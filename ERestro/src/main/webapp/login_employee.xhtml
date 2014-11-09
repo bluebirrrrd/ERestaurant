@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:outputStylesheet library="css" name="style.css" />
+	<title>Employee Log In | ERestaurant</title>
+</h:head>
+<h:body styleClass="login-body">
+	<div class="login">
+		<p class="title" align="center">EMPLOYEE LOG IN</p>
+			<p:inputText id="cust_login" value="#{employeeBean.employee.email}"
+				styleClass="form-input"
+				placeholder="Your email" />
+			<br />
+			<p:password id="emp_pwd" value="#{employeeBean.employee.password}"
+				style="margin-top:5px; 
+			font-size: 14px;
+			letter-spacing: 0.2px;
+			font-family: 'Ubuntu'; color: #525252;"
+				placeholder="Password" />
+			<br />
+		
+			<p:commandButton id="user_login" value="Log in"
+				action="#{employeeBean.logIn}"
+				styleClass="submit-button" />
+	</div>
+</h:body>
+</html>

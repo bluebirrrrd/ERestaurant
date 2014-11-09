@@ -5,17 +5,20 @@ import javax.persistence.*;
 @Entity
 public class Food {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
 	private String description;
 	@ManyToOne
-	@JoinColumn(name="categoryId")
+	@JoinColumn(name = "categoryId")
 	private FoodCategory category;
 	private short kitchenMade;
 	private double price;
-	
-	public Food() {  }
+	private short available;
+
+	public Food() {
+		available = 1;
+	}
 
 	public int getId() {
 		return id;
@@ -50,11 +53,16 @@ public class Food {
 	}
 
 	public boolean isKitchenMade() {
-		return kitchenMade>0?true:false;
+		return kitchenMade > 0 ? true : false;
 	}
 
-	public void setKitchenMade(short kitchenMade) {
-		this.kitchenMade = kitchenMade;
+	public void setKitchenMade(boolean kitchenMade) {
+		if (kitchenMade == true) {
+			this.kitchenMade = 1;
+		} else {
+			this.kitchenMade = 0;
+		}
+
 	}
 
 	public double getPrice() {
@@ -64,6 +72,16 @@ public class Food {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	
-	
+
+	public boolean isAvailable() {
+		return (available > 0 ? true : false);
+	}
+
+	public void setAvailable(boolean available) {
+		if (available == true) {
+			this.available = 1;
+		} else {
+			this.available = 0;
+		}
+	}
 }

@@ -1,0 +1,142 @@
+@CHARSET "UTF-8";
+
+.css_button {
+	margin:5px;
+   padding: 6.5px 13px;
+   border: none;
+   background: -webkit-gradient(linear, left top, left bottom, from(#E04548), to(#B71012));
+   background: -webkit-linear-gradient(top, #E04548, #B71012);
+   background: -moz-linear-gradient(top, #E04548, #B71012);
+   background: -ms-linear-gradient(top, #E04548, #B71012);
+   background: -o-linear-gradient(top, #E04548, #B71012);
+   background-color: #B71012;
+   box-shadow: 3px 3px 13px 0px rgba(50, 50, 50, 0.5);
+   -webkit-box-shadow: 3px 3px 13px 0px rgba(50, 50, 50, 0.5);
+   -moz-box-shadow: 3px 3px 13px 0px rgba(50, 50, 50, 0.5);
+   -webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+   border-radius: 8px;
+   text-shadow: rgba(50, 50, 50, 0.5) 1px 1px 0px;
+   color: #f9f9f9;
+   font-size: 14px;
+   font-family: Open Sans;
+   text-decoration: none;
+   font-weight: bold;
+   -webkit-transition: 0.2s;
+   -moz-transition: 0.2s;
+   -o-transition: 0.2s;
+   cursor: pointer;
+   }
+.css_button:hover {
+   background: none;
+   background: -webkit-gradient(linear, left top, left bottom, from(#F55456), to(#CF1316));
+   background: -webkit-linear-gradient(top, #F55456, #CF1316);
+   background: -moz-linear-gradient(top, #F55456, #CF1316);
+   background: -ms-linear-gradient(top, #F55456, #CF1316);
+   background: -o-linear-gradient(top, #F55456, #CF1316);
+   background-color: #E04548;
+   box-shadow: 3px 3px 13px 0px rgba(50, 50, 50, 0.5);
+   -webkit-box-shadow: 3px 3px 13px 0px rgba(50, 50, 50, 0.5);
+   -moz-box-shadow: 3px 3px 13px 0px rgba(50, 50, 50, 0.5);
+   border: none;
+   color: #D9D5D5;
+   }
+.css_button:active {
+   top: 2px;
+   position: relative;
+   }
+.h2 {
+	font-family: Open Sans;
+	font-size: 1em;
+	display: block;
+	color: #262626;
+	text-shadow: 3px 2px 5px #A1A1A1;
+	text-align: center;
+}
+
+.login-body {
+	background-color: rgba(183, 16, 18, 0.8);
+}
+
+.login {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 16em;
+	height: 10em;
+	background-color: #BBCCE2;
+	border-radius: 10px;
+	font-family: Open Sans;
+	font-size: 1em;
+	margin-top: -5em;
+	margin-left: -8em;
+	box-shadow: 3px 3px 13px 0px rgba(50, 50, 50, 0.5);
+	text-align: center;
+}
+
+.login.title {
+	margin-top: 12px;
+	text-align: center;
+	display: block;
+	color: #626061;
+	text-transform: uppercase;
+	font-size: 24px;
+	font-weight: 300;
+}
+
+.title {
+	margin-top: 12px;
+	text-align: center;
+	display: block;
+	color: #626061;
+	text-transform: uppercase;
+	font-size: 24px;
+	font-weight: 300;
+	font-family: 'Ubuntu'
+}
+
+.form-input {
+	font-size: 14px;
+	letter-spacing: 0.2px;
+	font-family: 'Ubuntu';
+	color: #525252;
+}
+
+.submit-button {
+	margin: 5px;
+	height: 2em;
+	font-family: 'Open Sans';
+	font-size: 1em;
+	text-align: center;
+}
+
+.infoTable {
+	margin-left:auto;
+	margin-right:auto;
+	background-color: #BBCCE2;
+	border: #000000 0px solid;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+.infoColumn {
+	margin-top: 0px;
+	background-color: #BBCCE2;
+}
+
+.info {
+	position: fixed;
+	top: 10%;
+	left: 50%;
+	width: 25em;
+	height: 20em;
+	background-color: #BBCCE2;
+	border-radius: 10px;
+	font-family: Open Sans;
+	font-size: 1em;
+	margin-left: -10em;
+	box-shadow: 3px 3px 13px 0px rgba(50, 50, 50, 0.5);
+	text-align: left;
+}

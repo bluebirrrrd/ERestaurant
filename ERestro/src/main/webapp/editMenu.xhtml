@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<h:outputStylesheet library="css" name="style.css" />
+<title>Edit Menu | ERestaurant</title>
+</head>
+<h:body>
+	<p:dataTable id="data" value="#{foodBean.dishes}" var="dish">
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Name" />
+			</f:facet>
+			<h:outputText value="#{dish.name}" />
+		</p:column>
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Category" />
+			</f:facet>
+			<h:outputText value="#{dish.category.name}" />
+		</p:column>
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Description" />
+			</f:facet>
+			<h:outputText value="#{dish.description}" />
+		</p:column>
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Price" />
+			</f:facet>
+			<h:outputText value="#{dish.price}" />
+		</p:column>
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Available in menu" />
+			</f:facet>
+			<p:selectBooleanButton styleClass="submit-button" id="isDone"
+				value="#{dish.available}" onLabel="Yes" offLabel="No"/>
+		</p:column>
+
+	</p:dataTable>
+</h:body>
+</html>

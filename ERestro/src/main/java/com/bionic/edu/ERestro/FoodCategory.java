@@ -10,6 +10,9 @@ public class FoodCategory {
 	private String name;
 	
 	public FoodCategory() { }
+	public FoodCategory(String name) {
+		this.name = name;
+	}
 	
 	public int getId() {
 		return id;

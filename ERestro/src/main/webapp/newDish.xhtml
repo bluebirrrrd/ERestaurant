@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:outputStylesheet library="css" name="style.css" />
+	<title>Dish Info</title>
+</h:head>
+<h:body>
+	<div class="info">
+		<h:panelGrid columns="2" styleClass="infoTable"
+			columnClasses="infoColumn">
+			<f:facet name="header">
+				<h:outputText value="Dish info" styleClass="title" />
+			</f:facet>
+
+			<h:outputLabel for="cat" value="Category:" />
+			<p:selectOneMenu id="cat" value="#{foodBean.selectedFoodCategory}">
+				<f:selectItems value="#{foodBean.categories}" var="foodCategory"
+					itemLabel="#{foodCategory.name}" itemValue="#{foodCategory}" required="true" requiredMessage="#{msgs.categoryRequired}" />
+			</p:selectOneMenu>
+
+			<p:outputLabel for="name" value="Name:" />
+
+			<p:inputText id="name" value="#{foodBean.dish.name}"
+				styleClass="form-input" placeholder="Enter the name" required="true" requiredMessage="#{msgs.dishNameRequired}"/>
+
+			<p:outputLabel for="description" value="Description" />
+
+			<h:panelGroup>
+				<p:inputTextarea id="description" styleClass="form-input"
+					value="#{foodBean.dish.description}" counter="display" placeholder="Optional"
+					maxlength="500" counterTemplate="({0} characters remaining)" />
+				<br />
+				<h:outputText id="display" />
+			</h:panelGroup>
+			<p:outputLabel for="kitchenMade" value="Kitchen made?" />
+			<p:selectBooleanButton styleClass="submit-button" id="kitchenMade"
+				value="#{foodBean.dish.kitchenMade}" onLabel="Yes" offLabel="No" />
+			<p:outputLabel for="price" value="Price" />
+			<p:inputMask id="price" value="#{foodBean.dish.price}" mask="999.99" required="true" requiredMessage="#{msgs.priceRequired}" />
+		</h:panelGrid>
+		<div style="text-align: center">
+			<p:commandButton id="submit" value="Save"
+				action="#{foodBean.saveFood}" styleClass="css_button" />
+		</div>
+	</div>
+</h:body>
+</html>
