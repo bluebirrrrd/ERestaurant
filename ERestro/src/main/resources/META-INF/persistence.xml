@@ -12,6 +12,8 @@
     <class>com.bionic.edu.ERestro.Food</class>
     <class>com.bionic.edu.ERestro.FoodCategory</class>
     <class>com.bionic.edu.ERestro.DeliveryStatus</class>
+    <class>com.bionic.edu.ERestro.Customer</class>
+    <class>com.bionic.edu.ERestro.Food_Order</class>
     <properties>
           <property name="javax.persistence.jdbc.driver"        
                  value="org.apache.derby.jdbc.EmbeddedDriver" />

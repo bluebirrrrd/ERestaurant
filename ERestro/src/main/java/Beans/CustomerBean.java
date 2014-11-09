@@ -1,8 +1,11 @@
 package Beans;
 
 import javax.faces.bean.*;
-//import javax.inject.Inject;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
+//import javax.inject.Inject;
+//import org.apache.commons.codec.digest.DigestUtils;
 import com.bionic.edu.ERestro.Customer;
 
 /*@Named
@@ -36,6 +39,10 @@ public class CustomerBean {
 		return "newCustomer";
 	}
 	
+	public boolean logIn(String email,String password) {
+		//String pass = DigestUtils.md5Hex(password); - //this one should go into custService implementation
+		return true; //custService.logIn(email, pass);
+	}
 	
 
 }

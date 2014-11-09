@@ -6,12 +6,14 @@
     <persistence-unit name="ER" transaction-type= 
               "RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>com.bionic.edu.ERestro.Users</class>
+    <class>com.bionic.edu.ERestro.Employee</class>
     <class>com.bionic.edu.ERestro.Rights</class>
     <class>com.bionic.edu.ERestro.Orders</class>
     <class>com.bionic.edu.ERestro.Food</class>
     <class>com.bionic.edu.ERestro.FoodCategory</class>
     <class>com.bionic.edu.ERestro.DeliveryStatus</class>
+    <class>com.bionic.edu.ERestro.Customer</class>
+    <class>com.bionic.edu.ERestro.Food_Order</class>
     <properties>
           <property name="javax.persistence.jdbc.driver"        
                  value="org.apache.derby.jdbc.EmbeddedDriver" />

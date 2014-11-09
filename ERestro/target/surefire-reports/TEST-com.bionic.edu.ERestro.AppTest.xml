@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="com.bionic.edu.ERestro.AppTest" time="0.016" errors="0" skipped="0">
+<testsuite tests="1" failures="0" name="com.bionic.edu.ERestro.AppTest" time="0.003" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_20\jre\bin"/>
@@ -16,7 +16,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="D:\Workspace\BU\J2EE\ERestro"/>
+    <property name="user.dir" value="D:\Workspace\git\ERestro"/>
     <property name="java.runtime.version" value="1.8.0_20-b26"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_20\jre\lib\endorsed"/>
@@ -27,7 +27,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 8.1"/>
-    <property name="classworlds.conf" value="D:\Workspace\BU\J2EE\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf4277525522288278274.tmp"/>
+    <property name="classworlds.conf" value="D:\Workspace\BU\J2EE\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf7605775693015170166.tmp"/>
     <property name="sun.jnu.encoding" value="Cp1251"/>
     <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_20\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\OpenCL SDK\3.0\bin\x86;C:\Program Files (x86)\Intel\OpenCL SDK\3.0\bin\x64;C:\Program Files (x86)\Rational\common;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Program Files\Calibre2\;C:\Program Files (x86)\Autodesk\Backburner\;C:\Program Files\Common Files\Autodesk Shared\;C:\Program Files\nodejs\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Users\Ann\AppData\Roaming\npm;."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -55,7 +55,7 @@
     <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.8.0_20\jre\lib\ext;C:\Windows\Sun\Java\lib\ext"/>
     <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_20\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_20\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_20\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_20\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_20\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_20\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_20\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_20\jre\classes"/>
     <property name="java.vendor" value="Oracle Corporation"/>
-    <property name="maven.home" value="D:\Workspace\BU\J2EE\ERestro\EMBEDDED"/>
+    <property name="maven.home" value="D:\Workspace\git\ERestro\EMBEDDED"/>
     <property name="file.separator" value="\"/>
     <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -63,5 +63,5 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.bionic.edu.ERestro.AppTest" name="testApp" time="0.016"/>
+  <testcase classname="com.bionic.edu.ERestro.AppTest" name="testApp" time="0.003"/>
 </testsuite>
