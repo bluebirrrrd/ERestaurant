@@ -148,6 +148,10 @@
 			<version>1.9</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>flick</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

@@ -18,7 +18,7 @@
           <property name="javax.persistence.jdbc.driver"        
                  value="org.apache.derby.jdbc.EmbeddedDriver" />
           <property name="javax.persistence.jdbc.url"    
-                value="jdbc:derby:D:\Workspace\BU\J2EE\ERestro\ER;create=true" />
+                value="jdbc:derby:..//ER;create=true" />
           <property name="eclipselink.ddl-generation.output-mode" 
                value="database" />
       </properties>

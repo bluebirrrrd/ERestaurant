@@ -4,47 +4,91 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:p="http://primefaces.org/ui">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <h:outputStylesheet library="css" name="style.css" />
 <title>Edit Menu | ERestaurant</title>
 </head>
 <h:body>
-	<p:dataTable id="data" value="#{foodBean.dishes}" var="dish">
-		<p:column>
-			<f:facet name="header">
-				<h:outputText value="Name" />
-			</f:facet>
-			<h:outputText value="#{dish.name}" />
-		</p:column>
-		<p:column>
-			<f:facet name="header">
-				<h:outputText value="Category" />
-			</f:facet>
-			<h:outputText value="#{dish.category.name}" />
-		</p:column>
-		<p:column>
-			<f:facet name="header">
-				<h:outputText value="Description" />
-			</f:facet>
-			<h:outputText value="#{dish.description}" />
-		</p:column>
-		<p:column>
-			<f:facet name="header">
-				<h:outputText value="Price" />
-			</f:facet>
-			<h:outputText value="#{dish.price}" />
-		</p:column>
-		<p:column>
-			<f:facet name="header">
-				<h:outputText value="Available in menu" />
-			</f:facet>
-			<p:selectBooleanButton styleClass="submit-button" id="isDone"
-				value="#{dish.available}" onLabel="Yes" offLabel="No"/>
-		</p:column>
+	<h:form>
+		<p:dataTable id="data" value="#{foodBean.dishes}" var="dish"
+			scrollable="true" scrollHeight="400" frozenRows="1">
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Category" />
+				</f:facet>
+				<f:facet name="output">
+					<h:outputText value="#{dish.category.name}" />
+				</f:facet>
+				<f:facet name="input">
+					<p:selectOneMenu id="cat" value="#{dish.category}">
+						<f:selectItems value="#{foodBean.categories}" var="foodCategory"
+							itemLabel="#{foodCategory.name}" itemValue="#{foodCategory}"
+							required="true" requiredMessage="#{msgs.categoryRequired}" />
+					</p:selectOneMenu>
+				</f:facet>
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Name" />
+				</f:facet>
+				<f:facet name="output">
+					<h:outputText value="#{dish.name}" />
+				</f:facet>
+				<f:facet name="input">
+					<p:inputText id="name" value="#{dish.name}" styleClass="form-input"
+						placeholder="Enter the name" required="true"
+						requiredMessage="#{msgs.dishNameRequired}" />
+				</f:facet>
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Description" />
+				</f:facet>
+				<f:facet name="output">
+					<h:outputText value="#{dish.description}" />
+				</f:facet>
+				<f:facet name="input">
+					<p:inputTextarea id="description" styleClass="form-input"
+						value="#{dish.description}" counter="display"
+						placeholder="Optional" maxlength="500"
+						counterTemplate="({0} characters remaining)" />
+				</f:facet>
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Price" />
+				</f:facet>
+				<f:facet name="output">
+					<h:outputText value="#{dish.price}" />
+				</f:facet>
+				<f:facet name="input">
+					<p:inputMask id="price" value="#{dish.price}" mask="999.99"
+						required="true" requiredMessage="#{msgs.priceRequired}" />
+				</f:facet>
 
-	</p:dataTable>
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Kitchen made">
+					</h:outputText>
+				</f:facet>
+				<f:facet name="output">
+					<p:selectBooleanCheckbox value="#{dish.kitchenMade}" />
+				</f:facet>
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Available in menu" />
+				</f:facet>
+				<f:facet name="output">
+					<p:selectBooleanButton styleClass="submit-button" id="Available"
+						value="#{dish.available}" onLabel="Yes" offLabel="No" />
+				</f:facet>
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
 </h:body>
 </html>

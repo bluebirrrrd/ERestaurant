@@ -20,10 +20,9 @@
 			</f:facet>
 
 			<h:outputLabel for="cat" value="Category:" />
-			<p:selectOneMenu id="cat" value="#{foodBean.selectedFoodCategory}">
-				<f:selectItems value="#{foodBean.categories}" var="foodCategory"
-					itemLabel="#{foodCategory.name}" itemValue="#{foodCategory}" required="true" requiredMessage="#{msgs.categoryRequired}" />
-			</p:selectOneMenu>
+			<p:selectOneRadio id="cat" value="#{foodBean.selectedFoodCategory}">
+				<f:selectItems value="#{foodBean.categories}" required="true" requiredMessage="#{msgs.categoryRequired}" />
+			</p:selectOneRadio>
 
 			<p:outputLabel for="name" value="Name:" />
 

@@ -10,6 +10,34 @@
      	org.springframework.web.jsf.el.SpringBeanFacesELResolver
        </el-resolver>
     </application>
-
+	<navigation-rule>
+		<from-view-id>/login_customer.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>menu</from-outcome>
+			<to-view-id>/main.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/login_employee.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>Admin</from-outcome>
+			<to-view-id>admin.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case> 
+			<from-outcome>BusinessAnalytic</from-outcome>
+			<to-view-id>business.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>Cook</from-outcome>
+			<to-view-id>kitchen.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>DeliveryGuy</from-outcome>
+			<to-view-id>delivery.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>SuperUser</from-outcome>
+			<to-view-id>super.xhtml</to-view-id></navigation-case>
+		</navigation-rule>
 </faces-config>
     
