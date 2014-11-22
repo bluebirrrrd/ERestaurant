@@ -10,5 +10,6 @@ public interface EmployeeService {
 	public void save(Employee e);
 	public List<Employee> getAllEmployeesList();
 	public List<Employee> getEmployeesByCategory(Rights category);
+	public List<Rights> getAccessRights();
 }
 

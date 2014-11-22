@@ -44,11 +44,11 @@ public class Orders {
 		this.time = time;
 	}
 
-	public Customer getUser() {
+	public Customer getCustomer() {
 		return customer;
 	}
 
-	public void setUser(Customer user) {
+	public void setCustomer(Customer user) {
 		this.customer = user;
 	}
 

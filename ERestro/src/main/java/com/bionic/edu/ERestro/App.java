@@ -15,7 +15,7 @@ public class App
   		factory = Persistence.createEntityManagerFactory(UNIT_NAME);
 		EntityManager em = factory.createEntityManager();
 		
-  		short valid = 5;
+  		boolean valid = true;
   		Employee cust1 = new Employee();
   		cust1.setName("Andrew Bowl");
   		cust1.setEmail("and_bowl@gmail.com");

@@ -20,8 +20,12 @@ public class Food_Order {
 		return (done>0?true:false);
 	}
 
-	public void setDone(short done) {
-		this.done = done;
+	public void setDone(boolean done) {
+		if (done==true) {
+			this.done = 1;
+		} else {
+			this.done = 0;
+		}
 	}
 
 	public Food_Order() {	}

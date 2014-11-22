@@ -1,5 +1,7 @@
 package Beans;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -7,31 +9,32 @@ import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.springframework.context.annotation.Scope;
 
+import Services.FoodBeanService;
+
 import com.bionic.edu.ERestro.Food;
 import com.bionic.edu.ERestro.FoodCategory;
 
-/*@ManagedBean(name="food", eager = true)
-@RequestScoped
-*/
- @Named("foodBean")
-	@Scope("request")
+
+@Named("foodBean")
+@Scope("request")
 public class FoodBean {
 	private Food dish;
-	private static List<Food> dishes;
 	private FoodCategory selectedFoodCategory;
 	private static List<FoodCategory> categories;
-	/*
-	 * @Inject FoodBeanService foodService;
-	 */
+
+	@Inject
+	FoodBeanService foodService;
+
 	public FoodBean() {
 		dish = new Food();
 		selectedFoodCategory = new FoodCategory();
 	}
-	
+
 	static {
 		FoodCategory foodcat1 = new FoodCategory();
 		foodcat1.setId(1);
@@ -42,7 +45,7 @@ public class FoodBean {
 		FoodCategory foodcat3 = new FoodCategory();
 		foodcat3.setId(3);
 		foodcat3.setName("Salads");
-		
+
 		Food dish1 = new Food();
 		dish1.setId(1);
 		dish1.setName("Chicken Soup");
@@ -64,38 +67,32 @@ public class FoodBean {
 		dish3.setDescription("Ladies love it");
 		dish3.setKitchenMade(true);
 		dish3.setPrice(44.00);
-		dishes = new ArrayList<Food>();
-		dishes.add(dish1);
-		dishes.add(dish2);
-		dishes.add(dish3);
 		
-		
+
 		categories = new ArrayList<FoodCategory>();
 
 		categories.add(foodcat1);
 		categories.add(foodcat2);
 		categories.add(foodcat3);
 	}
+
 	
-	public List<Food> getDishes() {
-		return dishes;
-	}
-	/*public void setDishes(List<Food> dishes) {
-		this.dishes = dishes;
-	}*/
 	public FoodCategory getSelectedFoodCategory() {
 		return selectedFoodCategory;
 	}
+
 	public void setSelectedFoodCategory(FoodCategory selectedFoodCategory) {
 		this.selectedFoodCategory = selectedFoodCategory;
 	}
-	
+
 	public List<FoodCategory> getCategories() {
 		return categories;
 	}
-/*	public void setCategories(Map<String, FoodCategory> categories) {
-		this.categories = categories;
-	}*/
+
+	/*
+	 * public void setCategories(Map<String, FoodCategory> categories) {
+	 * this.categories = categories; }
+	 */
 	public FoodCategory getFoodCategory() {
 		return selectedFoodCategory;
 	}
@@ -111,16 +108,38 @@ public class FoodBean {
 	public void setDish(Food dish) {
 		this.dish = dish;
 	}
-	
+
 	public String saveFood() {
-		//foodService.save();
+		 foodService.save(dish);
 		return "editMenu";
 	}
-	
+
 	public String editFood(String id) {
-		//dish = foodService.findById();
+		dish = foodService.findById();
 		return "newDish";
 	}
-	
-	
+
+	/*public String addPhoto(String photoId) {
+		String fileId = "../" + photoId + ".jpg";
+		File inpt = new File(fileId);
+		if (!inpt.exists()) {
+			String fileMsg = "Не найден файл " + fileId;
+			return "AddCover";
+		}
+		dish = foodService.findById();
+		dish.setId(photoId);
+		try {
+			FileInputStream in = new FileInputStream(fileId);
+			// Чтение изображения из файла
+			byte[] img = new byte[(int) inpt.length()];
+			in.read(img);
+			in.close();
+			dish.setPhoto(img);
+			foodService.save(dish);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return "editMenu";
+	} */ //ДОРОБИ!!!!!!!!!!!!!!!!!!!
+
 }

@@ -7,4 +7,5 @@ public interface Food_OrderService {
 	public void save(Food_Order food_order);
 	public Food_Order findById(int id);
 	public List<Food_Order> getAllFoodOrdersList();
+	public List<Food_Order> getUndoneFoodOrdersList();
 }

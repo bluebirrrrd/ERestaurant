@@ -9,6 +9,14 @@
 	<packaging>war</packaging>
 	<name>Spring JSF integration</name>
 	<url>http://www.springframework.org</url>
+	<repositories>
+    <repository>
+        <id>prime-repo</id>
+        <name>PrimeFaces Maven Repository</name>
+        <url>http://repository.primefaces.org</url>
+        <layout>default</layout>
+    </repository>
+</repositories>
 	<description>
 		<![CDATA[
       This project is a minimal jar utility with Spring configuration.
@@ -151,6 +159,7 @@
 		<dependency>
 			<groupId>org.primefaces.themes</groupId>
 			<artifactId>flick</artifactId>
+			<version>1.0.10</version>
 		</dependency>
 	</dependencies>
 

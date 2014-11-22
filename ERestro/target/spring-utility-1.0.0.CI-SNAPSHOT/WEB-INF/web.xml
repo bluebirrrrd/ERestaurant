@@ -15,6 +15,10 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:META-INF/spring/app-context.xml</param-value>
     </context-param>
+    <context-param>  
+    <param-name>primefaces.THEME</param-name>  
+    <param-value>flick</param-value>  
+</context-param>  
 
     <welcome-file-list>
         <welcome-file>login_customer.xhtml</welcome-file>

@@ -15,6 +15,16 @@ public class Food {
 	private short kitchenMade;
 	private double price;
 	private short available;
+	@Lob
+	private byte[] photo;
+
+	public byte[] getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
 
 	public Food() {
 		available = 1;

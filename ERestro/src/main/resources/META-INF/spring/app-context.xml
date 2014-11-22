@@ -33,8 +33,7 @@
 		</property>
 		<property name="loadTimeWeaver">
 			<bean
-				class="org.springframework.instrument. 	  
-	       classloading.InstrumentationLoadTimeWeaver" />
+				class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver" />
 </property>
 
 

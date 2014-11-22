@@ -1,24 +1,34 @@
 package Beans;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.faces.bean.*;
+import javax.inject.*;
+
+import org.springframework.context.annotation.Scope;
+
+import Services.Food_OrderService;
+import Services.OrderService;
 
 import com.bionic.edu.ERestro.Customer;
 import com.bionic.edu.ERestro.Food;
 import com.bionic.edu.ERestro.Food_Order;
 import com.bionic.edu.ERestro.Orders;
 
-@ManagedBean(name = "order", eager = true)
-@SessionScoped
+@Named
+@Scope("session")
 public class OrderBean {
 	private Orders order;
+
 	private List<Food_Order> content;
-	/*
-	 * @Inject private OrderService orderService;
-	 * @Inject private Food_OrderService foodOrderService;
-	 */
+
+	@Inject
+	private OrderService orderService;
+	@Inject
+	private Food_OrderService foodOrderService;
+
 	private double total;
 	private Customer customer;
 
@@ -27,6 +37,22 @@ public class OrderBean {
 		content = null;
 		total = 0.0;
 		customer = new Customer();
+
+		/*
+		 * Orders order1 = new Orders();
+		 * order1.setTime(java.sql.Timestamp.valueOf
+		 * (java.time.LocalDateTime.now())); Food_Order part1 = new
+		 * Food_Order(); part1.setFood((new FoodBean()).getDishes().get(1));
+		 * part1.setOrder(order1); part1.setId(1); part1.setQuantity(2);
+		 * part1.setDone(false); Food_Order part2 = new Food_Order();
+		 * part2.setFood((new FoodBean()).getDishes().get(2));
+		 * part2.setOrder(order1); part2.setId(2); part2.setQuantity(1);
+		 * part2.setDone(false); List<Food_Order> content1 = new
+		 * ArrayList<Food_Order>(); content1.add(part1); content1.add(part2);
+		 * order1.setContent(content1);
+		 * 
+		 * orderList = new ArrayList<Orders>(); orderList.add(order1);
+		 */
 	}
 
 	public Orders getOrder() {
@@ -52,13 +78,13 @@ public class OrderBean {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	
+
 	public void countTotal() {
 		total = 0;
 		Iterator<Food_Order> it = content.iterator();
 		while (it.hasNext()) {
 			Food_Order temp = it.next();
-			total += temp.getFood().getPrice()*temp.getQuantity();
+			total += temp.getFood().getPrice() * temp.getQuantity();
 		}
 	}
 
@@ -109,16 +135,16 @@ public class OrderBean {
 		order.setTotal(total);
 		return "confirmOrder";
 	}
-	
+
 	public String confirmOrder(Customer customer) {
 		this.customer = customer;
-		order.setUser(customer);
-		/*
-		 * for (Food_Order f: order.content) {
-		 * foodOrderService.save(f);
-		 * }
-		 */
-		//orderService.save(order);
-		return "profile?id="+customer.getId();
+		order.setCustomer(customer);
+		
+		for (Food_Order f : content) {
+			foodOrderService.save(f);
+		}
+
+		orderService.save(order);
+		return "profile?id=" + customer.getId();
 	}
 }

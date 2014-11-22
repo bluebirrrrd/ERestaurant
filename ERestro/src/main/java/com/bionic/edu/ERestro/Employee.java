@@ -62,8 +62,12 @@ public class Employee {
 		return valid>0?true:false;
 	}
 
-	public void setValid(short valid) {
-		this.valid = valid;
+	public void setValid(boolean valid) {
+		if (valid == true) {
+		this.valid = 1; }
+		else {
+			this.valid = 0;
+		}
 	}
 
 	public Rights getAccess() {
