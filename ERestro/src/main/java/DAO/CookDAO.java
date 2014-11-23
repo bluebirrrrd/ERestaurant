@@ -35,17 +35,19 @@ public class CookDAO {
 			em1.close();
 		}*/
 	}
-	public List<Food_Order> getDishes() {
+	
+	public List<Food_Order> getAllDishes() {
+		List<Food_Order> list = null;
+		TypedQuery<Food_Order> query = em1.createQuery("SELECT f FROM Food_Order f",Food_Order.class);
+		list = query.getResultList();
+		return list;
+	}
+	
+	public List<Food_Order> getUndoneDishes() {
 
-		List<Orders> orders = null;
-		List<Food_Order> parts = new ArrayList<Food_Order>();
-		TypedQuery<Orders> query = em1.createQuery("SELECT o FROM Orders o WHERE (deliveryStatusId = 1)",Orders.class);
-		orders = query.getResultList();
-		Iterator<Orders> it = orders.iterator();
-		while (it.hasNext()) {
-			Orders temp = it.next();
-			parts.addAll(temp.getContent());
-		}
+		List<Food_Order> parts = null;
+		TypedQuery<Food_Order> query = em1.createQuery("SELECT f FROM Food_Order f WHERE (done=1)",Food_Order.class);
+		parts = query.getResultList();
 		return parts;
 	}
 	
@@ -61,5 +63,9 @@ public class CookDAO {
 			em1.close();
 		}*/
 	}
-
+	
+	public Food_Order findPartById(int id) {
+		Food_Order dish = em1.find(Food_Order.class, id);
+		return dish;
+	}
 }

@@ -7,4 +7,5 @@ public interface OrderService {
 	public void save(Orders order);
 	public List<Orders> getUnfinishedOrdersList();
 	public List<Orders> getAllOrdersList();
+	public List<Orders> getFinishedOrdersList();
 }

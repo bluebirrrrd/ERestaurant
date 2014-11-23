@@ -10,6 +10,11 @@
      	org.springframework.web.jsf.el.SpringBeanFacesELResolver
        </el-resolver>
     </application>
+    <application>
+    <resource-handler>
+    org.omnifaces.resourcehandler.UnmappedResourceHandler
+    </resource-handler>
+</application>
 	<navigation-rule>
 		<from-view-id>/login_customer.xhtml</from-view-id>
 		<navigation-case>

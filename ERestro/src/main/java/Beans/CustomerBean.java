@@ -1,21 +1,27 @@
 package Beans;
 
+import java.io.Serializable;
+
 import javax.faces.bean.*;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-//import javax.inject.Inject;
-//import org.apache.commons.codec.digest.DigestUtils;
+import javax.inject.*;
+
+import org.springframework.context.annotation.Scope;
+
+import Services.CustomerService;
+
 import com.bionic.edu.ERestro.Customer;
 
-/*@Named
-@Scope("request")*/
-@ManagedBean(name = "customer", eager = true)
-@RequestScoped
-public class CustomerBean {
+@Named
+@Scope("request")
+public class CustomerBean implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	private Customer customer;
-/*  @Inject
-	private CustomerService custService;*/
+	@Inject
+	private CustomerService custService;
 	
 	public CustomerBean() {
 		customer = new Customer();
@@ -29,13 +35,10 @@ public class CustomerBean {
 		this.customer = customer;
 	}
 	
-	public String setCustomer() {
-		//custService.save(customer);
-		return "menu";
-	}
+	
 	
 	public String editCustomer(String id) {
-		//customer = custService.findById(Integer.valueOf(id));
+		customer = custService.findById(Integer.valueOf(id));
 		return "newCustomer";
 	}
 	
@@ -44,5 +47,9 @@ public class CustomerBean {
 		return true; //custService.logIn(email, pass);
 	}
 	
+	public String save() {
+		custService.save(customer);
+		return "menu";
+	}
 
 }

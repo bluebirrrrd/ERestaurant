@@ -1,5 +1,6 @@
 package DAO;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -47,7 +48,17 @@ public class CustomerDAO {
 		em1.persist(customer);
 	}
 
+	/*
+	 * needs some improvement. What happens if we persist only order without
+	 * getting any content out of it to persist?
+	 */
 	public void submitOrder(Orders order) {
+		Collection<Food_Order> content = order.getContent();
+		Iterator<Food_Order> it = content.iterator();
+		while (it.hasNext()) {
+			Food_Order temp = it.next();
+			em1.persist(temp);
+		}
 		em1.persist(order);
 	}
 
@@ -92,7 +103,8 @@ public class CustomerDAO {
 
 	public boolean login(String email, String password) {
 		Customer customer = null;
-		TypedQuery<Customer> query = em1.createQuery("SELECT c FROM Customer c WHERE (email=:mail)",Customer.class);
+		TypedQuery<Customer> query = em1.createQuery(
+				"SELECT c FROM Customer c WHERE (email=:mail)", Customer.class);
 		try {
 			query.setParameter("mail", email);
 			customer = query.getSingleResult();
@@ -105,10 +117,11 @@ public class CustomerDAO {
 			em1.close();
 		}
 	}
-	
+
 	public List<Orders> getMyOrders(int customerId) {
 		List<Orders> list = null;
-		TypedQuery<Orders> query = em1.createQuery("SELECT o FROM Orders o WHERE (userId = :id)",Orders.class);
+		TypedQuery<Orders> query = em1.createQuery(
+				"SELECT o FROM Orders o WHERE (userId = :id)", Orders.class);
 		query.setParameter("id", customerId);
 		list = query.getResultList();
 		return list;

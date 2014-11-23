@@ -9,6 +9,7 @@ import javax.persistence.*;
 import com.bionic.edu.ERestro.Customer;
 import com.bionic.edu.ERestro.Employee;
 import com.bionic.edu.ERestro.Food;
+import com.bionic.edu.ERestro.FoodCategory;
 import com.bionic.edu.ERestro.Food_Order;
 import com.bionic.edu.ERestro.Orders;
 import com.bionic.edu.ERestro.Rights;
@@ -37,7 +38,27 @@ public class AdminDAO implements EmployeeDAO {
 		}*/
 	}
 
-	public List<Food_Order> getDishes() {
+	public List<FoodCategory>  getCategoriesList(){
+		List<FoodCategory> list = null;
+		TypedQuery<FoodCategory> query = em1.createQuery("SELECT fc FROM FoodCategory fc", FoodCategory.class);
+		list = query.getResultList();
+		return list;
+	}
+	public List<Food> getAllDishes() {
+		List<Food> list = null;
+		TypedQuery<Food> query = em1.createQuery("SELECT f FROM Food f",Food.class);
+		list = query.getResultList();
+		return list;
+	}
+	
+	public List<Food> getDishesFromCategory(int categoryId) {
+		List<Food> list = null;
+		TypedQuery<Food> query = em1.createQuery("SELECT f FROM Food f WHERE (categoryId = :id)",Food.class);
+		query.setParameter("id", categoryId);
+		list = query.getResultList();
+		return list;
+	}
+	public List<Food_Order> getPendingDishes() {
 
 		List<Orders> orders = null;
 		List<Food_Order> parts = new ArrayList<Food_Order>();
@@ -82,5 +103,8 @@ public class AdminDAO implements EmployeeDAO {
 		}
 	}
 	
-	
+	public Food findById(int id) {
+		Food dish = em1.find(Food.class, id);
+		return dish;
+	}
 }

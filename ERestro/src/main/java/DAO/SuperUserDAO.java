@@ -18,7 +18,7 @@ public class SuperUserDAO implements EmployeeDAO {
 	public Rights login(String email, String password) {
 		Employee employee = null;
 		TypedQuery<Employee> query = em1.createQuery(
-				"SELECT u FROM Users u WHERE (email=:mail)", Employee.class);
+				"SELECT e FROM Employee e WHERE (email=:mail)", Employee.class);
 		// try {
 		query.setParameter("mail", email);
 		employee = query.getSingleResult();
@@ -41,9 +41,15 @@ public class SuperUserDAO implements EmployeeDAO {
 		return customers;
 	}
 	
+	public List<Rights> getRightsList() {
+		List<Rights> list = null;
+		TypedQuery<Rights> query = em1.createQuery("SELECT r FROM Rights r",Rights.class);
+		list = query.getResultList();
+		return list;
+	}
 	public List<Employee> getEmployeesList() {
 		List<Employee> employees = new ArrayList<Employee>();
-		TypedQuery<Employee> query = em1.createQuery("Select u from Users u",Employee.class);
+		TypedQuery<Employee> query = em1.createQuery("Select e from Employee e",Employee.class);
 		employees = query.getResultList();
 		return employees;
 	}
@@ -80,5 +86,23 @@ public class SuperUserDAO implements EmployeeDAO {
 			employeeUpdate.setValid(employee.isValid());
 			em1.getTransaction().commit();
 		}
+	}
+	
+	public Customer getCustomerById(int id) {
+		Customer customer = em1.find(Customer.class, id);
+		return customer;
+	}
+	
+	public Employee getEmployeeById(int id) {
+		Employee employee = em1.find(Employee.class, id);
+		return employee;
+	}
+	
+	public List<Employee> getEmployeesByCategory(int categoryId) {
+		List<Employee> list = null;
+		TypedQuery<Employee> query = em1.createQuery("SELECT e FROM Employee e WHERE (accessId = :id)",Employee.class);
+		query.setParameter("id", categoryId);
+		list = query.getResultList();
+		return list;
 	}
 }

@@ -30,8 +30,12 @@ public class OrderListBean {
 		orderList = orderService.getUnfinishedOrdersList();
 	}
 	
-	public void refreshAllList() {
+	/*public void refreshAllList() {
 		orderList = orderService.getAllOrdersList();
+	}*/
+	
+	public void refreshFinishedList() {
+		orderList = orderService.getFinishedOrdersList();
 	}
 	
 }

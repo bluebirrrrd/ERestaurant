@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import Services.FoodBeanService;
+import Services.FoodService;
 
 import com.bionic.edu.ERestro.Food;
 import com.bionic.edu.ERestro.FoodCategory;
@@ -14,7 +14,7 @@ public class FoodListBean {
 	private static List<FoodCategory> categories;
 	
 	@Inject
-	FoodBeanService foodService;
+	FoodService foodService;
 
 	public static List<Food> getDishes() {
 		return dishes;

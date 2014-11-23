@@ -14,7 +14,7 @@ import javax.inject.Named;
 
 import org.springframework.context.annotation.Scope;
 
-import Services.FoodBeanService;
+import Services.FoodService;
 
 import com.bionic.edu.ERestro.Food;
 import com.bionic.edu.ERestro.FoodCategory;
@@ -28,7 +28,7 @@ public class FoodBean {
 	private static List<FoodCategory> categories;
 
 	@Inject
-	FoodBeanService foodService;
+	FoodService foodService;
 
 	public FoodBean() {
 		dish = new Food();
@@ -115,7 +115,8 @@ public class FoodBean {
 	}
 
 	public String editFood(String id) {
-		dish = foodService.findById();
+		Integer intId = Integer.valueOf(id);
+		dish = foodService.findById(intId);
 		return "newDish";
 	}
 

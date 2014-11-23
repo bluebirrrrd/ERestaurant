@@ -1,5 +1,6 @@
 package Beans;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -17,7 +18,10 @@ import com.bionic.edu.ERestro.Rights;
 
 @Named
 @Scope("request")
-public class EmployeeBean {
+public class EmployeeBean implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+
 	private Employee employee;
 	
 	@Inject 

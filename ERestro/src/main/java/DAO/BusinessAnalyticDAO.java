@@ -37,7 +37,7 @@ public class BusinessAnalyticDAO {
 
 	public List<Orders> getOrdersList() {
 		List<Orders> ordersList = null;
-		TypedQuery<Orders> query = em1.createQuery("SELECT o FROM Orders o WHERE (deliveryStatusId=2)", Orders.class);
+		TypedQuery<Orders> query = em1.createQuery("SELECT o FROM Orders o WHERE (deliveryStatusId=3)", Orders.class);
 		//try {
 			ordersList = query.getResultList();
 		/*} finally {

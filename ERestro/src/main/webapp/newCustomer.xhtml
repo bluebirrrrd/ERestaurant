@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Insert title here</title>
+	<h:link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+		<h:outputStylesheet library="css" name="style.css" />
+		<!--   <link rel="stylesheet" type="text/css" href="lib/css/style.css"> -->
+		<link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400'
+			rel='stylesheet' type='text/css'/>
+			<!--[if lt IE 9]>     
+		<script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<script type="text/javascript" src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+	<![endif]-->
+		<h:outputScript library="js" name="jquery-2.1.1.min.js" />
+		<!--  <h:outputScript name="js" name="resources/js/control.js" />-->
+		<!-- <script type="text/javascript" src="lib/js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="lib/js/control.js"></script> -->
+</h:head>
+<h:body class="page">
+	<div class="wrap">
+
+        <div class="b_info">
+            <i class="icon icon-info icon--circle js-info"></i>
+            <div class="b_info__content">
+                <a class="b_info__content__link" href="tel:993012345679">
+                    <i class="icon icon-phone"></i>
+                    9930 1234 5679
+                </a>
+                <a class="b_info__content__link" href="e-mail:contact@domain.com">
+                    <i class="icon icon-letter"></i>
+                    contact@domain.com
+                </a>
+                <a class="b_info__content__link" href="#">
+                    <i class="icon icon-home"></i>
+                    street address example
+                </a>
+            </div>
+        </div>
+
+        <div class="aside">
+            <div class="header">
+                <a href="#" class="logo"></a>
+                <span class="header_user">
+                Welcome back, <b>Customer001</b>
+            </span>
+            </div>
+            <div class="nav">
+                <a href="#" class="nav__item">item #1</a>
+                <a href="#" class="nav__item">item #2</a>
+                <a href="#" class="nav__item">item #3</a>
+                <a href="#" class="nav__item">item #4</a>
+                <a href="#" class="nav__item">item #5</a>
+                <a href="#" class="nav__item">item #6</a>
+            </div>
+
+            <div class="aside__order">
+                Your order: <span>0</span> items
+                <p>
+                    go to start
+                    <i class="icon icon--circle icon-arrow-right"></i>
+                </p>
+            </div>
+
+            <div class="aside__copyright">
+                © 2014 ERestaurant, All Rights Reserved
+            </div>
+        </div>
+
+        <div class="main">
+            <div id="section">
+                <h1 class="section__title">Add info</h1>
+                <h:form action="" class="fancy-form">
+                    <h:outputLabel for="name" class="fancy-label">Name</h:outputLabel>
+                    <h:inputText value="#{customerBean.customer.name}" id="name" class="fancy-input"/>
+
+                    <h:outputLabel for="email" class="fancy-label">Email</h:outputLabel>
+                    <h:inputText value="#{customerBean.customer.email}" id="email" class="fancy-input"/>
+
+                    <h:outputLabel for="birthday" class="fancy-label">Birthday</h:outputLabel>
+                    <h:inputText value="#{customerBean.customer.birthDate}" id="birthday" class="fancy-input"/>
+
+                    <h:outputLabel for="address" class="fancy-label label-high">Billing address</h:outputLabel>
+                    <h:inputText value="#{customerBean.customer.billingAddress}" id="address" class="fancy-input input-high"/>
+
+                    <h:commandButton action="#{customerBean.save()}" class="fancy-submit"> <i class="icon icon--circle icon-check"></i>
+                    </h:commandButton>
+                </h:form>
+            </div>
+        </div>
+
+    </div>
+</h:body>
+</html>
