@@ -6,7 +6,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Insert title here</title>
+	<title>New Customer | ERestaurant</title>
 	<h:link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>
 		<h:outputStylesheet library="css" name="style.css" />
 		<!--   <link rel="stylesheet" type="text/css" href="lib/css/style.css"> -->
@@ -24,44 +24,22 @@
 <h:body class="page">
 	<div class="wrap">
 
-        <div class="b_info">
-            <i class="icon icon-info icon--circle js-info"></i>
-            <div class="b_info__content">
-                <a class="b_info__content__link" href="tel:993012345679">
-                    <i class="icon icon-phone"></i>
-                    9930 1234 5679
-                </a>
-                <a class="b_info__content__link" href="e-mail:contact@domain.com">
-                    <i class="icon icon-letter"></i>
-                    contact@domain.com
-                </a>
-                <a class="b_info__content__link" href="#">
-                    <i class="icon icon-home"></i>
-                    street address example
-                </a>
-            </div>
-        </div>
-
         <div class="aside">
             <div class="header">
-                <a href="#" class="logo"></a>
+                <h:link href="#" class="logo"></h:link>
                 <span class="header_user">
-                Welcome back, <b>Customer001</b>
+                Welcome back, <b><h:outputText value="#{customerBean.customer.name}"/></b>
             </span>
             </div>
+            <ui:repeat var="o" value="#{foodListBean.categories}">
             <div class="nav">
-                <a href="#" class="nav__item">item #1</a>
-                <a href="#" class="nav__item">item #2</a>
-                <a href="#" class="nav__item">item #3</a>
-                <a href="#" class="nav__item">item #4</a>
-                <a href="#" class="nav__item">item #5</a>
-                <a href="#" class="nav__item">item #6</a>
+                <h:link outcome="#" class="nav__item" value="#{o.name}"/>
             </div>
-
+			</ui:repeat>
             <div class="aside__order">
-                Your order: <span>0</span> items
+                Your order: <b><h:outputText value="#{orderBean.quantity}"/></b> items
                 <p>
-                    go to start
+                    go to cart
                     <i class="icon icon--circle icon-arrow-right"></i>
                 </p>
             </div>

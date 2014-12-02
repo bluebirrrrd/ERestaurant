@@ -31,12 +31,14 @@ public class OrderBean {
 
 	private double total;
 	private Customer customer;
+	private int quantity;
 
 	public OrderBean() {
 		order = new Orders();
 		content = null;
 		total = 0.0;
 		customer = new Customer();
+		
 
 		/*
 		 * Orders order1 = new Orders();
@@ -53,6 +55,14 @@ public class OrderBean {
 		 * 
 		 * orderList = new ArrayList<Orders>(); orderList.add(order1);
 		 */
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	public Orders getOrder() {
@@ -96,6 +106,7 @@ public class OrderBean {
 		content.add(f);
 		order.setContent(content);
 		countTotal();
+		this.quantity = content.size();
 		return "editOrder";
 	}
 
@@ -122,6 +133,7 @@ public class OrderBean {
 			if (temp.getFood().getName().equals(food.getName())) {
 				it.remove();
 				order.setContent(content);
+				quantity = content.size();
 				break;
 			}
 		}

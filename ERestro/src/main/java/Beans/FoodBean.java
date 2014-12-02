@@ -141,6 +141,6 @@ public class FoodBean {
 			System.out.println(e.getMessage());
 		}
 		return "editMenu";
-	} */ //ÄÎĞÎÁÈ!!!!!!!!!!!!!!!!!!!
+	} */ //ĞÀÇÁÅĞÈÑÜ!!!!!!!!!!!!!!!!!!!
 
 }

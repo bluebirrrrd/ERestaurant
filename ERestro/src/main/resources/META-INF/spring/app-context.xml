@@ -9,6 +9,9 @@
 	http://www.springframework.org/schema/tx/spring-tx.xsd">
 	<description>Example configuration to get you started.</description>
 	<context:component-scan base-package="Beans" />
+	<context:component-scan base-package="Services"/>
+	<context:component-scan base-package="DAO"/>
+	<context:component-scan base-package="com.bionic.edu.ERestro"/>
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.apache.derby.jdbc.EmbeddedDriver" />
