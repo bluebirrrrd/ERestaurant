@@ -45,7 +45,12 @@ xmlns:f="http://java.sun.com/jsf/core"
             <div class="header">
                 <a href="#" class="logo"></a>
                 <span class="header_user">
-                Welcome back, <b>#{employeeBean.employee.name}</b>
+                <h:outputText value="Welcome back, #{employeeAtWorkBean.employee.name}" rendered="#{employeeAtWorkBean.loggedIn}"/>
+                <h:outputText value="Welcome! " rendered="#{!employeeAtWorkBean.loggedIn}"/>
+                <h:link rendered="#{!employeeAtWorkBean.loggedIn}" outcome="#" value="Log in">
+                 <f:passThroughAttribute name="data-toggle" value="modal"/>
+                 <f:passThroughAttribute name="data-target" value="#logIn"/>                 
+                </h:link>
             </span>
             </div>
             <div class="nav">
@@ -73,8 +78,8 @@ xmlns:f="http://java.sun.com/jsf/core"
                         <tr>
                             <td>#{cust.name}</td>
                             <td>#{cust.billingAddress}</td>
-                            <td><h:outputText rendered="#{cust.isValid()}"><i class="fa fa-check"></i> </h:outputText>
-                            <h:outputText rendered="#{!cust.isValid()}"><i class="fa fa-times"></i> </h:outputText>
+                            <td><h:outputText rendered="#{cust.isValid()}"><i class="fancy-submit fa fa-check"></i> </h:outputText>
+                            <h:outputText rendered="#{!cust.isValid()}"><i class="fancy-submit fa fa-times"></i> </h:outputText>
                             </td>
                         </tr> 
                         </ui:repeat>
@@ -115,5 +120,36 @@ xmlns:f="http://java.sun.com/jsf/core"
         </div>
 
     </div>
+    
+    <div class="modal fade" id="logIn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        		<div class="modal-dialog modal-sm">
+            		<div class="modal-content">
+            		<div class="modal-header clearfix">
+                    	<button type="button" class="close fancy-close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
+                    	</button>
+                	</div>
+                      <div class="modal-body">
+						<h4 class="section__title">Log in</h4>
+							<h:form class="fancy-form">
+							
+							
+								<h:outputLabel for="email" value="Email" styleClass="fancy-label" />
+								<h:inputText value="#{employeeAtWorkBean.email}" styleClass="fancy-input"></h:inputText>
+
+								<h:outputLabel for="password" value="Password" styleClass="fancy-label" />
+								<h:inputSecret id="password" value="#{employeeAtWorkBean.password}"
+									styleClass="fancy-input" placeholder="Your password" required="true" requiredMessage="#{msgs.dishNameRequired}"/>
+
+							
+							<div style="text-align: center">
+								<h:commandLink id="log" 
+									action="#{employeeAtWorkBean.login()}" styleClass="fancy-submit"> <i class="icon icon--circle fa fa-check"> </i> </h:commandLink>
+							</div>
+							
+							</h:form>
+						</div>
+					</div>
+				</div>
+			</div>
 </h:body>
 </html>

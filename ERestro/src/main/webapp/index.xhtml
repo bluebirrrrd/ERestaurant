@@ -89,18 +89,17 @@
             </div>
             </h:form>
             
-           	<div class="modal fade" id="logIn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+               	<div class="modal fade" id="logIn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         		<div class="modal-dialog modal-sm">
             		<div class="modal-content">
+            		<div class="modal-header clearfix">
+                    	<button type="button" class="close fancy-close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
+                    	</button>
+                	</div>
                       <div class="modal-body">
 						<h4 class="section__title">Log in</h4>
 							<h:form class="fancy-form">
-							<div class="info">
-							<h:panelGrid columns="2" styleClass="infoTable"
-								columnClasses="infoColumn">
-								<f:facet name="header">
-									<h:outputText value="Log in" styleClass="title" />
-								</f:facet>
+							
 
 								<h:outputLabel for="email" value="Email" styleClass="fancy-label" />
 								<h:inputText value="#{customerBean.email}" styleClass="fancy-input"></h:inputText>
@@ -109,12 +108,12 @@
 								<h:inputSecret id="password" value="#{customerBean.password}"
 									styleClass="fancy-input" placeholder="Your password" required="true" requiredMessage="#{msgs.dishNameRequired}"/>
 
-							</h:panelGrid>
+							
 							<div style="text-align: center">
 								<h:commandLink id="log" 
-									action="#{customerBean.logIn()}" styleClass="fancy-submit"> <i class="icon icon--circle fa-check"> </i> </h:commandLink>
+									action="#{customerBean.logIn()}" styleClass="fancy-submit"> <i class="icon icon--circle fa fa-check"> </i> </h:commandLink>
 							</div>
-							</div>
+							
 							</h:form>
 						</div>
 					</div>

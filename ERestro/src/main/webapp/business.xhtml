@@ -9,7 +9,7 @@ xmlns:f="http://java.sun.com/jsf/core"
 <title>Business Analytic Page | ERestaurant</title>
  <link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>
     <link rel="stylesheet" type="text/css" href="http://balticlab.ru/lib/css/style.css"/>
-   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+   	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
     <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet' type='text/css'/>
     <!--[if lt IE 9]>     
 		<script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -45,14 +45,17 @@ xmlns:f="http://java.sun.com/jsf/core"
             <div class="header">
                 <a href="#" class="logo"></a>
                 <span class="header_user">
-                Welcome back, <b>#{employeeBean.employee.name}</b>
+                <h:outputText value="Welcome back, #{employeeAtWorkBean.employee.name}" rendered="#{employeeAtWorkBean.loggedIn}"/>
+                <h:outputText value="Welcome! " rendered="#{!employeeAtWorkBean.loggedIn}"/>
+                <h:link rendered="#{!employeeAtWorkBean.loggedIn}" outcome="#" value="Log in">
+                 <f:passThroughAttribute name="data-toggle" value="modal"/>
+                 <f:passThroughAttribute name="data-target" value="#logIn"/>                 
+                </h:link>
             </span>
             </div>
             <div class="nav">
-                <h:link outcome="allCustomers" class="nav__item" value="All customers"/>
-                <h:link outcome="newCustomer" class="nav__item" value="New customer"/>
-                <h:link outcome="allEmployees" class="nav__item" value="All employees"/>
-                <h:link outcome="newEmployee" class="nav__item" value="New employee"/>
+                <h:link outcome="business" class="nav__item" value="Business Analytic page"/>
+               
             </div>
 
             <div class="aside__copyright">
@@ -79,7 +82,7 @@ xmlns:f="http://java.sun.com/jsf/core"
                         <f:selectItems value="#{food_OrderListBean.categories}" var="cat" itemLabel="#{cat.name}" itemValue="#{cat.id}"></f:selectItems>
                         </h:selectOneMenu>
                     
-                     <h:commandLink action="#{food_OrderListBean.refreshListByDates()}" class="fancy-submit"> <i class="icon icon--circle fa-check "></i>
+                     <h:commandLink action="#{food_OrderListBean.refreshListByDates()}" class="fancy-submit"> <i class="icon icon--circle fa fa-check "></i>
                         </h:commandLink>
                     </h:form>
                     </div>
@@ -104,5 +107,37 @@ xmlns:f="http://java.sun.com/jsf/core"
         </div>
 
     </div>
+    
+    <div class="modal fade" id="logIn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        		<div class="modal-dialog modal-sm">
+            		<div class="modal-content">
+            		<div class="modal-header clearfix">
+                    	<button type="button" class="close fancy-close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
+                    	</button>
+                	</div>
+                      <div class="modal-body">
+						<h4 class="section__title">Log in</h4>
+							<h:form class="fancy-form">
+							
+							
+								<h:outputLabel for="email" value="Email" styleClass="fancy-label" />
+								<h:inputText value="#{employeeAtWorkBean.email}" styleClass="fancy-input"></h:inputText>
+
+								<h:outputLabel for="password" value="Password" styleClass="fancy-label" />
+								<h:inputSecret id="password" value="#{employeeAtWorkBean.password}"
+									styleClass="fancy-input" placeholder="Your password" required="true" requiredMessage="#{msgs.dishNameRequired}"/>
+
+							
+							<div style="text-align: center">
+								<h:commandLink id="log" 
+									action="#{employeeAtWorkBean.login()}" styleClass="fancy-submit"> <i class="icon icon--circle fa fa-check"> </i> </h:commandLink>
+							</div>
+							
+							</h:form>
+						</div>
+					</div>
+				</div>
+			</div>
+    
 </h:body>
 </html>
