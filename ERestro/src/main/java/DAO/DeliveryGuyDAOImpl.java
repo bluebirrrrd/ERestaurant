@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import org.springframework.stereotype.Repository;
 
+import com.bionic.edu.ERestro.DeliveryStatus;
 import com.bionic.edu.ERestro.Employee;
 import com.bionic.edu.ERestro.Orders;
 import com.bionic.edu.ERestro.Rights;
@@ -33,7 +34,7 @@ public class DeliveryGuyDAOImpl implements DeliveryGuyDAO {
 	
 	public List<Orders> getOrdersList() {
 		List<Orders> ordersList = null;
-		TypedQuery<Orders> query = em1.createQuery("SELECT o FROM Orders o WHERE (o.deliveryStatusId=2)", Orders.class);
+		TypedQuery<Orders> query = em1.createQuery("SELECT o FROM Orders o WHERE (o.delStat.id=2)", Orders.class);
 		//try {
 			ordersList = query.getResultList();
 		/*} finally {
@@ -44,6 +45,20 @@ public class DeliveryGuyDAOImpl implements DeliveryGuyDAO {
 	
 	public void saveOrder(Orders order) {
 		em1.merge(order);
+	}
+
+	@Override
+	public List<DeliveryStatus> getStatusList() {
+		List<DeliveryStatus> result = null;
+		TypedQuery<DeliveryStatus> query = em1.createQuery("SELECT s FROM DeliveryStatus s", DeliveryStatus.class);
+		result = query.getResultList();
+		return result;
+	}
+
+	@Override
+	public Orders findById(int id) {
+		Orders order = em1.find(Orders.class, id);
+		return order;
 	}
 	
 }

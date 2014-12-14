@@ -61,17 +61,17 @@
 								<h:outputText value="Dish info" styleClass="title" />
 							</f:facet>
 
-			<h:outputLabel for="cat" value="Category:" />
+			<h:outputLabel for="cat" value="Category:" styleClass="fancy-label" />
 			<h:selectOneMenu id="cat" value="#{foodBean.selectedFoodCategory}" style="selection">
 				<f:selectItems value="#{foodBean.categories}" var="categ" itemLabel="#{categ.name}" itemValue="#{categ}" required="true" requiredMessage="#{msgs.categoryRequired}" />
 			</h:selectOneMenu>
 
-			<h:outputLabel for="name" value="Name:" />
+			<h:outputLabel for="name" value="Name:" styleClass="fancy-label" />
 
 			<h:inputText id="name" value="#{foodBean.dish.name}"
 				styleClass="fancy-input" placeholder="Enter the name" required="true" requiredMessage="#{msgs.dishNameRequired}"/>
 
-			<h:outputLabel for="description" value="Description" />
+			<h:outputLabel for="description" value="Description" styleClass="fancy-label-high" />
 
 			<h:panelGroup>
 				<h:inputTextarea id="description" styleClass="fancy-input"
@@ -80,7 +80,7 @@
 				<br />
 				<h:outputText id="display" />
 			</h:panelGroup>
-			<h:outputLabel for="kitchenMade" value="Kitchen made?" />
+			<h:outputLabel for="kitchenMade" value="Kitchen made?" styleClass="fancy-label"/>
 			<h:selectOneMenu  styleclass ="selection" id="kitchenMade"	value="#{foodBean.dish.kitchenMade}">
 				<f:selectItem itemValue="1" itemLabel="Yes"/>
                 <f:selectItem itemValue="0" itemLabel="No"/> 

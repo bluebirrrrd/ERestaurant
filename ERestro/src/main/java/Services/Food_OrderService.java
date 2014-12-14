@@ -9,4 +9,5 @@ public interface Food_OrderService {
 	public List<Food_Order> getAllFoodOrdersList();
 	public List<Food_Order> getUndoneFoodOrdersList();
 	public List<Food_Order> getDoneFoodOrdersList();
+	public List<Food_Order> getFoodOrdersBetweenDates(String startDate, String endDate);
 }

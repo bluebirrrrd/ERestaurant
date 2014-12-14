@@ -44,10 +44,10 @@ public class CustomerServiceImpl implements CustomerService,Serializable {
 	}
 
 	@Transactional
-	public boolean logIn(String email, String password) {
+	public Customer logIn(String email, String password) {
 		String pass = DigestUtils.md5Hex(password);
-		boolean result = customerDAO.login(email, pass);
-		return result;
+		Customer customer = customerDAO.login(email, pass);
+		return customer;
 	}
 
 }

@@ -87,10 +87,5 @@ public class EmployeeBean implements Serializable{
 		employee = employeeService.findById(Integer.valueOf(id));
 		employee.setValid(employee.isValid());
 	}
-	
-	public Rights login(String email, String password) {
-		Rights result = employeeService.login(email, password);
-		return result;
-	}
 
 }

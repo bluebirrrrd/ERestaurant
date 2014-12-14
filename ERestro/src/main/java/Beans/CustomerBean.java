@@ -15,7 +15,7 @@ import Services.CustomerService;
 import com.bionic.edu.ERestro.Customer;
 
 @Named
-@Scope("request")
+@Scope("session")
 public class CustomerBean implements Serializable{
 	
 	
@@ -24,9 +24,13 @@ public class CustomerBean implements Serializable{
 	private CustomerService custService;
 	private boolean loggedIn;
 	private java.util.Date birthday;
+	private String email;
+	private String password;
+	
 	
 	public CustomerBean() {
 		customer = new Customer();
+		loggedIn = false;
 	}
 	
 	public CustomerService getCustService() {
@@ -59,22 +63,45 @@ public class CustomerBean implements Serializable{
 		this.customer = customer;
 	}
 	
-	
-	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public String editCustomer(String id) {
 		customer = custService.findById(Integer.valueOf(id));
 		return "newCustomer";
 	}
 	
-	public boolean logIn(String email,String password) {
-		loggedIn = custService.logIn(email, password); //String pass = DigestUtils.md5Hex(password); - //this one should go into custService implementation
-		return loggedIn; //custService.logIn(email, pass);
+	public String logIn() {
+		customer = custService.logIn(email, password); //String pass = DigestUtils.md5Hex(password); - //this one should go into custService implementation
+		if (customer.getId() != 0) {
+			loggedIn = true;
+		} 
+		return "index";
 	}
 	
 	public String save() {
 		customer.setBirthDate(birthday);
 		custService.save(customer);
-		return "menu";
+		return "index";
+	}
+	
+	public String logOff() {
+		loggedIn = false;
+		customer = new Customer();
+		return "index";
 	}
 
 }

@@ -50,6 +50,13 @@ public class Food_OrderServiceImpl implements Food_OrderService, Serializable {
 		List<Food_Order> result = businessAnalyticDAO.getPartsList();
 		return result;
 	}
+
+	@Override
+	public List<Food_Order> getFoodOrdersBetweenDates(String startDate,
+			String endDate) {
+		List<Food_Order> result = businessAnalyticDAO.getPartsBetweenDates(startDate, endDate);
+		return result;
+	}
 	
 	
 

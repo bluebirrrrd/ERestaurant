@@ -12,7 +12,7 @@ public interface EmployeeService {
 	public List<Employee> getAllEmployeesList();
 	public List<Employee> getEmployeesByCategory(int categoryId);
 	public List<Rights> getAccessRights();
-	public Rights login(String email, String password);
+	public Employee login(String email, String password);
 	public Rights findRightsById(int id);
 	public void save(Customer customer);
 }

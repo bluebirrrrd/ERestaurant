@@ -59,10 +59,10 @@ public class EmployeeServiceImpl implements EmployeeService, Serializable {
 	}
 	
 	@Override
-	public Rights login(String email, String password) {
+	public Employee login(String email, String password) {
 		String pass = DigestUtils.md5Hex(password); //this one should go into custService implementation
-		Rights right = employeeDAO.login(email, pass);
-		return right;
+		Employee empl = employeeDAO.login(email, pass);
+		return empl;
 		
 	}
 

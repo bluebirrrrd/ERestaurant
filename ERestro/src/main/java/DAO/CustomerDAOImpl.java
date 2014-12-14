@@ -83,7 +83,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 		return listCategories;
 	}
 
-	public boolean login(String email, String password) {
+	public Customer login(String email, String password) {
 		Customer customer = null;
 		TypedQuery<Customer> query = em1.createQuery(
 				"SELECT c FROM Customer c WHERE (c.email=:mail)", Customer.class);
@@ -91,9 +91,11 @@ public class CustomerDAOImpl implements CustomerDAO {
 		query.setParameter("mail", email);
 		customer = query.getSingleResult();
 		if (customer == null) {
-			return false;
+			return new Customer();
 		} else {
-			return customer.getPassword().equals(password);
+			if (customer.getPassword().equals(password)) 
+				return customer;
+			else return new Customer();
 		}
 	}
 

@@ -16,18 +16,18 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	private EntityManager em1;
 	
 	@Override
-	public Rights login(String email, String password) {
+	public Employee login(String email, String password) {
 		Employee employee = null;
 		TypedQuery<Employee> query = em1.createQuery(
 				"SELECT e FROM Employee e WHERE (e.email=:mail)", Employee.class);
 			query.setParameter("mail", email);
 			employee = query.getSingleResult();
 			if (employee == null) {
-				return null;
+				return new Employee();
 			} else if (employee.getPassword().equals(password)) {
-				return employee.getAccess();
+				return employee;
 			} else {
-				return null;
+				return new Employee();
 			}
 	}
 

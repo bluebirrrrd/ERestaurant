@@ -12,6 +12,7 @@ import DAO.BusinessAnalyticDAO;
 import DAO.CustomerDAO;
 import DAO.DeliveryGuyDAO;
 
+import com.bionic.edu.ERestro.DeliveryStatus;
 import com.bionic.edu.ERestro.Orders;
 
 @Named
@@ -49,6 +50,18 @@ public class OrderServiceImpl implements OrderService, Serializable {
 	public List<Orders> getFinishedOrdersList() {
 		List<Orders> list = baDAO.getOrdersList();
 		return list;
+	}
+
+	@Override
+	public List<DeliveryStatus> getStatusList() {
+		List<DeliveryStatus> result = deliveryDAO.getStatusList();
+		return result;
+	}
+
+	@Override
+	public Orders findById(int id) {
+		Orders result = deliveryDAO.findById(id);
+		return result;
 	}
 
 }

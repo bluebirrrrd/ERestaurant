@@ -29,4 +29,11 @@ public class Food_OrderBean {
 		part.setDone(true);
 		foodOrderService.save(part);
 	}
+	
+	public String setDone(String id) {
+		part = foodOrderService.findById(Integer.valueOf(id));
+		part.setDone(true);
+		foodOrderService.save(part);
+		return "delivery";
+	}
 }

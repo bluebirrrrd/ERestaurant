@@ -15,6 +15,6 @@ public interface CustomerDAO {
 	public List<Food> getFoodByCategory(int categoryId);
 	public List<Food> getAllFoodList();
 	public List<FoodCategory> getFoodCategories();
-	public boolean login(String email, String password);
+	public Customer login(String email, String password);
 	public List<Orders> getMyOrders(int customerId);
 }

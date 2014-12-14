@@ -76,7 +76,7 @@ public class FoodBean {
 	public String editFood(String id) {
 		Integer intId = Integer.valueOf(id);
 		dish = foodService.findById(intId);
-		return "newDish";
+		return "admin";
 	}
 	
 	public void refreshCategories() {

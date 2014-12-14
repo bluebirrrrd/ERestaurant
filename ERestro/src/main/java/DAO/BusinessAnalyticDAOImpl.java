@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 
 
+
 import com.bionic.edu.ERestro.Food_Order;
 import com.bionic.edu.ERestro.Orders;
 
@@ -51,5 +52,17 @@ public class BusinessAnalyticDAOImpl implements BusinessAnalyticDAO{
 		TypedQuery<Food_Order> query = em1.createQuery("SELECT fo FROM Food_Order fo WHERE fo.done=1", Food_Order.class);
 		parts = query.getResultList();
 		return parts;
+	}
+	
+	@Override
+	public List<Food_Order> getPartsBetweenDates(String startDate,
+			String endDate) {
+		List<Food_Order> result = null;
+		TypedQuery<Food_Order> query = em1.createQuery("SELECT fo FROM Food_Order fo "+ 
+		"WHERE  (DATE(fo.orderId.time) > DATE(:start)) AND (DATE (fo.orderId.time) < DATE(:end))",Food_Order.class);
+		query.setParameter("start", "'" + startDate+"'");
+		query.setParameter("end", "'"+endDate+"'");
+		result = query.getResultList();
+		return result;
 	}
 }

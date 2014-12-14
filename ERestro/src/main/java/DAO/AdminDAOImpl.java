@@ -51,7 +51,7 @@ public class AdminDAOImpl implements AdminDAO {
 	
 	public List<Food> getDishesFromCategory(int categoryId) {
 		List<Food> list = null;
-		TypedQuery<Food> query = em1.createQuery("SELECT f FROM Food f WHERE (f.category = (SELECT fc FROM FoodCategory fc WHERE id=:id))",Food.class);
+		TypedQuery<Food> query = em1.createQuery("SELECT f FROM Food f WHERE (f.category = (SELECT fc FROM FoodCategory fc WHERE fc.id=:id))",Food.class);
 		query.setParameter("id", categoryId);
 		list = query.getResultList();
 		return list;

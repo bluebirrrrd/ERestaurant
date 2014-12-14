@@ -44,13 +44,20 @@ public class FoodListBean {
 		categories = foodService.getCategoriesList();
 	}
 	
-	public void refreshList() {
+	public String refreshList() {
 		dishes = foodService.getAllFoodList();
+		return "index";
 	}
 	
 	public String refreshListByCategory(String categoryId) {
 		int catId = Integer.valueOf(categoryId);
 		dishes = foodService.getListByCategory(catId);
 		return "index";
+	}
+	
+	public String adminRefreshListByCategory(String categoryId) {
+		int catId = Integer.valueOf(categoryId);
+		dishes = foodService.getListByCategory(catId);
+		return "admin";
 	}
 }

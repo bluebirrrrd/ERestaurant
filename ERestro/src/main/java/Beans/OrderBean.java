@@ -1,8 +1,9 @@
 package Beans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.faces.bean.*;
@@ -15,6 +16,7 @@ import Services.Food_OrderService;
 import Services.OrderService;
 
 import com.bionic.edu.ERestro.Customer;
+import com.bionic.edu.ERestro.DeliveryStatus;
 import com.bionic.edu.ERestro.Food;
 import com.bionic.edu.ERestro.Food_Order;
 import com.bionic.edu.ERestro.Orders;
@@ -27,7 +29,7 @@ public class OrderBean implements Serializable {
 
 	private Orders order;
 	
-	private List<Food_Order> content;
+	private List<Food_Order> content = new LinkedList<Food_Order>();
 
 	@Inject
 	private OrderService orderService;
@@ -44,7 +46,6 @@ public class OrderBean implements Serializable {
 
 	public OrderBean() {
 		order = new Orders();
-		content = null;
 		total = 0.0;
 			}
 
@@ -105,16 +106,17 @@ public class OrderBean implements Serializable {
 		}
 	}
 
-	public String addItem(String dishId, String quantity) {
+	public String addItem(String dishId) {
 		Food_Order f = new Food_Order();
 		f.setOrder(order);
 		Food dish = foodService.findById(Integer.valueOf(dishId));
 		f.setFood(dish);
-		f.setQuantity(Integer.valueOf(quantity));
+		f.setQuantity(tempQuantity);
 		content.add(f);
 		order.setContent(content);
 		countTotal();
 		this.quantity = content.size();
+		tempQuantity = 1;
 		return "index";
 	}
 
@@ -160,7 +162,7 @@ public class OrderBean implements Serializable {
 		countTotal();
 		order.setTotal(total);
 		order.setCustomer(customer);
-		return "confirmOrder";
+		return "profile";
 	}
 
 	public String confirmOrder() {
@@ -173,5 +175,20 @@ public class OrderBean implements Serializable {
 
 		orderService.save(order);
 		return "profile";
+	}
+	
+	public String setDone(String orderId) {
+		List<DeliveryStatus> list = orderService.getStatusList();
+		DeliveryStatus temp = null;
+		for (DeliveryStatus i: list) {
+			if (i.getId()==3) {
+				temp.setId(i.getId());
+				temp.setName(i.getName());
+			}
+		}
+		order = orderService.findById(Integer.valueOf(orderId));
+		order.setDelStat(temp);
+		orderService.save(order);
+		return "delivery";
 	}
 }

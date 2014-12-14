@@ -33,14 +33,15 @@
             </span>
             </div>
             
+            <h:form>
             <div class="nav">
-            	<a href="#" class="nav__item">All Dishes</a>
-            <ui:repeat var="o" value="#{foodListBean.categories}">
-                <h:commandLink action="#{foodListBean.refreshListByCategory(o.id)}" styleclass="nav__item" value="#{o.getName()}"/>
-            </ui:repeat>
+            	<h:commandLink action="#{foodListBean.refreshList()}" class="nav__item" value="All dishes"/>
+            	<ui:repeat var="o" value="#{foodListBean.categories}">
+                <h:commandLink action="#{foodListBean.adminRefreshListByCategory(o.id)}" class="nav__item" value="#{o.name}"/>
+                </ui:repeat>
             <a href="#" data-toggle="modal" data-target="#newDish" class="nav__item">New Dish</a>
             </div>
-			
+			</h:form>
 
             <div class="aside__copyright">
                 © 2014 ERestaurant, All Rights Reserved
@@ -51,7 +52,7 @@
         <div class="main">
        <ui:repeat var="dish" value="#{foodListBean.dishes}" > 
             <h:link outcome="#" class="main__item">
-                <img class="main__item__img" src="lib/img/img.jpg" alt="picture" />
+                 <h:graphicImage styleClass="main__item__img" value="resources/img/#{dish.id}.jpg" />
                 <div class="main__item__content">
                     <div class="main__item__content__box">
                         <h4 class="main__item__content__price"><h:outputText value="$#{dish.price}"/></h4>
@@ -62,6 +63,8 @@
                         </div>
                         
                         <h:commandLink id="edit" action="#{foodBean.editFood(dish.id)}">
+                        <f:passThroughAttribute name="data-toggle" value="modal"/>
+                        <f:passThroughAttribute name="data-target" value="#newDish"/>
                         <i class="icon icon--circle fa fa-pencil" ></i>
                         </h:commandLink>
                     	

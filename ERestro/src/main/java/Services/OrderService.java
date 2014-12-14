@@ -8,4 +8,6 @@ public interface OrderService {
 	public List<Orders> getUnfinishedOrdersList();
 	public List<Orders> getAllOrdersList();
 	public List<Orders> getFinishedOrdersList();
+	public List<DeliveryStatus> getStatusList();
+	public Orders findById(int id);
 }

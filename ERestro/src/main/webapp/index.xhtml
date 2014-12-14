@@ -8,8 +8,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Menu</title>
 <link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>
-    <link rel="stylesheet" type="text/css" href="http://balticlab.ru/lib/css/style.css"/>
-   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+  
+   <link rel="stylesheet" type="text/css" href="http://balticlab.ru/lib/css/style.css"/> 
+   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/> 
+   
     <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet' type='text/css'/>
     <!--[if lt IE 9]>     
 		<script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -27,11 +29,17 @@
             <div class="header">
                 <a href="#" class="logo"></a>
                 <span class="header_user">
-                Welcome back, <b><h:outputText value="#{customerBean.customer.name}"/></b>
+                <h:outputText value="Welcome back, #{customerBean.customer.name}" rendered="#{customerBean.loggedIn}"/>
+                <h:outputText value="Welcome! " rendered="#{!customerBean.loggedIn}"/>
+                <h:link rendered="#{!customerBean.loggedIn}" outcome="#" value="Log in">
+                 <f:passThroughAttribute name="data-toggle" value="modal"/>
+                 <f:passThroughAttribute name="data-target" value="#logIn"/>                 
+                </h:link>
             </span>
             </div>
             <h:form>
             <div class="nav">
+            	<h:commandLink action="#{foodListBean.refreshList()}" class="nav__item" value="All dishes"/>
             	<ui:repeat var="o" value="#{foodListBean.categories}">
                 <h:commandLink action="#{foodListBean.refreshListByCategory(o.id)}" class="nav__item" value="#{o.name}"/>
                 </ui:repeat>
@@ -42,20 +50,22 @@
                 Your order: <span><h:outputText value="#{orderBean.quantity}"/></span> items
                 <p>
                     go to cart
-                    <h:commandLink action="#{orderBean.proceedOrder()}"><i class="fa fa-arrow-right"></i></h:commandLink>
+                    <h:link outcome="#{orderBean.proceedOrder()}"><i class="fa fa-arrow-right"></i></h:link>
                 </p>
             </div>
 
             <div class="aside__copyright">
+            	
                 © 2014 ERestaurant, All Rights Reserved
             </div>
-        </div>
+	</div>
         <h:form>
         
         <div class="main">
         <ui:repeat var="dish" value="#{foodListBean.dishes}">
             <h:link outcome="#" class="main__item">
-                <img class="main__item__img" src="lib/img/img.jpg" alt="picture" />
+              
+              <h:graphicImage styleClass="main__item__img" value="resources/img/#{dish.id}.jpg" />  
                 <div class="main__item__content">
                     <div class="main__item__content__box">
                         <h4 class="main__item__content__price"><h:outputText value="#{dish.price}"/></h4>
@@ -63,14 +73,14 @@
                         <h4 class="main__item__content__text"><h:outputText value="#{dish.description}"/></h4>
                         <div class="main__item__content__footer">
                             <i class="icon fa fa-minus q-ctrl"></i>
-                            <h:inputText class="quntity-input" value="#{orderBean.tempQuantity}" converter="javax.faces.Integer">
+                            <h:inputText class="quntity-input" value="#{orderBean.tempQuantity}">
                             </h:inputText>
                             
                             <i class="icon fa fa-plus q-ctrl"></i>
 
                         </div>
                         
-                        <h:commandLink id="add" action="#{orderBean.addItem(dish.id,quantity)}"><i class="icon icon--circle fa fa-shopping-cart" ></i></h:commandLink>
+                        <h:commandLink id="add" action="#{orderBean.addItem(dish.id)}"><i class="icon icon--circle fa fa-shopping-cart" ></i></h:commandLink>
                     	
                     </div>
                 </div>
@@ -78,5 +88,38 @@
             </ui:repeat>
             </div>
             </h:form>
+            
+           	<div class="modal fade" id="logIn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        		<div class="modal-dialog modal-sm">
+            		<div class="modal-content">
+                      <div class="modal-body">
+						<h4 class="section__title">Log in</h4>
+							<h:form class="fancy-form">
+							<div class="info">
+							<h:panelGrid columns="2" styleClass="infoTable"
+								columnClasses="infoColumn">
+								<f:facet name="header">
+									<h:outputText value="Log in" styleClass="title" />
+								</f:facet>
+
+								<h:outputLabel for="email" value="Email" styleClass="fancy-label" />
+								<h:inputText value="#{customerBean.email}" styleClass="fancy-input"></h:inputText>
+
+								<h:outputLabel for="password" value="Password" styleClass="fancy-label" />
+								<h:inputSecret id="password" value="#{customerBean.password}"
+									styleClass="fancy-input" placeholder="Your password" required="true" requiredMessage="#{msgs.dishNameRequired}"/>
+
+							</h:panelGrid>
+							<div style="text-align: center">
+								<h:commandLink id="log" 
+									action="#{customerBean.logIn()}" styleClass="fancy-submit"> <i class="icon icon--circle fa-check"> </i> </h:commandLink>
+							</div>
+							</div>
+							</h:form>
+						</div>
+					</div>
+				</div>
+			</div>
+
 </h:body>
 </html>

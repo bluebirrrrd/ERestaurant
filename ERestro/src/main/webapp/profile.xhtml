@@ -66,15 +66,15 @@ xmlns:f="http://java.sun.com/jsf/core"
                 <div class="col-md-6">
                     <table class="fancy-table">
                         <tr>
-                            <th>Name</th>
+                            <th width="40%">Name</th>
                             <th>Quantity</th>
                             <th width="40">Edit</th>
                         </tr>
-                        <ui:repeat var="item" value="#{order.content}">
+                        <ui:repeat var="item" value="#{orderBean.content}">
                         <tr>
                             <td>#{item.food.name}</td>
-                            <td><h:inputText value="#{item.quantity}" converter="javax.faces.Integer"/></td>
-                            <td><h:commandLink action="#{orderBean.edit_quantity(item.food.id,item.quantity)}"></h:commandLink>
+                            <td><h:inputText value="#{item.quantity}" converter="javax.faces.Integer" class="fancy-input"/></td>
+                            <td><h:link outcome="#{orderBean.edit_quantity(item.food.id,item.quantity)}"><i class="fa fa-pencil"></i></h:link>
                             </td>
                         </tr>
                         </ui:repeat>
