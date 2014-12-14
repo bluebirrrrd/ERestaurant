@@ -20,11 +20,11 @@ xmlns:f="http://java.sun.com/jsf/core"
     <script type="text/javascript" src="http://balticlab.ru/lib/js/control.js"></script>
 </h:head>
 <h:body class="page">
-#{customerListBean.refreshCustomersList()}
+#{orderListBean.refreshUnfinishedList()}
     <div class="wrap">
 
         <div class="b_info">
-            <i class="icon fa-info icon--circle js-info"></i>
+            <i class="icon icon--circle fa fa-info js-info"></i>
             <div class="b_info__content">
                 <a class="b_info__content__link" href="tel:993012345679">
                     <i class="icon icon-phone"></i>
@@ -49,7 +49,7 @@ xmlns:f="http://java.sun.com/jsf/core"
             </span>
             </div>
             <div class="nav">
-                <h:link outcome="kitchen" class="nav__item" value="Kitchen page"/>
+                <h:link outcome="delivery" class="nav__item" value="Delivery page"/>
                 
             </div>
 
@@ -60,7 +60,7 @@ xmlns:f="http://java.sun.com/jsf/core"
 
         <div class="main">
             <div id="section" class="clearfix">
-                <div class="col-md-6">
+                
                     <table class="fancy-table">
                         <tr>
                             <th>Time</th>
@@ -73,14 +73,14 @@ xmlns:f="http://java.sun.com/jsf/core"
                         	<td>#{item.time}</td>
                             <td>#{item.customer.name}</td>
                             <td>#{item.quantity}</td>
-                            <td><h:outputLink action="#{item.setDelStat(1)}"><i class="fa fa-check"></i> </h:outputLink>
+                            <td><h:outputLink action="#{orderBean.setDone(item.id)}"><i class="fa fa-check"></i> </h:outputLink>
                             
                             </td>
                         </tr> 
                         </ui:repeat>
                     </table>
                 </div>
-            </div>
+            
         </div>
 
     </div>
