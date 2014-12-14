@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Admin page | ERestaurant</title>
+<link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="http://balticlab.ru/lib/css/style.css"/>
+   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet' type='text/css'/>
+    <!--[if lt IE 9]>     
+		<script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<script type="text/javascript" src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+	<![endif]-->
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://balticlab.ru/lib/js/control.js"></script>
+	
+</h:head>
+<h:body>
+  
+  #{foodBean.refreshCategories()}
+  #{foodListBean.getCategoriesList()}
+  #{foodListBean.refreshList()}
+<div class="aside">
+            <div class="header">
+                <a href="#" class="logo"></a>
+                <span class="header_user">
+                Welcome back, <b><h:outputText value="#{employeeBean.employee.name}"/></b>
+            </span>
+            </div>
+            
+            <div class="nav">
+            	<a href="#" class="nav__item">All Dishes</a>
+            <ui:repeat var="o" value="#{foodListBean.categories}">
+                <h:commandLink action="#{foodListBean.refreshListByCategory(o.id)}" styleclass="nav__item" value="#{o.getName()}"/>
+            </ui:repeat>
+            <a href="#" data-toggle="modal" data-target="#newDish" class="nav__item">New Dish</a>
+            </div>
+			
+
+            <div class="aside__copyright">
+                © 2014 ERestaurant, All Rights Reserved
+            </div>
+        </div>
+<h:form>
+        
+        <div class="main">
+       <ui:repeat var="dish" value="#{foodListBean.dishes}" > 
+            <h:link outcome="#" class="main__item">
+                <img class="main__item__img" src="lib/img/img.jpg" alt="picture" />
+                <div class="main__item__content">
+                    <div class="main__item__content__box">
+                        <h4 class="main__item__content__price"><h:outputText value="$#{dish.price}"/></h4>
+                        <h4 class="main__item__content__title"><h:outputText value="#{dish.name}"/></h4>
+                        <h4 class="main__item__content__text"><h:outputText value="#{dish.description}"/></h4>
+                        <div class="main__item__content__footer">
+                           
+                        </div>
+                        
+                        <h:commandLink id="edit" action="#{foodBean.editFood(dish.id)}">
+                        <i class="icon icon--circle fa fa-pencil" ></i>
+                        </h:commandLink>
+                    	
+                    </div>
+                </div>
+            </h:link>
+           </ui:repeat> 
+            </div>
+            </h:form>
+             <div class="modal fade" id="newDish" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header clearfix">
+                    <button type="button" class="close fancy-close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+                <div class="modal-body">
+					<h4 class="section__title">New dish</h4>
+					<h:form class="fancy-form">
+						<div class="info">
+							<h:panelGrid columns="2" styleClass="infoTable"
+								columnClasses="infoColumn">
+							<f:facet name="header">
+								<h:outputText value="Dish info" styleClass="title" />
+							</f:facet>
+
+			<h:outputLabel for="cat" value="Category:" styleclass="fancy-label" />
+			<h:selectOneMenu id="cat" value="#{foodBean.selectedFoodCategory}" styleclass="selection">
+				<f:selectItems value="#{foodBean.categories}" var="cat" itemLabel="#{cat.name}" itemValue="#{cat}" required="true" requiredMessage="#{msgs.categoryRequired}" />
+			</h:selectOneMenu>
+
+			<h:outputLabel for="name" value="Name:" styleclass="fancy-label"/>
+
+			<h:inputText id="name" value="#{foodBean.dish.name}"
+				styleClass="fancy-input" placeholder="Enter the name" required="true" requiredMessage="#{msgs.dishNameRequired}"/>
+
+			<h:outputLabel for="description" value="Description" />
+
+			<h:panelGroup>
+				<h:inputTextarea id="description" styleClass="fancy-input"
+					value="#{foodBean.dish.description}" counter="display" placeholder="Optional"
+					maxlength="500" counterTemplate="({0} characters remaining)" />
+				<br />
+				<h:outputText id="display" />
+			</h:panelGroup>
+			<h:outputLabel for="kitchenMade" value="Kitchen made?" styleclass="fancy-label" />
+			<h:selectOneMenu  styleclass ="selection" id="kitchenMade"	value="#{foodBean.dish.kitchenMade}">
+				<f:selectItem itemValue="1" itemLabel="Yes"/>
+                <f:selectItem itemValue="0" itemLabel="No"/> 
+			</h:selectOneMenu>
+			<h:outputLabel for="price" value="Price" styleclass="fancy-label" />
+			<h:inputText id="price" value="#{foodBean.dish.price}" required="true" requiredMessage="#{msgs.priceRequired}" />
+		</h:panelGrid>
+		<div style="text-align: center">
+			<h:commandLink id="submit" 
+				action="#{foodBean.saveFood()}" styleClass="fancy-submit"> <i class="icon icon--circle fa fa-check"> </i> </h:commandLink>
+		</div>
+	</div>
+</h:form>
+</div>
+</div>
+</div>
+</div>
+            
+</h:body>
+</html>

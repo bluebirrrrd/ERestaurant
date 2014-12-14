@@ -1,5 +1,6 @@
 package Beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -9,6 +10,7 @@ import javax.inject.*;
 
 import org.springframework.context.annotation.Scope;
 
+import Services.FoodService;
 import Services.Food_OrderService;
 import Services.OrderService;
 
@@ -19,42 +21,55 @@ import com.bionic.edu.ERestro.Orders;
 
 @Named
 @Scope("session")
-public class OrderBean {
-	private Orders order;
+public class OrderBean implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
+	private Orders order;
+	
 	private List<Food_Order> content;
 
 	@Inject
 	private OrderService orderService;
 	@Inject
 	private Food_OrderService foodOrderService;
+	@Inject 
+	private FoodService foodService;
 
 	private double total;
 	private Customer customer;
 	private int quantity;
+	private Food dish;
+	private int tempQuantity;
 
 	public OrderBean() {
 		order = new Orders();
 		content = null;
 		total = 0.0;
-		customer = new Customer();
-		
+			}
 
-		/*
-		 * Orders order1 = new Orders();
-		 * order1.setTime(java.sql.Timestamp.valueOf
-		 * (java.time.LocalDateTime.now())); Food_Order part1 = new
-		 * Food_Order(); part1.setFood((new FoodBean()).getDishes().get(1));
-		 * part1.setOrder(order1); part1.setId(1); part1.setQuantity(2);
-		 * part1.setDone(false); Food_Order part2 = new Food_Order();
-		 * part2.setFood((new FoodBean()).getDishes().get(2));
-		 * part2.setOrder(order1); part2.setId(2); part2.setQuantity(1);
-		 * part2.setDone(false); List<Food_Order> content1 = new
-		 * ArrayList<Food_Order>(); content1.add(part1); content1.add(part2);
-		 * order1.setContent(content1);
-		 * 
-		 * orderList = new ArrayList<Orders>(); orderList.add(order1);
-		 */
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
+
+	public Food getDish() {
+		return dish;
+	}
+
+	public void setDish(Food dish) {
+		this.dish = dish;
+	}
+
+	public int getTempQuantity() {
+		return tempQuantity;
+	}
+
+	public void setTempQuantity(int tempQuantity) {
+		this.tempQuantity = tempQuantity;
 	}
 
 	public int getQuantity() {
@@ -81,14 +96,6 @@ public class OrderBean {
 		this.content = content;
 	}
 
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
 	public void countTotal() {
 		total = 0;
 		Iterator<Food_Order> it = content.iterator();
@@ -98,32 +105,39 @@ public class OrderBean {
 		}
 	}
 
-	public String addItem(Food food, String quantity) {
+	public String addItem(String dishId, String quantity) {
 		Food_Order f = new Food_Order();
 		f.setOrder(order);
-		f.setFood(food);
+		Food dish = foodService.findById(Integer.valueOf(dishId));
+		f.setFood(dish);
 		f.setQuantity(Integer.valueOf(quantity));
 		content.add(f);
 		order.setContent(content);
 		countTotal();
 		this.quantity = content.size();
-		return "editOrder";
+		return "index";
 	}
 
-	public String edit_quantity(Food food, String quantity) {
+	public String edit_quantity(String foodId, String quantity) {
 		Iterator<Food_Order> it = content.iterator();
 		while (it.hasNext()) {
 			Food_Order temp = it.next();
-			if (temp.getFood().getName().equals(food.getName())) {
+			if (temp.getFood().getId()== Integer.valueOf(foodId)) {
+				if (Integer.valueOf(quantity) != 0) {
 				temp.setQuantity(Integer.valueOf(quantity));
 				it.remove();
 				content.add(temp);
 				order.setContent(content);
 				break;
+				} else {
+					it.remove();
+					order.setContent(content);
+					break;
+				}
 			}
 		}
 		countTotal();
-		return "editOrder";
+		return "profile";
 	}
 
 	public String removeItem(Food food) {
@@ -145,11 +159,12 @@ public class OrderBean {
 		order.setContent(content);
 		countTotal();
 		order.setTotal(total);
+		order.setCustomer(customer);
 		return "confirmOrder";
 	}
 
-	public String confirmOrder(Customer customer) {
-		this.customer = customer;
+	public String confirmOrder() {
+		
 		order.setCustomer(customer);
 		
 		for (Food_Order f : content) {
@@ -157,6 +172,6 @@ public class OrderBean {
 		}
 
 		orderService.save(order);
-		return "profile?id=" + customer.getId();
+		return "profile";
 	}
 }

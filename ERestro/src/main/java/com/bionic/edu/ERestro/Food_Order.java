@@ -27,6 +27,9 @@ public class Food_Order {
 			this.done = 0;
 		}
 	}
+	public void setDone(int done) {
+		this.done = (short)done;
+	}
 
 	public Food_Order() {	}
 

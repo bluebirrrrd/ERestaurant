@@ -5,11 +5,15 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.TypedQuery;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.transaction.annotation.Transactional;
 
+import DAO.EmployeeDAO;
 import DAO.SuperUserDAO;
 
+import com.bionic.edu.ERestro.Customer;
 import com.bionic.edu.ERestro.Employee;
 import com.bionic.edu.ERestro.Rights;
 
@@ -21,6 +25,9 @@ public class EmployeeServiceImpl implements EmployeeService, Serializable {
 	@Inject 
 	SuperUserDAO superUserDAO;
 	
+	@Inject
+	EmployeeDAO employeeDAO;
+	
 	public Employee findById(int id) {
 		 Employee employee = superUserDAO.getEmployeeById(id);
 		return employee;
@@ -28,8 +35,11 @@ public class EmployeeServiceImpl implements EmployeeService, Serializable {
 
 	@Transactional
 	public void save(Employee e) {
+		String pass = DigestUtils.md5Hex(e.getPassword());
+		e.setPassword(pass);
 		superUserDAO.saveEmployee(e);
 	}
+	
 
 
 	public List<Employee> getAllEmployeesList() {
@@ -37,8 +47,8 @@ public class EmployeeServiceImpl implements EmployeeService, Serializable {
 		return list;
 	}
 
-	public List<Employee> getEmployeesByCategory(Rights category) {
-			List<Employee> list = superUserDAO.getEmployeesByCategory(category.getId());
+	public List<Employee> getEmployeesByCategory(int categoryId) {
+			List<Employee> list = superUserDAO.getEmployeesByCategory(categoryId);
 		return list;
 	}
 
@@ -47,5 +57,28 @@ public class EmployeeServiceImpl implements EmployeeService, Serializable {
 		List<Rights> list = superUserDAO.getRightsList();
 		return list;
 	}
+	
+	@Override
+	public Rights login(String email, String password) {
+		String pass = DigestUtils.md5Hex(password); //this one should go into custService implementation
+		Rights right = employeeDAO.login(email, pass);
+		return right;
+		
+	}
+
+	@Override
+	public Rights findRightsById(int id) {
+		Rights result = superUserDAO.findRightsById(id);
+		return result;
+	}
+
+	@Override
+	public void save(Customer customer) {
+		String pass = DigestUtils.md5Hex(customer.getPassword());
+		customer.setPassword(pass);
+		superUserDAO.saveCustomer(customer);
+		
+	}
+	
 
 }

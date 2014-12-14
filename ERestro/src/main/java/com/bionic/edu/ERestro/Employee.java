@@ -1,5 +1,10 @@
 package com.bionic.edu.ERestro;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 import javax.persistence.*;
 
 @Entity
@@ -22,6 +27,14 @@ public class Employee {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public short getValid() {
+		return valid;
+	}
+
+	public void setValid(short valid) {
+		this.valid = valid;
 	}
 
 	public Employee() {	}
@@ -78,6 +91,11 @@ public class Employee {
 		this.access = access;
 	}
 	
+	public void setBirthDate(java.util.Date birthDate) {
+		Instant instant = Instant.ofEpochMilli(birthDate.getTime());
+		LocalDate res = LocalDateTime.ofInstant(instant,ZoneId.systemDefault()).toLocalDate();
+		this.birthDate = java.sql.Date.valueOf(res);
+	}
 	
 	
 	

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Delivery page | ERestaurant</title>
+ <link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="http://balticlab.ru/lib/css/style.css"/>
+   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet' type='text/css'/>
+    <!--[if lt IE 9]>     
+		<script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<script type="text/javascript" src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+	<![endif]-->
+
+    <script type="text/javascript" src="http://balticlab.ru/lib/js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="http://balticlab.ru/lib/js/control.js"></script>
+</h:head>
+<h:body class="page">
+#{customerListBean.refreshCustomersList()}
+    <div class="wrap">
+
+        <div class="b_info">
+            <i class="icon fa-info icon--circle js-info"></i>
+            <div class="b_info__content">
+                <a class="b_info__content__link" href="tel:993012345679">
+                    <i class="icon icon-phone"></i>
+                    9930 1234 5679
+                </a>
+                <a class="b_info__content__link" href="e-mail:contact@domain.com">
+                    <i class="fa fa-letter"></i>
+                    contact@domain.com
+                </a>
+                <a class="b_info__content__link" href="#">
+                    <i class="fa fa-home"></i>
+                    street address example
+                </a>
+            </div>
+        </div>
+
+        <div class="aside">
+            <div class="header">
+                <a href="#" class="logo"></a>
+                <span class="header_user">
+                Welcome back, <b>#{employeeBean.employee.name}</b>
+            </span>
+            </div>
+            <div class="nav">
+                <h:link outcome="kitchen" class="nav__item" value="Kitchen page"/>
+                
+            </div>
+
+            <div class="aside__copyright">
+                © 2014 ERestaurant, All Rights Reserved
+            </div>
+        </div>
+
+        <div class="main">
+            <div id="section" class="clearfix">
+                <div class="col-md-6">
+                    <table class="fancy-table">
+                        <tr>
+                            <th>Time</th>
+                            <th>Client</th>
+                            <th>Address</th>
+                            <th width="40">Done?</th>
+                        </tr>
+                        <ui:repeat var="item" value="#{orderListBean.orderList}">
+                        <tr>
+                        	<td>#{item.time}</td>
+                            <td>#{item.customer.name}</td>
+                            <td>#{item.quantity}</td>
+                            <td><h:outputLink action="#{item.setDelStat(1)}"><i class="fa fa-check"></i> </h:outputLink>
+                            
+                            </td>
+                        </tr> 
+                        </ui:repeat>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</h:body>
+</html>

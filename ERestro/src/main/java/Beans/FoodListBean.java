@@ -1,35 +1,43 @@
 package Beans;
 
+import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.inject.Named;
+
+import org.springframework.context.annotation.Scope;
 
 import Services.FoodService;
 
 import com.bionic.edu.ERestro.Food;
 import com.bionic.edu.ERestro.FoodCategory;
 
+@Named
+@Scope("session")
 public class FoodListBean {
-	private static List<Food> dishes;
-	private static List<FoodCategory> categories;
+	private  List<Food> dishes = null;
+	private  List<FoodCategory> categories = null;
 	
 	@Inject
 	FoodService foodService;
-
-	public static List<Food> getDishes() {
+	
+	
+	public List<Food> getDishes() {
 		return dishes;
 	}
 
-	public static void setDishes(List<Food> dishes) {
-		FoodListBean.dishes = dishes;
+	public void setDishes(List<Food> dishes) {
+		this.dishes = dishes;
 	}
 
-	public static List<FoodCategory> getCategories() {
+	public List<FoodCategory> getCategories() {
 		return categories;
 	}
 
-	public static void setCategories(List<FoodCategory> categories) {
-		FoodListBean.categories = categories;
+	public void setCategories(List<FoodCategory> categories) {
+		this.categories = categories;
 	}
 	
 	public void getCategoriesList() {
@@ -40,7 +48,9 @@ public class FoodListBean {
 		dishes = foodService.getAllFoodList();
 	}
 	
-	public void refreshListByCategory(FoodCategory category) {
-		dishes = foodService.getListByCategory(category);
+	public String refreshListByCategory(String categoryId) {
+		int catId = Integer.valueOf(categoryId);
+		dishes = foodService.getListByCategory(catId);
+		return "index";
 	}
 }

@@ -13,7 +13,7 @@ import com.bionic.edu.ERestro.Food_Order;
 public class Food_OrderBean {
 
 	private Food_Order part;
-	
+
 	@Inject
 	private Food_OrderService foodOrderService;
 

@@ -3,51 +3,101 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<h:outputStylesheet library="css" name="style.css" />
-	<title>Dish Info</title>
+	<title>New Dish</title>
+	<link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="http://balticlab.ru/lib/css/style.css"/>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet' type='text/css'/>
+    <!--[if lt IE 9]>     
+		<script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<script type="text/javascript" src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+	<![endif]-->
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://balticlab.ru/lib/js/control.js"></script>
 </h:head>
-<h:body>
-	<div class="info">
-		<h:panelGrid columns="2" styleClass="infoTable"
-			columnClasses="infoColumn">
-			<f:facet name="header">
-				<h:outputText value="Dish info" styleClass="title" />
-			</f:facet>
+<h:body class="page">
+<div class="wrap">
+ <div class="aside">
+            <div class="header">
+                <a href="#" class="logo"></a>
+                <span class="header_user">
+                Welcome back, <b>Customer001</b>
+            </span>
+            </div>
+            <div class="nav">
+               <ui:repeat var="o" value="#{foodListBean.categories}">
+                <h:link outcome="#" class="nav__item" value="#{o.name}"/>
+                </ui:repeat>
+                <h:link outcome="newDish" class="nav__item" value="New Dish"/>
+            </div>
+	</div>
+	<div class="main">
+            <div id="section">
+                <a href="#" data-toggle="modal" data-target="#newDish">
+                    <h1 class="section__title">Add dish</h1>
+                </a>
+
+
+            </div>
+        </div>
+	 <div class="modal fade" id="newDish" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header clearfix">
+                    <button type="button" class="close fancy-close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+                <div class="modal-body">
+					<h4 class="section__title">New dish</h4>
+					<h:form class="fancy-form">
+						<div class="info">
+							<h:panelGrid columns="2" styleClass="infoTable"
+								columnClasses="infoColumn">
+							<f:facet name="header">
+								<h:outputText value="Dish info" styleClass="title" />
+							</f:facet>
 
 			<h:outputLabel for="cat" value="Category:" />
-			<p:selectOneRadio id="cat" value="#{foodBean.selectedFoodCategory}">
-				<f:selectItems value="#{foodBean.categories}" required="true" requiredMessage="#{msgs.categoryRequired}" />
-			</p:selectOneRadio>
+			<h:selectOneMenu id="cat" value="#{foodBean.selectedFoodCategory}" style="selection">
+				<f:selectItems value="#{foodBean.categories}" var="categ" itemLabel="#{categ.name}" itemValue="#{categ}" required="true" requiredMessage="#{msgs.categoryRequired}" />
+			</h:selectOneMenu>
 
-			<p:outputLabel for="name" value="Name:" />
+			<h:outputLabel for="name" value="Name:" />
 
-			<p:inputText id="name" value="#{foodBean.dish.name}"
-				styleClass="form-input" placeholder="Enter the name" required="true" requiredMessage="#{msgs.dishNameRequired}"/>
+			<h:inputText id="name" value="#{foodBean.dish.name}"
+				styleClass="fancy-input" placeholder="Enter the name" required="true" requiredMessage="#{msgs.dishNameRequired}"/>
 
-			<p:outputLabel for="description" value="Description" />
+			<h:outputLabel for="description" value="Description" />
 
 			<h:panelGroup>
-				<p:inputTextarea id="description" styleClass="form-input"
+				<h:inputTextarea id="description" styleClass="fancy-input"
 					value="#{foodBean.dish.description}" counter="display" placeholder="Optional"
 					maxlength="500" counterTemplate="({0} characters remaining)" />
 				<br />
 				<h:outputText id="display" />
 			</h:panelGroup>
-			<p:outputLabel for="kitchenMade" value="Kitchen made?" />
-			<p:selectBooleanButton styleClass="submit-button" id="kitchenMade"
-				value="#{foodBean.dish.kitchenMade}" onLabel="Yes" offLabel="No" />
-			<p:outputLabel for="price" value="Price" />
-			<p:inputMask id="price" value="#{foodBean.dish.price}" mask="999.99" required="true" requiredMessage="#{msgs.priceRequired}" />
+			<h:outputLabel for="kitchenMade" value="Kitchen made?" />
+			<h:selectOneMenu  styleclass ="selection" id="kitchenMade"	value="#{foodBean.dish.kitchenMade}">
+				<f:selectItem itemValue="1" itemLabel="Yes"/>
+                <f:selectItem itemValue="0" itemLabel="No"/> 
+			</h:selectOneMenu>
+			<h:outputLabel for="price" value="Price" />
+			<h:inputText id="price" value="#{foodBean.dish.price}" required="true" requiredMessage="#{msgs.priceRequired}" />
 		</h:panelGrid>
 		<div style="text-align: center">
-			<p:commandButton id="submit" value="Save"
-				action="#{foodBean.saveFood}" styleClass="css_button" />
+			<h:commandButton id="submit" value="Save"
+				action="#{foodBean.saveFood()}" styleClass="fancy-submit"> <i class="icon icon--circle fa-check"> </i> </h:commandButton>
 		</div>
 	</div>
+</h:form>
+</div>
+</div>
+</div>
+</div>
+</div>
 </h:body>
 </html>

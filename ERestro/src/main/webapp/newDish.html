@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Ля-ля-ля-ля</title>
+    <link href="favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="lib/css/style.css">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet' type='text/css'>
+    <!--[if lt IE 9]>     
+		<script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<script type="text/javascript" src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+	<![endif]-->
+
+    <script type="text/javascript" src="lib/js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="lib/js/control.js"></script>
+</head>
+
+<body class="page">
+    <div class="wrap">
+
+        <div class="b_info">
+            <i class="icon icon-info icon--circle js-info"></i>
+            <div class="b_info__content">
+                <a class="b_info__content__link" href="tel:993012345679">
+                    <i class="icon icon-phone"></i>
+                    9930 1234 5679
+                </a>
+                <a class="b_info__content__link" href="e-mail:contact@domain.com">
+                    <i class="icon icon-letter"></i>
+                    contact@domain.com
+                </a>
+                <a class="b_info__content__link" href="#">
+                    <i class="icon icon-home"></i>
+                    street address example
+                </a>
+            </div>
+        </div>
+
+        <div class="aside">
+            <div class="header">
+                <a href="#" class="logo"></a>
+                <span class="header_user">
+                Welcome back, <b>Customer001</b>
+            </span>
+            </div>
+            <div class="nav">
+                <a href="#" class="nav__item">item #1</a>
+                <a href="#" class="nav__item">item #2</a>
+                <a href="#" class="nav__item">item #3</a>
+                <a href="#" class="nav__item">item #4</a>
+                <a href="#" class="nav__item">item #5</a>
+                <a href="#" class="nav__item">item #6</a>
+            </div>
+
+            <div class="aside__order">
+                Your order: <span>0</span> items
+                <p>
+                    go to start
+                    <i class="icon icon--circle icon-arrow-right"></i>
+                </p>
+            </div>
+
+            <div class="aside__copyright">
+                © 2014 ERestaurant, All Rights Reserved
+            </div>
+        </div>
+
+        <div class="main">
+            <div id="section">
+                <a href="#" data-toggle="modal" data-target="#newDish">
+                    <h1 class="section__title">Add dish</h1>
+                </a>
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div class="modal fade" id="newDish" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header clearfix">
+                    <button type="button" class="close fancy-close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+                <div class="modal-body">
+                    <h4 class="section__title">New dish</h4>
+                    <form action="" class="fancy-form">
+                        <label for="name" class="fancy-label">Name</label>
+                        <input type="text" name="name" class="fancy-input">
+
+                        <label for="category" class="fancy-label label-high">Category</label>
+                        <select name="category" class="selection">
+                            <option value="0">Starters</option>
+                            <option value="1">Main Courses</option>
+                            <option value="2">Salads</option>
+                        </select>
+
+                        <label for="desc" class="fancy-label">Description</label>
+                        <textarea name="desc" class="fancy-input"></textarea>
+
+                        <label for="price" class="fancy-label">Price</label>
+                        <input type="text" name="price" class="fancy-input">
+
+                        <label for="avalible" class="fancy-label label-high">Avalible</label>
+                        <input type="checkbox" name="avalible" class="fancy-input fancy-checkbox">
+
+                        <button type="submit" class="fancy-submit"> <i class="icon icon--circle fa-check"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

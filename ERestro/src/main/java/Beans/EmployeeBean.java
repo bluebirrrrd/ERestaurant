@@ -26,9 +26,40 @@ public class EmployeeBean implements Serializable{
 	
 	@Inject 
 	private EmployeeService employeeService;
-
+	private boolean loggedIn;
+	private java.util.Date birthday;
+	private Rights role= new Rights();
+	
 	public EmployeeBean() {
 		employee = new Employee();
+	}
+	
+	
+	public Rights getRole() {
+		return role;
+	}
+
+
+	public void setRole(Rights role) {
+		this.role = role;
+	}
+
+
+	public boolean isLoggedIn() {
+		return loggedIn;
+	}
+
+	public void setLoggedIn(boolean loggedIn) {
+		this.loggedIn = loggedIn;
+	}
+
+
+	public java.util.Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(java.util.Date birthday) {
+		this.birthday = birthday;
 	}
 
 	public Employee getEmployee() {
@@ -45,6 +76,9 @@ public class EmployeeBean implements Serializable{
 	}
 
 	public String saveEmployee() {
+		Rights access = employeeService.findRightsById(role.getId());
+		employee.setAccess(access);
+		employee.setBirthDate(birthday);
 		employeeService.save(employee);
 		return "employeeList";
 	}
@@ -52,6 +86,11 @@ public class EmployeeBean implements Serializable{
 	public void changeStatusOfEmployee(String id) {
 		employee = employeeService.findById(Integer.valueOf(id));
 		employee.setValid(employee.isValid());
+	}
+	
+	public Rights login(String email, String password) {
+		Rights result = employeeService.login(email, password);
+		return result;
 	}
 
 }

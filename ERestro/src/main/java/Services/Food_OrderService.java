@@ -8,4 +8,5 @@ public interface Food_OrderService {
 	public Food_Order findById(int id);
 	public List<Food_Order> getAllFoodOrdersList();
 	public List<Food_Order> getUndoneFoodOrdersList();
+	public List<Food_Order> getDoneFoodOrdersList();
 }

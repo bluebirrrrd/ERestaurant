@@ -8,6 +8,7 @@ import javax.inject.Named;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import DAO.BusinessAnalyticDAO;
 import DAO.CookDAO;
 import DAO.DeliveryGuyDAO;
 
@@ -20,6 +21,9 @@ public class Food_OrderServiceImpl implements Food_OrderService, Serializable {
 	
 	@Inject
 	CookDAO cookDAO;
+	
+	@Inject
+	BusinessAnalyticDAO businessAnalyticDAO;
 	
 	@Transactional
 	public void save(Food_Order food_order) {
@@ -40,5 +44,13 @@ public class Food_OrderServiceImpl implements Food_OrderService, Serializable {
 		List<Food_Order> list = cookDAO.getUndoneDishes();
 		return list;
 	}
+
+	@Override
+	public List<Food_Order> getDoneFoodOrdersList() {
+		List<Food_Order> result = businessAnalyticDAO.getPartsList();
+		return result;
+	}
+	
+	
 
 }

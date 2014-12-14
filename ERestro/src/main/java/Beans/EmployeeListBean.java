@@ -44,7 +44,8 @@ public class EmployeeListBean {
 		employees = employeeService.getAllEmployeesList();
 	}
 
-	public void refreshListByCategory(Rights category) {
-		employees = employeeService.getEmployeesByCategory(category);
+	public void refreshListByCategory(String categoryId) {
+		int catId = Integer.valueOf(categoryId);
+		employees = employeeService.getEmployeesByCategory(catId);
 	}
 }

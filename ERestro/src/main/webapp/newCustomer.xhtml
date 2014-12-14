@@ -8,18 +8,17 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>New Customer | ERestaurant</title>
 	<h:link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>
-		<h:outputStylesheet library="css" name="style.css" />
-		<!--   <link rel="stylesheet" type="text/css" href="lib/css/style.css"> -->
-		<link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400'
+	<link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>	
+	 <link rel="stylesheet" type="text/css" href="http://balticlab.ru/lib/css/style.css"/>
+	<link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400'
 			rel='stylesheet' type='text/css'/>
+			<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
 			<!--[if lt IE 9]>     
 		<script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<script type="text/javascript" src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 	<![endif]-->
-		<h:outputScript library="js" name="jquery-2.1.1.min.js" />
-		<!--  <h:outputScript name="js" name="resources/js/control.js" />-->
-		<!-- <script type="text/javascript" src="lib/js/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="lib/js/control.js"></script> -->
+	 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://balticlab.ru/lib/control.js"></script>
 </h:head>
 <h:body class="page">
 	<div class="wrap">
@@ -28,20 +27,14 @@
             <div class="header">
                 <h:link href="#" class="logo"></h:link>
                 <span class="header_user">
-                Welcome back, <b><h:outputText value="#{customerBean.customer.name}"/></b>
+                <h:outputText value="Welcome back, #{customerBean.customer.name}" rendered=""/>
             </span>
             </div>
-            <ui:repeat var="o" value="#{foodListBean.categories}">
             <div class="nav">
-                <h:link outcome="#" class="nav__item" value="#{o.name}"/>
-            </div>
-			</ui:repeat>
-            <div class="aside__order">
-                Your order: <b><h:outputText value="#{orderBean.quantity}"/></b> items
-                <p>
-                    go to cart
-                    <i class="icon icon--circle icon-arrow-right"></i>
-                </p>
+                <h:link outcome="allCustomers" class="nav__item" value="All customers"/>
+                <h:link outcome="#" class="nav__item" value="New customer"/>
+                <h:link outcome="allEmployees" class="nav__item" value="All employees"/>
+                <h:link outcome="#" class="nav__item" value="New employee"/>
             </div>
 
             <div class="aside__copyright">
@@ -60,13 +53,19 @@
                     <h:inputText value="#{customerBean.customer.email}" id="email" class="fancy-input"/>
 
                     <h:outputLabel for="birthday" class="fancy-label">Birthday</h:outputLabel>
-                    <h:inputText value="#{customerBean.customer.birthDate}" id="birthday" class="fancy-input"/>
-
+                    <h:inputText value="#{customerBean.birthday}" id="birthday" class="fancy-input">
+                    	<!-- <f:passThroughAttribute name="type" value="date" />--> 
+                    	<f:convertDateTime pattern="dd.MM.yyyy" />
+                    </h:inputText>
+					
                     <h:outputLabel for="address" class="fancy-label label-high">Billing address</h:outputLabel>
                     <h:inputText value="#{customerBean.customer.billingAddress}" id="address" class="fancy-input input-high"/>
-
-                    <h:commandButton action="#{customerBean.save()}" class="fancy-submit"> <i class="icon icon--circle icon-check"></i>
-                    </h:commandButton>
+                    
+                    <h:outputLabel for="password" class="fancy-label">Password</h:outputLabel>
+                    <h:inputSecret value="#{customerBean.customer.password}" id="password" class="fancy-input"/>
+                    
+                    <h:commandLink action="#{customerBean.save()}" class="fancy-submit"> <i class="icon icon--circle fa fa-check"></i>
+                    </h:commandLink>
                 </h:form>
             </div>
         </div>

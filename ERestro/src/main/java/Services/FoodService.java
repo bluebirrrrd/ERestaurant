@@ -9,6 +9,6 @@ public interface FoodService {
 	public Food findById(int id);
 	public void save(Food dish);
 	public List<Food> getAllFoodList();
-	public List<Food> getListByCategory(FoodCategory foodCategory);
+	public List<Food> getListByCategory(int categoryId);
 	public List<FoodCategory> getCategoriesList();
 }

@@ -9,5 +9,4 @@ public interface CustomerService {
 	public void save(Customer c);
 	public List<Customer> getAllCustomerList();
 	public boolean logIn(String email, String password);
-	
 }

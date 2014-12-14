@@ -36,8 +36,7 @@ public class FoodServiceImpl implements FoodService, Serializable {
 		return list;
 	}
 
-	public List<Food> getListByCategory(FoodCategory foodCategory) {
-		int categoryId = foodCategory.getId();
+	public List<Food> getListByCategory(int categoryId) {
 		List<Food> list = adminDAO.getDishesFromCategory(categoryId);
 		return list;
 	}

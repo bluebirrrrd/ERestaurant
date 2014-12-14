@@ -18,6 +18,8 @@ public class OrderListBean {
 	@Inject
 	private OrderService orderService;
 	
+	private double total;
+	
 	public  List<Orders> getOrderList() {
 		return orderList;
 	}
@@ -30,9 +32,13 @@ public class OrderListBean {
 		orderList = orderService.getUnfinishedOrdersList();
 	}
 	
-	/*public void refreshAllList() {
+	public void refreshAllList() {
+		total=0.0;
 		orderList = orderService.getAllOrdersList();
-	}*/
+		for (Orders o: orderList) {
+			total += o.getTotal();
+		}
+	}
 	
 	public void refreshFinishedList() {
 		orderList = orderService.getFinishedOrdersList();

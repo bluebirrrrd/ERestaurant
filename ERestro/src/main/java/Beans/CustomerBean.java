@@ -17,14 +17,38 @@ import com.bionic.edu.ERestro.Customer;
 @Named
 @Scope("request")
 public class CustomerBean implements Serializable{
-	private static final long serialVersionUID = 1L;
+	
 	
 	private Customer customer;
 	@Inject
 	private CustomerService custService;
+	private boolean loggedIn;
+	private java.util.Date birthday;
 	
 	public CustomerBean() {
 		customer = new Customer();
+	}
+	
+	public CustomerService getCustService() {
+		return custService;
+	}
+
+	public boolean isLoggedIn() {
+		return loggedIn;
+	}
+
+	public void setLoggedIn(boolean loggedIn) {
+		this.loggedIn = loggedIn;
+	}
+
+	
+
+	public java.util.Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(java.util.Date birthday) {
+		this.birthday = birthday;
 	}
 
 	public Customer getCustomer() {
@@ -43,11 +67,12 @@ public class CustomerBean implements Serializable{
 	}
 	
 	public boolean logIn(String email,String password) {
-		//String pass = DigestUtils.md5Hex(password); - //this one should go into custService implementation
-		return true; //custService.logIn(email, pass);
+		loggedIn = custService.logIn(email, password); //String pass = DigestUtils.md5Hex(password); - //this one should go into custService implementation
+		return loggedIn; //custService.logIn(email, pass);
 	}
 	
 	public String save() {
+		customer.setBirthDate(birthday);
 		custService.save(customer);
 		return "menu";
 	}

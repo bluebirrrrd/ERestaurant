@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Menu</title>
+<link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="http://balticlab.ru/lib/css/style.css"/>
+   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet' type='text/css'/>
+    <!--[if lt IE 9]>     
+		<script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<script type="text/javascript" src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+	<![endif]-->
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://balticlab.ru/lib/js/control.js"></script>
+	
+</h:head>
+<h:body>
+#{foodListBean.getCategoriesList()}
+
+<div class="aside">
+            <div class="header">
+                <a href="#" class="logo"></a>
+                <span class="header_user">
+                Welcome back, <b><h:outputText value="#{customerBean.customer.name}"/></b>
+            </span>
+            </div>
+            <h:form>
+            <div class="nav">
+            	<ui:repeat var="o" value="#{foodListBean.categories}">
+                <h:commandLink action="#{foodListBean.refreshListByCategory(o.id)}" class="nav__item" value="#{o.name}"/>
+                </ui:repeat>
+            </div>
+			</h:form>
+
+            <div class="aside__order">
+                Your order: <span><h:outputText value="#{orderBean.quantity}"/></span> items
+                <p>
+                    go to cart
+                    <h:commandLink action="#{orderBean.proceedOrder()}"><i class="fa fa-arrow-right"></i></h:commandLink>
+                </p>
+            </div>
+
+            <div class="aside__copyright">
+                © 2014 ERestaurant, All Rights Reserved
+            </div>
+        </div>
+        <h:form>
+        
+        <div class="main">
+        <ui:repeat var="dish" value="#{foodListBean.dishes}">
+            <h:link outcome="#" class="main__item">
+                <img class="main__item__img" src="lib/img/img.jpg" alt="picture" />
+                <div class="main__item__content">
+                    <div class="main__item__content__box">
+                        <h4 class="main__item__content__price"><h:outputText value="#{dish.price}"/></h4>
+                        <h4 class="main__item__content__title"><h:outputText value="#{dish.name}"/></h4>
+                        <h4 class="main__item__content__text"><h:outputText value="#{dish.description}"/></h4>
+                        <div class="main__item__content__footer">
+                            <i class="icon fa fa-minus q-ctrl"></i>
+                            <h:inputText class="quntity-input" value="#{orderBean.tempQuantity}" converter="javax.faces.Integer">
+                            </h:inputText>
+                            
+                            <i class="icon fa fa-plus q-ctrl"></i>
+
+                        </div>
+                        
+                        <h:commandLink id="add" action="#{orderBean.addItem(dish.id,quantity)}"><i class="icon icon--circle fa fa-shopping-cart" ></i></h:commandLink>
+                    	
+                    </div>
+                </div>
+            </h:link>
+            </ui:repeat>
+            </div>
+            </h:form>
+</h:body>
+</html>

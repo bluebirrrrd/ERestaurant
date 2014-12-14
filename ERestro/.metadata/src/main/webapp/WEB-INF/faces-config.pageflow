@@ -1,17 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14155483045210" configfile="/ERestro/src/main/webapp/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="login_customer.xhtml" id="pf14156238952120" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf14156238952121" path="/login_customer.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="main.xhtml" id="pf14156238952122" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14156238952121" path="/main.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="login_employee.xhtml" id="pf14156238952123" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf14156238952124 pf14156238952125 pf14156238952126 pf14156238952127 pf14156238952128" path="/login_employee.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="admin.xhtml" id="pf14156238952129" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf14156238952124" path="admin.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="business.xhtml" id="pf141562389521210" referenceLink="//@navigationRule.1/@navigationCase.1/@toViewId|" inlinks="pf14156238952125" path="business.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="kitchen.xhtml" id="pf141562389521211" referenceLink="//@navigationRule.1/@navigationCase.2/@toViewId|" inlinks="pf14156238952126" path="kitchen.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="delivery.xhtml" id="pf141562389521212" referenceLink="//@navigationRule.1/@navigationCase.3/@toViewId|" inlinks="pf14156238952127" path="delivery.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="super.xhtml" id="pf141562389521213" referenceLink="//@navigationRule.1/@navigationCase.4/@toViewId|" inlinks="pf14156238952128" path="super.xhtml"/>
-  <links id="pf14156238952121" target="pf14156238952122" source="pf14156238952120" outcome="menu"/>
-  <links id="pf14156238952124" target="pf14156238952129" source="pf14156238952123" outcome="Admin"/>
-  <links id="pf14156238952125" target="pf141562389521210" source="pf14156238952123" outcome="BusinessAnalytic"/>
-  <links id="pf14156238952126" target="pf141562389521211" source="pf14156238952123" outcome="Cook"/>
-  <links id="pf14156238952127" target="pf141562389521212" source="pf14156238952123" outcome="DeliveryGuy"/>
-  <links id="pf14156238952128" target="pf141562389521213" source="pf14156238952123" outcome="SuperUser"/>
-</pageflow:Pageflow>
+<pageflow:Pageflow xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14155483045210" configfile="/ERestro/src/main/webapp/WEB-INF/faces-config.xml"/>

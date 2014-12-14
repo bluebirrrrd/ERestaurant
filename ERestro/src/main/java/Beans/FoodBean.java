@@ -25,7 +25,7 @@ import com.bionic.edu.ERestro.FoodCategory;
 public class FoodBean {
 	private Food dish;
 	private FoodCategory selectedFoodCategory;
-	private static List<FoodCategory> categories;
+	private List<FoodCategory> categories = null;
 
 	@Inject
 	FoodService foodService;
@@ -34,48 +34,6 @@ public class FoodBean {
 		dish = new Food();
 		selectedFoodCategory = new FoodCategory();
 	}
-
-	static {
-		FoodCategory foodcat1 = new FoodCategory();
-		foodcat1.setId(1);
-		foodcat1.setName("Starters");
-		FoodCategory foodcat2 = new FoodCategory();
-		foodcat2.setId(2);
-		foodcat2.setName("Main Courses");
-		FoodCategory foodcat3 = new FoodCategory();
-		foodcat3.setId(3);
-		foodcat3.setName("Salads");
-
-		Food dish1 = new Food();
-		dish1.setId(1);
-		dish1.setName("Chicken Soup");
-		dish1.setCategory(foodcat2);
-		dish1.setDescription("Best soup ever!!!");
-		dish1.setKitchenMade(true);
-		dish1.setPrice(55.00);
-		Food dish2 = new Food();
-		dish2.setId(2);
-		dish2.setName("Canape with Olives");
-		dish2.setCategory(foodcat1);
-		dish2.setDescription("Chief hates doing them");
-		dish2.setKitchenMade(true);
-		dish2.setPrice(23.95);
-		Food dish3 = new Food();
-		dish3.setId(3);
-		dish3.setName("Caesar Salad");
-		dish3.setCategory(foodcat3);
-		dish3.setDescription("Ladies love it");
-		dish3.setKitchenMade(true);
-		dish3.setPrice(44.00);
-		
-
-		categories = new ArrayList<FoodCategory>();
-
-		categories.add(foodcat1);
-		categories.add(foodcat2);
-		categories.add(foodcat3);
-	}
-
 	
 	public FoodCategory getSelectedFoodCategory() {
 		return selectedFoodCategory;
@@ -89,10 +47,11 @@ public class FoodBean {
 		return categories;
 	}
 
-	/*
-	 * public void setCategories(Map<String, FoodCategory> categories) {
-	 * this.categories = categories; }
-	 */
+	
+	public void setCategories(List<FoodCategory> categories) {
+		this.categories = categories;
+	}
+
 	public FoodCategory getFoodCategory() {
 		return selectedFoodCategory;
 	}
@@ -119,7 +78,10 @@ public class FoodBean {
 		dish = foodService.findById(intId);
 		return "newDish";
 	}
-
+	
+	public void refreshCategories() {
+		categories = foodService.getCategoriesList();
+	}
 	/*public String addPhoto(String photoId) {
 		String fileId = "../" + photoId + ".jpg";
 		File inpt = new File(fileId);

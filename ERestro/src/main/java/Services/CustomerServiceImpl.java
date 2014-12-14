@@ -32,6 +32,8 @@ public class CustomerServiceImpl implements CustomerService,Serializable {
 
 	@Transactional
 	public void save(Customer c) {
+		String pass = DigestUtils.md5Hex(c.getPassword());
+		c.setPassword(pass);
 		superUserDAO.saveCustomer(c);
 
 	}
