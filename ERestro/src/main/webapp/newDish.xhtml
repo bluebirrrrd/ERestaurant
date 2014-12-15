@@ -20,7 +20,10 @@
     <script type="text/javascript" src="http://balticlab.ru/lib/js/control.js"></script>
 </h:head>
 <h:body class="page">
+#{foodListBean.getCategoriesList()}
+#{foodBean.refreshCategories()}
 <div class="wrap">
+<h:form>
  <div class="aside">
             <div class="header">
                 <a href="#" class="logo"></a>
@@ -35,11 +38,12 @@
             </div>
             <div class="nav">
                <ui:repeat var="o" value="#{foodListBean.categories}">
-                <h:link outcome="#" class="nav__item" value="#{o.name}"/>
+                <h:commandLink action="#{foodListBean.adminRefreshListByCategory(o.id)}" class="nav__item" value="#{o.name}"/>
                 </ui:repeat>
                 <h:link outcome="newDish" class="nav__item" value="New Dish"/>
             </div>
 	</div>
+	</h:form>
 	<div class="main">
             <div id="section">
                 <a href="#" data-toggle="modal" data-target="#newDish">
@@ -65,8 +69,8 @@
 							
 
 			<h:outputLabel for="cat" value="Category:" styleClass="fancy-label" />
-			<h:selectOneMenu id="cat" value="#{foodBean.selectedFoodCategory}" styleClass="selection">
-				<f:selectItems value="#{foodBean.categories}" var="categ" itemLabel="#{categ.name}" itemValue="#{categ}" required="true" requiredMessage="#{msgs.categoryRequired}" />
+			<h:selectOneMenu id="cat" value="#{foodBean.selectedFoodCategory.id}" styleClass="selection">
+				<f:selectItems value="#{foodBean.categories}" var="categ" itemLabel="#{categ.name}" itemValue="#{categ.id}" />
 			</h:selectOneMenu>
 
 			<h:outputLabel for="name" value="Name:" styleClass="fancy-label" />
