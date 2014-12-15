@@ -12,7 +12,7 @@ import com.bionic.edu.ERestro.Rights;
 import Services.EmployeeService;
 
 @Named
-@Scope("request")
+@Scope("view")
 public class EmployeeListBean {
 	private List<Employee> employees = null;
 	private List<Rights> categories = null;

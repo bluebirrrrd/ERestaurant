@@ -79,7 +79,7 @@
            </ui:repeat> 
             </div>
             </h:form>
-             <div class="modal fade" id="newDish" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	 <div class="modal fade" id="newDish" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header clearfix">
@@ -90,50 +90,48 @@
                 <div class="modal-body">
 					<h4 class="section__title">New dish</h4>
 					<h:form class="fancy-form">
-						<div class="info">
-							<h:panelGrid columns="2" styleClass="infoTable"
-								columnClasses="infoColumn">
-							<f:facet name="header">
-								<h:outputText value="Dish info" styleClass="title" />
-							</f:facet>
+						
+						
+							
 
-			<h:outputLabel for="cat" value="Category:" styleclass="fancy-label" />
-			<h:selectOneMenu id="cat" value="#{foodBean.selectedFoodCategory}" styleclass="selection">
-				<f:selectItems value="#{foodBean.categories}" var="cat" itemLabel="#{cat.name}" itemValue="#{cat}" required="true" requiredMessage="#{msgs.categoryRequired}" />
+			<h:outputLabel for="cat" value="Category:" styleClass="fancy-label" />
+			<h:selectOneMenu id="cat" value="#{foodBean.selectedFoodCategory.id}" styleClass="selection">
+				<f:selectItems value="#{foodBean.categories}" var="categ" itemLabel="#{categ.name}" itemValue="#{categ.id}" />
 			</h:selectOneMenu>
 
-			<h:outputLabel for="name" value="Name:" styleclass="fancy-label"/>
+			<h:outputLabel for="name" value="Name:" styleClass="fancy-label" />
 
 			<h:inputText id="name" value="#{foodBean.dish.name}"
 				styleClass="fancy-input" placeholder="Enter the name" required="true" requiredMessage="#{msgs.dishNameRequired}"/>
 
-			<h:outputLabel for="description" value="Description" />
+			<h:outputLabel for="description" value="Description" styleClass="fancy-label label-high" />
 
-			<h:panelGroup>
+			
 				<h:inputTextarea id="description" styleClass="fancy-input"
 					value="#{foodBean.dish.description}" counter="display" placeholder="Optional"
 					maxlength="500" counterTemplate="({0} characters remaining)" />
 				<br />
 				<h:outputText id="display" />
-			</h:panelGroup>
-			<h:outputLabel for="kitchenMade" value="Kitchen made?" styleclass="fancy-label" />
-			<h:selectOneMenu  styleclass ="selection" id="kitchenMade"	value="#{foodBean.dish.kitchenMade}">
+			
+			<h:outputLabel for="kitchenMade" value="Kitchen made?" styleClass="fancy-label"/>
+			<h:selectOneMenu  styleClass="selection" id="kitchenMade"	value="#{foodBean.dish.kitchenMade}">
 				<f:selectItem itemValue="1" itemLabel="Yes"/>
                 <f:selectItem itemValue="0" itemLabel="No"/> 
 			</h:selectOneMenu>
-			<h:outputLabel for="price" value="Price" styleclass="fancy-label" />
-			<h:inputText id="price" value="#{foodBean.dish.price}" required="true" requiredMessage="#{msgs.priceRequired}" />
-		</h:panelGrid>
+			<br/>
+			<h:outputLabel for="price" value="Price" styleClass="fancy-label"/>
+			<h:inputText id="price" styleClass="fancy-input" value="#{foodBean.dish.price}" required="true" requiredMessage="#{msgs.priceRequired}" />
+	
 		<div style="text-align: center">
-			<h:commandLink id="submit" 
-				action="#{foodBean.saveFood()}" styleClass="fancy-submit"> <i class="icon icon--circle fa fa-check"> </i> </h:commandLink>
+			<h:commandButton id="submit" value="Save"
+				action="#{foodBean.saveFood()}" styleClass="fancy-submit"> <i class="icon icon--circle fa-check"> </i> </h:commandButton>
 		</div>
-	</div>
 </h:form>
 </div>
 </div>
 </div>
 </div>
+
 
    	<div class="modal fade" id="logIn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         		<div class="modal-dialog modal-sm">

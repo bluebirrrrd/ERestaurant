@@ -12,7 +12,7 @@ import com.bionic.edu.ERestro.Customer;
 import Services.CustomerService;
 
 @Named
-@Scope("request")
+@Scope("view")
 public class CustomerListBean {
 	private List<Customer> customers = null;
 	

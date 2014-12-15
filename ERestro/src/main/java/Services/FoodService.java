@@ -11,4 +11,5 @@ public interface FoodService {
 	public List<Food> getAllFoodList();
 	public List<Food> getListByCategory(int categoryId);
 	public List<FoodCategory> getCategoriesList();
+	public FoodCategory findCategoryById(int id);
 }

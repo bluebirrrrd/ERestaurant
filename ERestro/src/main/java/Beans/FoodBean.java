@@ -21,7 +21,7 @@ import com.bionic.edu.ERestro.FoodCategory;
 
 
 @Named("foodBean")
-@Scope("request")
+@Scope("view")
 public class FoodBean {
 	private Food dish;
 	private FoodCategory selectedFoodCategory;
@@ -69,7 +69,10 @@ public class FoodBean {
 	}
 
 	public String saveFood() {
-		 foodService.save(dish);
+		int catId = selectedFoodCategory.getId();
+		selectedFoodCategory = foodService.findCategoryById(catId);
+		dish.setCategory(selectedFoodCategory);
+		foodService.save(dish);
 		return "editMenu";
 	}
 

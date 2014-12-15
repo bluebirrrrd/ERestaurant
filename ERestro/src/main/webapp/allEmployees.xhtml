@@ -20,6 +20,8 @@ xmlns:f="http://java.sun.com/jsf/core"
     <script type="text/javascript" src="http://balticlab.ru/lib/js/control.js"></script>
 </h:head>
 <h:body class="page">
+#{employeeListBean.refreshList()}
+#{employeeListBean.getCategoriesList()}
     <div class="wrap">
 
         <div class="b_info">
@@ -67,6 +69,7 @@ xmlns:f="http://java.sun.com/jsf/core"
         <div class="main">
             <div id="section" class="clearfix">
                 <div class="col-md-6">
+                <h:form>
                     <table class="fancy-table">
                         <tr>
                             <th>Name</th>
@@ -75,59 +78,44 @@ xmlns:f="http://java.sun.com/jsf/core"
                         </tr>
                         <ui:repeat var="empl" value="#{employeeListBean.employees}">
                         <tr>
-                            <td>#{empl.name}</td>
-                            <td>#{epml.access.name}</td>
+                            <td><h:commandLink action="#{employeeBean.editEmployee(empl.id)}" >#{empl.name}</h:commandLink></td>
+                            <td><h:outputText value="#{epml.access.role}"/></td>
                             <td><h:outputText rendered="#{empl.isValid()}"><i class="fa fa-check"></i> </h:outputText>
                             <h:outputText rendered="#{!empl.isValid()}"><i class="fa fa-times"></i> </h:outputText>
                             </td>
                         </tr>
                         
-                        <tr class="selected">
-                            <td>Jane West</td>
-                            <td>Administrator</td>
-                            <td><i class="icon icon-check"></i>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Jane West</td>
-                            <td>Administrator</td>
-                            <td><i class="icon icon-check"></i>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Jane West</td>
-                            <td>Administrator</td>
-                            <td><i class="icon icon-check"></i>
-                            </td>
-                        </tr>
                         </ui:repeat>
                     </table>
+                    </h:form>
                 </div>
                 <div class="col-md-6">
                     <h1 class="section__title">Add info</h1>
                     <h:form class="fancy-form">
                         <h:outputLabel for="name" class="fancy-label">Name</h:outputLabel>
-                        <h:inputText type="text" id="name" class="fancy-input"/>
+                        <h:inputText value="#{employeeBean.employee.name}" id="name" class="fancy-input"/>
 
                         <h:outputLabel for="email" class="fancy-label">Email</h:outputLabel>
-                        <h:inputText type="email" id="email" class="fancy-input"/>
+                        <h:inputText value="#{employeeBean.employee.email}" id="email" class="fancy-input"/>
 
                         <h:outputLabel for="birthday" class="fancy-label">Birthday</h:outputLabel>
-                        <h:inputText type="date" id="birthdate" class="fancy-input"/>
+                        <h:inputText value="#{employeeBean.birthday}" id="birthday" class="fancy-input">
+                        <f:convertDateTime pattern="dd.MM.yyyy" />
+                        </h:inputText>
 
                         <h:outputLabel for="position" class="fancy-label label-high">Position</h:outputLabel>
-                        <h:selectOneMenu id="position" class="selection">
+                        <h:selectOneMenu value="#{employeeBean.role.id}" id="position" class="selection">
                             <f:selectItems value="#{employeeListBean.categories}" var="cat"
-                            itemValue="#{cat.name}"/>
+                            itemLabel="#{cat.role}" itemValue="#{cat.id}"/>
                         </h:selectOneMenu>
 
                         <h:outputLabel for="valid" class="fancy-label" style="padding-top:15px;">Valid</h:outputLabel>
-                        <h:selectOneMenu id="valid" value="#{employeeBean.employee.valid}" class="selection"> 
+                        <h:selectOneMenu id="valid" value="#{employeeBean.valid}" class="selection"> 
                         	<f:selectItem itemValue="1" itemLabel="Yes"/>
                         	<f:selectItem itemValue="0" itemLabel="No"/>
                         </h:selectOneMenu>
 
-                        <h:commandLink type="submit" action="#{employeeBean.saveEmployee()}" class="fancy-submit"> <i class="icon icon--circle fa-check "></i>
+                        <h:commandLink type="submit" action="#{employeeBean.saveEmployee()}" class="fancy-submit"> <i class="icon icon--circle fa fa-check "></i>
                         </h:commandLink>
                     </h:form>
                 </div>

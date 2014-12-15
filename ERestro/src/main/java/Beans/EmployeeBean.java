@@ -17,7 +17,7 @@ import com.bionic.edu.ERestro.Employee;
 import com.bionic.edu.ERestro.Rights;
 
 @Named
-@Scope("request")
+@Scope("session")
 public class EmployeeBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -29,12 +29,24 @@ public class EmployeeBean implements Serializable{
 	private boolean loggedIn;
 	private java.util.Date birthday;
 	private Rights role= new Rights();
+	private int valid;
 	
 	public EmployeeBean() {
 		employee = new Employee();
+		
 	}
 	
 	
+	public int getValid() {
+		return valid;
+	}
+
+
+	public void setValid(int valid) {
+		this.valid = valid;
+	}
+
+
 	public Rights getRole() {
 		return role;
 	}
@@ -72,7 +84,9 @@ public class EmployeeBean implements Serializable{
 
 	public String editEmployee(String id) {
 		employee = employeeService.findById(Integer.valueOf(id));
-		return "editEmployee";
+		birthday = employee.getBirthDate();
+		valid = employee.getValid();
+		return "allEmployees";
 	}
 
 	public String saveEmployee() {
@@ -80,7 +94,8 @@ public class EmployeeBean implements Serializable{
 		employee.setAccess(access);
 		employee.setBirthDate(birthday);
 		employeeService.save(employee);
-		return "employeeList";
+		employee = new Employee();
+		return "allEmployees";
 	}
 
 	public void changeStatusOfEmployee(String id) {

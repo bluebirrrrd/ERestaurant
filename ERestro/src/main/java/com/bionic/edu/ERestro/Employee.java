@@ -37,7 +37,9 @@ public class Employee {
 		this.valid = valid;
 	}
 
-	public Employee() {	}
+	public Employee() {	
+		valid = (short) 1;
+	}
 
 	public int getId() {
 		return id;
@@ -82,6 +84,7 @@ public class Employee {
 			this.valid = 0;
 		}
 	}
+
 
 	public Rights getAccess() {
 		return access;

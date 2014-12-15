@@ -26,6 +26,7 @@ public class CustomerBean implements Serializable{
 	private java.util.Date birthday;
 	private String email;
 	private String password;
+	private int valid;
 	
 	
 	public CustomerBean() {
@@ -35,6 +36,14 @@ public class CustomerBean implements Serializable{
 	
 	public CustomerService getCustService() {
 		return custService;
+	}
+	
+	public int getValid() {
+		return valid;
+	}
+
+	public void setValid(int valid) {
+		this.valid = valid;
 	}
 
 	public boolean isLoggedIn() {
@@ -81,7 +90,9 @@ public class CustomerBean implements Serializable{
 
 	public String editCustomer(String id) {
 		customer = custService.findById(Integer.valueOf(id));
-		return "newCustomer";
+		birthday = customer.getBirthDate();
+		valid = customer.getValid();
+		return "allCustomers";
 	}
 	
 	public String logIn() {
@@ -93,9 +104,12 @@ public class CustomerBean implements Serializable{
 	}
 	
 	public String save() {
+		customer.setValid(valid);
 		customer.setBirthDate(birthday);
 		custService.save(customer);
-		return "index";
+		customer = new Customer();
+		birthday = null;
+		return "allCustomers";
 	}
 	
 	public String logOff() {

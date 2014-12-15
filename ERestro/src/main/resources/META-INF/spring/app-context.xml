@@ -12,6 +12,7 @@
 	<context:component-scan base-package="Services"/>
 	<context:component-scan base-package="DAO"/>
 	<context:component-scan base-package="com.bionic.edu.ERestro"/>
+	<context:component-scan base-package="extras"/>
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.apache.derby.jdbc.EmbeddedDriver" />
@@ -52,5 +53,13 @@
 	<bean
 		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 	<tx:annotation-driven transaction-manager="transactionManager" />
-
+	<bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+    <property name="scopes">
+        <map>
+            <entry key="view">
+                <bean class="extras.ViewScope"/>
+            </entry>
+        </map>
+    </property>
+</bean>
 </beans>

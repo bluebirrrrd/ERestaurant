@@ -73,7 +73,7 @@
                     <h:outputLabel for="password" class="fancy-label">Password</h:outputLabel>
                     <h:inputSecret value="#{employeeBean.employee.password}" id="password" class="fancy-input"/>
                     
-                    <h:commandLink action="#{customerBean.save()}" class="fancy-submit"> <i class="icon icon--circle fa fa-check"></i>
+                    <h:commandLink action="#{employeeBean.saveEmployee()}" class="fancy-submit"> <i class="icon icon--circle fa fa-check"></i>
                     </h:commandLink>
                 </h:form>
             </div>

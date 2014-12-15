@@ -18,6 +18,10 @@ public class Customer {
 	private String billingAddress;
 	private short valid;
 	private String password;
+	
+	public Customer() {
+		valid = (short)1;
+	}
 	public int getId() {
 		return id;
 	}
@@ -65,6 +69,13 @@ public class Customer {
 	public boolean isValid() {
 		if (valid == 0) { return false; }
 		else return true;
+	}
+	public void setValid(int valid) {
+		this.valid = (short)valid;
+	}
+	public void setValid(String valid) {
+		int res = Integer.valueOf(valid);
+		this.valid = (short)res;
 	}
 	public String getPassword() {
 		return password;

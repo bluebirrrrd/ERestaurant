@@ -46,4 +46,10 @@ public class FoodServiceImpl implements FoodService, Serializable {
 		return list;
 	}
 
+	@Override
+	public FoodCategory findCategoryById(int id) {
+		FoodCategory result = adminDAO.findCategoryById(id);
+		return result;
+	}
+
 }
