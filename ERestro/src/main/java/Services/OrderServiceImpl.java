@@ -64,4 +64,10 @@ public class OrderServiceImpl implements OrderService, Serializable {
 		return result;
 	}
 
+	@Override
+	public DeliveryStatus getStatusById(String id) {
+		DeliveryStatus result = deliveryDAO.findStatusById(Integer.valueOf(id));
+		return result;
+	}
+
 }

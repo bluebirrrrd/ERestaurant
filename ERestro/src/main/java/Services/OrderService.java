@@ -10,4 +10,5 @@ public interface OrderService {
 	public List<Orders> getFinishedOrdersList();
 	public List<DeliveryStatus> getStatusList();
 	public Orders findById(int id);
+	public DeliveryStatus getStatusById(String id);
 }

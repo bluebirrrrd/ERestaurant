@@ -48,6 +48,8 @@
 
             <div class="aside__order">
                 Your order: <span><h:outputText value="#{orderBean.quantity}"/></span> items
+                <br/>
+                Total: $<span><h:outputText value="#{orderBean.total}"/></span>
                 <p>
                     go to cart
                     <h:link outcome="#{orderBean.proceedOrder()}"><i class="fa fa-arrow-right"></i></h:link>

@@ -60,5 +60,11 @@ public class DeliveryGuyDAOImpl implements DeliveryGuyDAO {
 		Orders order = em1.find(Orders.class, id);
 		return order;
 	}
+
+	@Override
+	public DeliveryStatus findStatusById(int id) {
+		DeliveryStatus result = em1.find(DeliveryStatus.class, id);
+		return result;
+	}
 	
 }

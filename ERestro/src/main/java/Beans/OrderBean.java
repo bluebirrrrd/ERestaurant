@@ -1,7 +1,8 @@
 package Beans;
 
 import java.io.Serializable;
-
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class OrderBean implements Serializable {
 
 	private Orders order;
 	
-	private List<Food_Order> content = new LinkedList<Food_Order>();
+	private List<Food_Order> content = new ArrayList<Food_Order>();
 
 	@Inject
 	private OrderService orderService;
@@ -39,7 +40,8 @@ public class OrderBean implements Serializable {
 	private FoodService foodService;
 
 	private double total;
-	private Customer customer;
+	@Inject
+	private CustomerBean customer;
 	private int quantity;
 	private Food dish;
 	private int tempQuantity;
@@ -161,31 +163,29 @@ public class OrderBean implements Serializable {
 		order.setContent(content);
 		countTotal();
 		order.setTotal(total);
-		order.setCustomer(customer);
+		order.setCustomer(customer.getCustomer());
 		return "profile";
 	}
 
 	public String confirmOrder() {
 		
-		order.setCustomer(customer);
+		order.setCustomer(customer.getCustomer());
 		
 		for (Food_Order f : content) {
 			foodOrderService.save(f);
 		}
-
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+		order.setTime(now);
+		
+		DeliveryStatus temp = orderService.getStatusById("1");
+		order.setDelStat(temp);
 		orderService.save(order);
 		return "profile";
 	}
 	
 	public String setDone(String orderId) {
 		List<DeliveryStatus> list = orderService.getStatusList();
-		DeliveryStatus temp = null;
-		for (DeliveryStatus i: list) {
-			if (i.getId()==3) {
-				temp.setId(i.getId());
-				temp.setName(i.getName());
-			}
-		}
+		DeliveryStatus temp = orderService.getStatusById("3");
 		order = orderService.findById(Integer.valueOf(orderId));
 		order.setDelStat(temp);
 		orderService.save(order);

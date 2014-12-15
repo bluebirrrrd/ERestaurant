@@ -7,6 +7,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import java.sql.Timestamp;
+
 import javax.inject.*;
 
 import org.springframework.context.annotation.Scope;
@@ -104,10 +106,16 @@ public class Food_OrderListBean {
 	}
 	
 	public void refreshListByDates() {
-		Format formatter = new SimpleDateFormat("yyyy-MM-dd");
+		/*Format formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String sd = formatter.format(startDate);
-		String ed = formatter.format(endDate);
-		foodOrderList = foodOrderService.getFoodOrdersBetweenDates(sd, ed);
+		String ed = formatter.format(endDate);*/
+		Timestamp ts1 = new Timestamp(startDate.getTime());
+		Timestamp ts2 = new Timestamp(endDate.getTime());
+		/* 
+		 * пройти по списку и проверять дату методами isBefore(ts2), isAfter(ts1)
+		 * сохранять все в новый список, а потом заменить старый новым
+		 */
+		
 	}
 	
 }
