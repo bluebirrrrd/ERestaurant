@@ -46,13 +46,8 @@ public class CustomerDAOImpl implements CustomerDAO {
 	 * getting any content out of it to persist?
 	 */
 	public void submitOrder(Orders order) {
-		Collection<Food_Order> content = order.getContent();
-		Iterator<Food_Order> it = content.iterator();
 		em1.persist(order);
-		while (it.hasNext()) {
-			Food_Order temp = it.next();
-			em1.persist(temp);
-		}
+		
 		
 	}
 

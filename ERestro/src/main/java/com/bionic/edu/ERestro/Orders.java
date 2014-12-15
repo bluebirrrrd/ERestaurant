@@ -26,7 +26,7 @@ public class Orders {
 					@JoinColumn(name="foodId"))
 	private Collection<Food> content;
 	*/
-	@OneToMany(mappedBy="orderId")
+	@OneToMany(mappedBy="orderId", cascade = CascadeType.PERSIST)
 	private Collection<Food_Order> content;
 	
 	public Orders() { }

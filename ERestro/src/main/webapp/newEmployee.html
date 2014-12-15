@@ -48,10 +48,10 @@
                 <h1 class="section__title">Add info</h1>
                 <h:form action="" class="fancy-form">
                     <h:outputLabel for="name" class="fancy-label">Name</h:outputLabel>
-                    <h:inputText value="#{employeeBean.employee.name}" id="name" class="fancy-input"/>
+                    <h:inputText value="#{employeeBean.employee.name}" id="name" class="fancy-input" required="true"  requiredMessage="#{msgs.dishNameRequired}"/>
 
                     <h:outputLabel for="email" class="fancy-label">Email</h:outputLabel>
-                    <h:inputText value="#{employeeBean.employee.email}" id="email" class="fancy-input"/>
+                    <h:inputText value="#{employeeBean.employee.email}" id="email" class="fancy-input" required="true" requiredMessage="#{msgs.emailRequired}"/>
 
                     <h:outputLabel for="birthday" class="fancy-label">Birthday</h:outputLabel>
                     <h:inputText value="#{employeeBean.birthday}" id="birthday" class="fancy-input">

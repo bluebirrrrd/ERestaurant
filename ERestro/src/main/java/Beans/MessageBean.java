@@ -14,6 +14,8 @@ public class MessageBean {
 	private final String priceRequired = "Please enter the price";
 	private final String loginTrouble = "Whoops, looks like email or password is wrong. Try entering another combination";
 	private final String categoryRequired = "Please pick the category";
+	private final String birthdayFormat = "Please enter the date in right format. Example: 21.06.2014";
+	
 	
 	public String getCategoryRequired() {
 		return categoryRequired;
@@ -32,6 +34,9 @@ public class MessageBean {
 	}
 	public String getLoginTrouble() {
 		return loginTrouble;
+	}
+	public String getBirthdayFormat() {
+		return birthdayFormat;
 	}
 	
 	
