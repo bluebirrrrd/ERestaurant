@@ -34,7 +34,7 @@ public class DeliveryGuyDAOImpl implements DeliveryGuyDAO {
 	
 	public List<Orders> getOrdersList() {
 		List<Orders> ordersList = null;
-		TypedQuery<Orders> query = em1.createQuery("SELECT o FROM Orders o WHERE (o.delStat.id=2)", Orders.class);
+		TypedQuery<Orders> query = em1.createQuery("SELECT o FROM Orders o WHERE (o.delivered=0)", Orders.class);
 		//try {
 			ordersList = query.getResultList();
 		/*} finally {
@@ -47,13 +47,7 @@ public class DeliveryGuyDAOImpl implements DeliveryGuyDAO {
 		em1.merge(order);
 	}
 
-	@Override
-	public List<DeliveryStatus> getStatusList() {
-		List<DeliveryStatus> result = null;
-		TypedQuery<DeliveryStatus> query = em1.createQuery("SELECT s FROM DeliveryStatus s", DeliveryStatus.class);
-		result = query.getResultList();
-		return result;
-	}
+	
 
 	@Override
 	public Orders findById(int id) {
@@ -62,9 +56,14 @@ public class DeliveryGuyDAOImpl implements DeliveryGuyDAO {
 	}
 
 	@Override
-	public DeliveryStatus findStatusById(int id) {
-		DeliveryStatus result = em1.find(DeliveryStatus.class, id);
-		return result;
+	public List<Orders> getAllOrdersList() {
+		List<Orders> ordersList = null;
+		TypedQuery<Orders> query = em1.createQuery("SELECT o FROM Orders o", Orders.class);
+			ordersList = query.getResultList();
+		
+		return ordersList;
 	}
+
+	
 	
 }

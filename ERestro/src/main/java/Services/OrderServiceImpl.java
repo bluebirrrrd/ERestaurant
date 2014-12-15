@@ -43,7 +43,7 @@ public class OrderServiceImpl implements OrderService, Serializable {
 
 	@Override
 	public List<Orders> getAllOrdersList() {
-		// TODO Auto-generated method stub
+		List<Orders> list = deliveryDAO.getAllOrdersList();
 		return null;
 	}
 	
@@ -53,21 +53,10 @@ public class OrderServiceImpl implements OrderService, Serializable {
 	}
 
 	@Override
-	public List<DeliveryStatus> getStatusList() {
-		List<DeliveryStatus> result = deliveryDAO.getStatusList();
-		return result;
-	}
-
-	@Override
 	public Orders findById(int id) {
 		Orders result = deliveryDAO.findById(id);
 		return result;
 	}
 
-	@Override
-	public DeliveryStatus getStatusById(String id) {
-		DeliveryStatus result = deliveryDAO.findStatusById(Integer.valueOf(id));
-		return result;
-	}
 
 }

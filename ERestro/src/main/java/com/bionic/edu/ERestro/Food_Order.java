@@ -31,7 +31,9 @@ public class Food_Order {
 		this.done = (short)done;
 	}
 
-	public Food_Order() {	}
+	public Food_Order() {	
+		quantity = 1;
+	}
 
 	public int getId() {
 		return id;

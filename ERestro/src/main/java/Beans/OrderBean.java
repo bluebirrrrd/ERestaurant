@@ -3,6 +3,7 @@ package Beans;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 import javax.faces.bean.*;
 import javax.inject.*;
 
+import org.apache.commons.logging.Log;
 import org.springframework.context.annotation.Scope;
 
 import Services.FoodService;
@@ -22,34 +24,54 @@ import com.bionic.edu.ERestro.Food;
 import com.bionic.edu.ERestro.Food_Order;
 import com.bionic.edu.ERestro.Orders;
 
+import javax.faces.event.AjaxBehaviorEvent;
+
 @Named
 @Scope("session")
 public class OrderBean implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	private Orders order;
-	
-	private List<Food_Order> content = new ArrayList<Food_Order>();
 
+	private List<Food_Order> content = new LinkedList<Food_Order>();
+	private Food_Order item;
 	@Inject
 	private OrderService orderService;
 	@Inject
 	private Food_OrderService foodOrderService;
-	@Inject 
+	@Inject
 	private FoodService foodService;
 
 	private double total;
 	@Inject
 	private CustomerBean customer;
+
 	private int quantity;
 	private Food dish;
-	private int tempQuantity;
+	private int itemQuantity;
 
 	public OrderBean() {
 		order = new Orders();
 		total = 0.0;
-			}
+		item = new Food_Order();
+	}
+
+	public int getItemQuantity() {
+		return itemQuantity;
+	}
+
+	public void setItemQuantity(int itemQuantity) {
+		this.itemQuantity = itemQuantity;
+	}
+
+	public Food_Order getItem() {
+		return item;
+	}
+
+	public void setItem(Food_Order item) {
+		this.item = item;
+	}
 
 	public double getTotal() {
 		return total;
@@ -65,14 +87,6 @@ public class OrderBean implements Serializable {
 
 	public void setDish(Food dish) {
 		this.dish = dish;
-	}
-
-	public int getTempQuantity() {
-		return tempQuantity;
-	}
-
-	public void setTempQuantity(int tempQuantity) {
-		this.tempQuantity = tempQuantity;
 	}
 
 	public int getQuantity() {
@@ -106,19 +120,19 @@ public class OrderBean implements Serializable {
 			Food_Order temp = it.next();
 			total += temp.getFood().getPrice() * temp.getQuantity();
 		}
+		total = Math.round(total * 100) / 100;
+		order.setTotal(total);
 	}
 
 	public String addItem(String dishId) {
-		Food_Order f = new Food_Order();
-		f.setOrder(order);
+		item.setOrder(order);
 		Food dish = foodService.findById(Integer.valueOf(dishId));
-		f.setFood(dish);
-		f.setQuantity(tempQuantity);
-		content.add(f);
+		item.setFood(dish);
+		content.add(item);
 		order.setContent(content);
 		countTotal();
 		this.quantity = content.size();
-		tempQuantity = 1;
+		item = new Food_Order();
 		return "index";
 	}
 
@@ -126,13 +140,13 @@ public class OrderBean implements Serializable {
 		Iterator<Food_Order> it = content.iterator();
 		while (it.hasNext()) {
 			Food_Order temp = it.next();
-			if (temp.getFood().getId()== Integer.valueOf(foodId)) {
+			if (temp.getFood().getId() == Integer.valueOf(foodId)) {
 				if (Integer.valueOf(quantity) != 0) {
-				temp.setQuantity(Integer.valueOf(quantity));
-				it.remove();
-				content.add(temp);
-				order.setContent(content);
-				break;
+					temp.setQuantity(Integer.valueOf(quantity));
+					it.remove();
+					content.add(temp);
+					order.setContent(content);
+					break;
 				} else {
 					it.remove();
 					order.setContent(content);
@@ -164,31 +178,38 @@ public class OrderBean implements Serializable {
 		countTotal();
 		order.setTotal(total);
 		order.setCustomer(customer.getCustomer());
+		Calendar calendar = Calendar.getInstance();
+		java.util.Date now = calendar.getTime();
+		java.sql.Timestamp currentTimestamp = new java.sql.Timestamp(now.getTime());
+		order.setTime(currentTimestamp);
 		return "profile";
 	}
 
 	public String confirmOrder() {
-		
+
 		order.setCustomer(customer.getCustomer());
-		
+
 		for (Food_Order f : content) {
 			foodOrderService.save(f);
 		}
-		Timestamp now = new Timestamp(System.currentTimeMillis());
-		order.setTime(now);
-		
-		DeliveryStatus temp = orderService.getStatusById("1");
-		order.setDelStat(temp);
+		Calendar calendar = Calendar.getInstance();
+		java.util.Date now = calendar.getTime();
+		java.sql.Timestamp currentTimestamp = new java.sql.Timestamp(now.getTime());
+		order.setTime(currentTimestamp);
+
 		orderService.save(order);
 		return "profile";
 	}
-	
+
 	public String setDone(String orderId) {
-		List<DeliveryStatus> list = orderService.getStatusList();
-		DeliveryStatus temp = orderService.getStatusById("3");
+
 		order = orderService.findById(Integer.valueOf(orderId));
-		order.setDelStat(temp);
+		order.setDelivered(1);
 		orderService.save(order);
 		return "delivery";
+	}
+
+	public void changeQuantity(AjaxBehaviorEvent event) {
+		this.item.setQuantity(itemQuantity);
 	}
 }

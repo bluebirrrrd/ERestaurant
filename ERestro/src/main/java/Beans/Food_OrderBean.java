@@ -9,7 +9,7 @@ import Services.Food_OrderService;
 import com.bionic.edu.ERestro.Food_Order;
 
 @Named
-@Scope("request")
+@Scope("view")
 public class Food_OrderBean {
 
 	private Food_Order part;
@@ -17,6 +17,10 @@ public class Food_OrderBean {
 	@Inject
 	private Food_OrderService foodOrderService;
 
+	public Food_OrderBean() {
+		part = new Food_Order();
+	}
+	
 	public Food_Order getPart() {
 		return part;
 	}

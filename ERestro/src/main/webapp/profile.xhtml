@@ -55,6 +55,7 @@ xmlns:f="http://java.sun.com/jsf/core"
             </div>
             <h:form>
             <div class="nav">
+            	<h:commandLink action="#{foodListBean.refreshList()}" class="nav__item" value="All dishes"/>
             	<ui:repeat var="o" value="#{foodListBean.categories}">
                 <h:commandLink action="#{foodListBean.refreshListByCategory(o.getId())}" class="nav__item" value="#{o.name}"/>
                 </ui:repeat>
@@ -70,18 +71,21 @@ xmlns:f="http://java.sun.com/jsf/core"
             <div id="section" class="clearfix">
                 <div class="col-md-6">
                     <table class="fancy-table">
+                       
                         <tr>
                             <th width="100">Name</th>
                             <th>Quantity</th>
                             <th width="40">Edit</th>
                         </tr>
-                        <ui:repeat var="item" value="#{orderBean.content}">
-                        <tr>
-                            <td><h:outputText value="#{item.food.name}"/></td>
-                            <td><h:inputText value="#{item.quantity}" converter="javax.faces.Integer" class="fancy-input"/></td>
-                            <td><h:link outcome="#{orderBean.edit_quantity(item.food.id,item.quantity)}"><i class="fa fa-pencil"></i></h:link>
-                            </td>
-                        </tr>
+                        <ui:repeat var="it" value="#{orderBean.content}">
+                         <h:panelGroup>
+                         <tr>
+                            <td><h:outputText value="#{it.food.name}"/></td>
+                            <td><h:inputText value="#{it.quantity}" converter="javax.faces.Integer" styleClass="fancy-input"/></td>
+                            <td><h:link outcome="#{orderBean.edit_quantity(it.food.id,it.quantity)}"><i class="fa fa-pencil"></i></h:link>
+                           </td>
+                       </tr> 
+                        </h:panelGroup>
                         </ui:repeat>
                     </table>
                 </div>
@@ -123,7 +127,7 @@ xmlns:f="http://java.sun.com/jsf/core"
 							
 
 								<h:outputLabel for="email" value="Email" styleClass="fancy-label" />
-								<h:inputText value="#{customerBean.email}" styleClass="fancy-input"></h:inputText>
+								<h:inputText id="email" value="#{customerBean.email}" styleClass="fancy-input"></h:inputText>
 
 								<h:outputLabel for="password" value="Password" styleClass="fancy-label" />
 								<h:inputSecret id="password" value="#{customerBean.password}"

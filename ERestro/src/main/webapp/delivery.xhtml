@@ -77,7 +77,7 @@ xmlns:f="http://java.sun.com/jsf/core"
                         <tr>
                         	<td>#{item.time}</td>
                             <td>#{item.customer.name}</td>
-                            <td>#{item.quantity}</td>
+                            <td>#{item.customer.billingAddress}</td>
                             <td><h:outputLink action="#{orderBean.setDone(item.id)}"><i class="fa fa-check"></i> </h:outputLink>
                             
                             </td>

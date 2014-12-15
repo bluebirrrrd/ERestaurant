@@ -49,10 +49,13 @@
             <div class="aside__order">
                 Your order: <span><h:outputText value="#{orderBean.quantity}"/></span> items
                 <br/>
-                Total: $<span><h:outputText value="#{orderBean.total}"/></span>
+                Total: $<span><h:outputText value="#{orderBean.order.total}">
+                <f:convertNumber minFractionDigits="2" />
+                </h:outputText>
+                </span>
                 <p>
                     go to cart
-                    <h:link outcome="#{orderBean.proceedOrder()}"><i class="fa fa-arrow-right"></i></h:link>
+                    <h:link outcome="#{orderBeanNew.proceedOrder()}"><i class="fa fa-arrow-right"></i></h:link>
                 </p>
             </div>
 
@@ -73,16 +76,19 @@
                         <h4 class="main__item__content__price"><h:outputText value="#{dish.price}"/></h4>
                         <h4 class="main__item__content__title"><h:outputText value="#{dish.name}"/></h4>
                         <h4 class="main__item__content__text"><h:outputText value="#{dish.description}"/></h4>
-                        <div class="main__item__content__footer">
+                         <div class="main__item__content__footer">
                             <i class="icon fa fa-minus q-ctrl"></i>
-                            <h:inputText class="quntity-input" value="#{orderBean.tempQuantity}">
+                            <h:inputText id="quantity" class="quntity-input" value="#{orderBean.item.quantity}" converter="javax.faces.Integer">
+                         
                             </h:inputText>
                             
                             <i class="icon fa fa-plus q-ctrl"></i>
 
-                        </div>
+                        </div>  
                         
-                        <h:commandLink id="add" action="#{orderBean.addItem(dish.id)}"><i class="icon icon--circle fa fa-shopping-cart" ></i></h:commandLink>
+                        <h:commandLink type="submit" id="add" action="#{orderBean.addItem(dish.id)}">
+                      
+                         <i class="icon icon--circle fa fa-shopping-cart" ></i></h:commandLink>
                     	
                     </div>
                 </div>
@@ -104,7 +110,7 @@
 							
 
 								<h:outputLabel for="email" value="Email" styleClass="fancy-label" />
-								<h:inputText value="#{customerBean.email}" styleClass="fancy-input"></h:inputText>
+								<h:inputText id="email" value="#{customerBean.email}" styleClass="fancy-input"></h:inputText>
 
 								<h:outputLabel for="password" value="Password" styleClass="fancy-label" />
 								<h:inputSecret id="password" value="#{customerBean.password}"

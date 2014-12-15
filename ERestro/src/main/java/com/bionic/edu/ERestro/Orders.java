@@ -1,6 +1,7 @@
 package com.bionic.edu.ERestro;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.*;
 
@@ -9,14 +10,16 @@ public class Orders {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	private java.sql.Timestamp time;
+	@Basic(optional = false)
+	@Column(name = "Time", insertable = false, updatable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date time;
 	@ManyToOne
 	@JoinColumn(name="userId")
 	private Customer customer;
 	private double total;
-	@ManyToOne
-	@JoinColumn(name="deliveryStatusId")
-	private DeliveryStatus delStat;
+	
+	private int delivered;
 /*	@JoinTable(name="OrderFood",
 			   joinColumns=@JoinColumn(name="orderId"),
 			   inverseJoinColumns=
@@ -36,11 +39,11 @@ public class Orders {
 		this.id = id;
 	}
 
-	public java.sql.Timestamp getTime() {
+	public Date getTime() {
 		return time;
 	}
 
-	public void setTime(java.sql.Timestamp time) {
+	public void setTime(Date time) {
 		this.time = time;
 	}
 
@@ -60,12 +63,12 @@ public class Orders {
 		this.total = total;
 	}
 
-	public DeliveryStatus getDelStat() {
-		return delStat;
+	public int getDelivered() {
+		return delivered;
 	}
 
-	public void setDelStat(DeliveryStatus delStat) {
-		this.delStat = delStat;
+	public void setDelivered(int delivered) {
+		this.delivered = delivered;
 	}
 
 	public Collection<Food_Order> getContent() {

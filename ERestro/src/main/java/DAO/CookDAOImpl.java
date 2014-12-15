@@ -42,7 +42,7 @@ public class CookDAOImpl implements CookDAO {
 	public List<Food_Order> getUndoneDishes() {
 
 		List<Food_Order> parts = null;
-		TypedQuery<Food_Order> query = em1.createQuery("SELECT f FROM Food_Order f WHERE (f.done=1)",Food_Order.class);
+		TypedQuery<Food_Order> query = em1.createQuery("SELECT f FROM Food_Order f WHERE (f.done=0)",Food_Order.class);
 		parts = query.getResultList();
 		return parts;
 	}
