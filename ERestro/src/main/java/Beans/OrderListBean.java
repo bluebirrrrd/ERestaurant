@@ -44,4 +44,8 @@ public class OrderListBean {
 		orderList = orderService.getFinishedOrdersList();
 	}
 	
+	public void refreshCustList(String customerId) {
+		orderList = orderService.getCustomersOrdersList(Integer.valueOf(customerId));
+	}
+	
 }

@@ -2,147 +2,174 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>All Employees | ERestaurant</title>
- <link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>
-    <link rel="stylesheet" type="text/css" href="http://balticlab.ru/lib/css/style.css"/>
-   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
-    <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet' type='text/css'/>
+<title>My Profile | ERestaurant</title>
+<link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+<link rel="stylesheet" type="text/css" href="http://balticlab.ru/lib/css/style.css"/>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+<link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet' type='text/css'/>
     <!--[if lt IE 9]>     
 		<script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<script type="text/javascript" src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
-	<![endif]-->
+       <![endif]-->
 
-    <script type="text/javascript" src="http://balticlab.ru/lib/js/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="http://balticlab.ru/lib/js/control.js"></script>
-</h:head>
-<h:body class="page">
-#{foodListBean.getCategoriesList()}
-    <div class="wrap">
+       <script type="text/javascript" src="http://balticlab.ru/lib/js/jquery-2.1.1.min.js"></script>
+       <script type="text/javascript" src="http://balticlab.ru/lib/js/control.js"></script>
+   </h:head>
+   <h:body class="page">
+   #{foodListBean.getCategoriesList()}
+   #{orderListBean.refreshCustList(customerBean.customer.id)}
+   <div class="wrap">
 
-        <div class="b_info">
-            <i class="icon fa-info icon--circle js-info"></i>
-            <div class="b_info__content">
-                <a class="b_info__content__link" href="tel:993012345679">
-                    <i class="icon icon-phone"></i>
-                    9930 1234 5679
-                </a>
-                <a class="b_info__content__link" href="e-mail:contact@domain.com">
-                    <i class="fa fa-letter"></i>
-                    contact@domain.com
-                </a>
-                <a class="b_info__content__link" href="#">
-                    <i class="fa fa-home"></i>
-                    street address example
-                </a>
-            </div>
+    <div class="b_info">
+        <i class="icon fa-info icon--circle js-info"></i>
+        <div class="b_info__content">
+            <a class="b_info__content__link" href="tel:993012345679">
+                <i class="icon icon-phone"></i>
+                9930 1234 5679
+            </a>
+            <a class="b_info__content__link" href="e-mail:contact@domain.com">
+                <i class="fa fa-letter"></i>
+                contact@domain.com
+            </a>
+            <a class="b_info__content__link" href="#">
+                <i class="fa fa-home"></i>
+                street address example
+            </a>
         </div>
+    </div>
 
-        <div class="aside">
-            <div class="header">
-                <a href="#" class="logo"></a>
-                <span class="header_user">
+    <div class="aside">
+        <div class="header">
+            <a href="#" class="logo"></a>
+            <span class="header_user">
                 <h:outputText value="Welcome back, #{customerBean.customer.name}" rendered="#{customerBean.loggedIn}"/>
                 <h:outputText value="Welcome! " rendered="#{!customerBean.loggedIn}"/>
                 <h:link rendered="#{!customerBean.loggedIn}" outcome="#" value="Log in">
-                 <f:passThroughAttribute name="data-toggle" value="modal"/>
-                 <f:passThroughAttribute name="data-target" value="#logIn"/>                 
-                </h:link>
-            </span>
-            </div>
-            <h:form>
-            <div class="nav">
-            	<h:commandLink action="#{foodListBean.refreshList()}" class="nav__item" value="All dishes"/>
-            	<ui:repeat var="o" value="#{foodListBean.categories}">
-                <h:commandLink action="#{foodListBean.refreshListByCategory(o.getId())}" class="nav__item" value="#{o.name}"/>
-                </ui:repeat>
-            </div>
-			</h:form>
-
-            <div class="aside__copyright">
-                © 2014 ERestaurant, All Rights Reserved
-            </div>
-        </div>
-
-        <div class="main">
-            <div id="section" class="clearfix">
-                <div class="col-md-6">
-                    <table class="fancy-table">
-                       
-                        <tr>
-                            <th width="100">Name</th>
-                            <th>Quantity</th>
-                            <th width="40">Edit</th>
-                        </tr>
-                        <ui:repeat var="it" value="#{orderBean.content}">
-                         <h:panelGroup>
-                         <tr>
-                            <td><h:outputText value="#{it.food.name}"/></td>
-                            <td><h:inputText value="#{it.quantity}" converter="javax.faces.Integer" styleClass="fancy-input"/></td>
-                            <td><h:link outcome="#{orderBean.edit_quantity(it.food.id,it.quantity)}"><i class="fa fa-pencil"></i></h:link>
-                           </td>
-                       </tr> 
-                        </h:panelGroup>
-                        </ui:repeat>
-                    </table>
-                </div>
-                <div class="col-md-6">
-                    <h1 class="section__title">Shipment info</h1>
-                    <h:form class="fancy-form">
-                        <h:outputLabel for="name" class="fancy-label">Name</h:outputLabel>
-                        <h:inputText value="#{customerBean.customer.name}" id="name" class="fancy-input"/>
-
-                        <h:outputLabel for="email" class="fancy-label">Email</h:outputLabel>
-                        <h:inputText value="#{customerBean.customer.email}" id="email" class="fancy-input"/>
-
-                        <h:outputLabel for="birthday" class="fancy-label">Birthday</h:outputLabel>
-                        <h:inputText value="#{customerBean.birthday}" id="birthday" class="fancy-input">
-                    		<f:convertDateTime pattern="dd.MM.yyyy" />
-                   		</h:inputText>
-
-                        <h:outputLabel for="address" class="fancy-label label-high">Billing address</h:outputLabel>
-                    <h:inputText value="#{customerBean.customer.billingAddress}" id="address" class="fancy-input input-high"/>
-
-                        <h:commandLink type="submit" action="#{orderBean.confirmOrder()}" class="fancy-submit"> <i class="icon icon--circle fa fa-check "></i>
-                        </h:commandLink>
-                    </h:form>
-                </div>
-            </div>
-        </div>
-
+                <f:passThroughAttribute name="data-toggle" value="modal"/>
+                <f:passThroughAttribute name="data-target" value="#logIn"/>                 
+            </h:link>
+        </span>
     </div>
-               	<div class="modal fade" id="logIn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        		<div class="modal-dialog modal-sm">
-            		<div class="modal-content">
-            		<div class="modal-header clearfix">
-                    	<button type="button" class="close fancy-close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
-                    	</button>
-                	</div>
-                      <div class="modal-body">
-						<h4 class="section__title">Log in</h4>
-							<h:form class="fancy-form">
-							
+    <h:form>
+    <div class="nav">
+       <h:commandLink action="#{foodListBean.refreshList()}" class="nav__item" value="All dishes"/>
+       <ui:repeat var="o" value="#{foodListBean.categories}">
+       <h:commandLink action="#{foodListBean.refreshListByCategory(o.getId())}" class="nav__item" value="#{o.name}"/>
+   </ui:repeat>
+</div>
+</h:form>
 
-								<h:outputLabel for="email" value="Email" styleClass="fancy-label" />
-								<h:inputText id="email" value="#{customerBean.email}" styleClass="fancy-input"></h:inputText>
+<div class="aside__copyright">
+    © 2014 ERestaurant, All Rights Reserved
+</div>
+</div>
 
-								<h:outputLabel for="password" value="Password" styleClass="fancy-label" />
-								<h:inputSecret id="password" value="#{customerBean.password}"
-									styleClass="fancy-input" placeholder="Your password" required="true" requiredMessage="#{msgs.dishNameRequired}"/>
+<div class="main">
+    <div id="section" class="clearfix">
+        <div class="col-md-6">
+            <h4 class="section__title">My orders</h4>
+            <h:form>
+            <table class="fancy-table">
+                <tr>
+                    <th>Time</th>
+                    <th>Total</th>
+                    <th>Address</th>
+                    <th width="40">Done?</th>
+                </tr>
+                <ui:repeat var="item" value="#{orderListBean.orderList}"  varStatus="status" offset="0">
+                <h:panelGroup rendered="#{(status.index+4)%4==0}">
+                <tr>
+                   <td><h:outputText value="#{item.time}"/> </td>
+                   <td><h:outputText value="#{item.total}"/></td>
+                   <td><h:outputText value="#{item.customer.billingAddress}" /></td>
+                   <td><h:link rendered="#{item.delivered>0}" outcome="#"><i class="fa fa-clock-0 fa-lg"></i> </h:link>
+                    <h:link outcome="#" rendered="#{item.delivered==0}"><i class="fa fa-clock-o fa-lg"></i> </h:link>
+                    
+                </td>
+            </tr>
+        </h:panelGroup> 
+    </ui:repeat>
+</table>
+<h4 class="section__title">Cart</h4>
+<table class="fancy-table">
+ 
+    <tr>
+        <th width="100">Name</th>
+        <th>Quantity</th>
+        <th width="40">Edit</th>
+    </tr>
+    <ui:repeat var="it" value="#{orderBean.content}">
+    <h:panelGroup>
+    <tr>
+        <td><h:outputText value="#{it.food.name}"/></td>
+        <td><h:inputText value="#{it.quantity}" converter="javax.faces.Integer" styleClass="fancy-input"/></td>
+        <td><h:link outcome="#{orderBean.edit_quantity(it.food.id,it.quantity)}"><i class="fa fa-pencil"></i></h:link>
+        </td>
+    </tr> 
+</h:panelGroup>
+</ui:repeat>
+</table>
+</h:form>
+</div>
 
-							
-							<div style="text-align: center">
-								<h:commandLink id="log" 
-									action="#{customerBean.logIn()}" styleClass="fancy-submit"> <i class="icon icon--circle fa fa-check"> </i> </h:commandLink>
-							</div>
-							
-							</h:form>
-						</div>
-					</div>
-				</div>
-			</div>
+<div class="col-md-6">
+    <h1 class="section__title">Shipment info</h1>
+    <h:form class="fancy-form">
+    <h:outputLabel for="name" class="fancy-label">Name</h:outputLabel>
+    <h:inputText value="#{customerBean.customer.name}" id="name" class="fancy-input"/>
+
+    <h:outputLabel for="email" class="fancy-label">Email</h:outputLabel>
+    <h:inputText value="#{customerBean.customer.email}" id="email" class="fancy-input"/>
+
+    <h:outputLabel for="birthday" class="fancy-label">Birthday</h:outputLabel>
+    <h:inputText value="#{customerBean.birthday}" id="birthday" class="fancy-input">
+    <f:convertDateTime pattern="dd.MM.yyyy" />
+</h:inputText>
+
+<h:outputLabel for="address" class="fancy-label label-high">Billing address</h:outputLabel>
+<h:inputText value="#{customerBean.customer.billingAddress}" id="address" class="fancy-input input-high"/>
+
+<h:commandLink type="submit" action="#{orderBean.confirmOrder()}" class="fancy-submit"> <i class="icon icon--circle fa fa-check "></i>
+</h:commandLink>
+</h:form>
+</div>
+</div>
+</div>
+
+</div>
+<div class="modal fade" id="logIn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+          <div class="modal-header clearfix">
+           <button type="button" class="close fancy-close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
+           </button>
+       </div>
+       <div class="modal-body">
+          <h4 class="section__title">Log in</h4>
+          <h:form class="fancy-form">
+          
+
+          <h:outputLabel for="email" value="Email" styleClass="fancy-label" />
+          <h:inputText id="email" value="#{customerBean.email}" styleClass="fancy-input"></h:inputText>
+
+          <h:outputLabel for="password" value="Password" styleClass="fancy-label" />
+          <h:inputSecret id="password" value="#{customerBean.password}"
+          styleClass="fancy-input" placeholder="Your password" required="true" requiredMessage="#{msgs.dishNameRequired}"/>
+
+          
+          <div style="text-align: center">
+            <h:commandLink id="log" 
+            action="#{customerBean.logIn()}" styleClass="fancy-submit"> <i class="icon icon--circle fa fa-check"> </i> </h:commandLink>
+        </div>
+        
+    </h:form>
+</div>
+</div>
+</div>
+</div>
 </h:body>
 </html>

@@ -58,5 +58,11 @@ public class OrderServiceImpl implements OrderService, Serializable {
 		return result;
 	}
 
+	@Override
+	public List<Orders> getCustomersOrdersList(int customerId) {
+		List<Orders> list = customerDAO.getMyOrders(customerId);
+		return list;
+	}
+
 
 }

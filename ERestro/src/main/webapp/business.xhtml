@@ -2,143 +2,143 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Business Analytic Page | ERestaurant</title>
- <link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>
-    <link rel="stylesheet" type="text/css" href="http://balticlab.ru/lib/css/style.css"/>
-   	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
-    <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet' type='text/css'/>
+<link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+<link rel="stylesheet" type="text/css" href="http://balticlab.ru/lib/css/style.css"/>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+<link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet' type='text/css'/>
     <!--[if lt IE 9]>     
 		<script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<script type="text/javascript" src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
-	<![endif]-->
+       <![endif]-->
 
-    <script type="text/javascript" src="http://balticlab.ru/lib/js/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="http://balticlab.ru/lib/js/control.js"></script>
-</h:head>
-<h:body class="page">
-#{food_OrderListBean.refreshCategories()}
-#{food_OrderListBean.refreshList()}
-    <div class="wrap">
+       <script type="text/javascript" src="http://balticlab.ru/lib/js/jquery-2.1.1.min.js"></script>
+       <script type="text/javascript" src="http://balticlab.ru/lib/js/control.js"></script>
+   </h:head>
+   <h:body class="page">
+   #{food_OrderListBean.refreshCategories()}
+   #{food_OrderListBean.refreshList()}
+   <div class="wrap">
 
-        <div class="b_info">
-            <i class="icon fa-info icon--circle js-info"></i>
-            <div class="b_info__content">
-                <a class="b_info__content__link" href="tel:993012345679">
-                    <i class="icon icon-phone"></i>
-                    9930 1234 5679
-                </a>
-                <a class="b_info__content__link" href="e-mail:contact@domain.com">
-                    <i class="fa fa-letter"></i>
-                    contact@domain.com
-                </a>
-                <a class="b_info__content__link" href="#">
-                    <i class="fa fa-home"></i>
-                    street address example
-                </a>
-            </div>
+    <div class="b_info">
+        <i class="icon fa-info icon--circle js-info"></i>
+        <div class="b_info__content">
+            <a class="b_info__content__link" href="tel:993012345679">
+                <i class="icon icon-phone"></i>
+                9930 1234 5679
+            </a>
+            <a class="b_info__content__link" href="e-mail:contact@domain.com">
+                <i class="fa fa-letter"></i>
+                contact@domain.com
+            </a>
+            <a class="b_info__content__link" href="#">
+                <i class="fa fa-home"></i>
+                street address example
+            </a>
         </div>
+    </div>
 
-        <div class="aside">
-            <div class="header">
-                <a href="#" class="logo"></a>
-                <span class="header_user">
+    <div class="aside">
+        <div class="header">
+            <a href="#" class="logo"></a>
+            <span class="header_user">
                 <h:outputText value="Welcome back, #{employeeAtWorkBean.employee.name}" rendered="#{employeeAtWorkBean.loggedIn}"/>
                 <h:outputText value="Welcome! " rendered="#{!employeeAtWorkBean.loggedIn}"/>
                 <h:link rendered="#{!employeeAtWorkBean.loggedIn}" outcome="#" value="Log in">
-                 <f:passThroughAttribute name="data-toggle" value="modal"/>
-                 <f:passThroughAttribute name="data-target" value="#logIn"/>                 
-                </h:link>
-            </span>
-            </div>
-            <div class="nav">
-                <h:link outcome="business" class="nav__item" value="Business Analytic page"/>
-               
-            </div>
-
-            <div class="aside__copyright">
-                © 2014 ERestaurant, All Rights Reserved
-            </div>
-        </div>
-
-        <div class="main">
-            <div id="section" class="clearfix">
-                <div class="col-md-6">
-                    <h:form class="fancy-form">
-                        <h:outputLabel for="startDate" styleClass="fancy-label">Start Date</h:outputLabel>
-                        <h:inputText  id="startDate" value="#{food_OrderListBean.startDate}" styleClass="fancy-input">
-                        	<f:convertDateTime pattern="dd.MM.yyyy" />
-                        </h:inputText>
-						<br/>
-                        <h:outputLabel for="endDate" styleClass="fancy-label">End Date</h:outputLabel>
-                        <h:inputText id="endDate" value="#{food_OrderListBean.endDate}" styleClass="fancy-input">
-                        	<f:convertDateTime pattern="dd.MM.yyyy" />
-                        </h:inputText>
-
-                        <h:outputLabel for="category" class="fancy-label">Category</h:outputLabel>
-                        <h:selectOneMenu id="category" value="#{food_OrderListBean.selectedCategoryId}" styleClass="selection" rendered="false">
-                        <f:selectItems value="#{food_OrderListBean.categories}" var="cat" itemLabel="#{cat.name}" itemValue="#{cat.id}"></f:selectItems>
-                        </h:selectOneMenu>
-                    
-                     <h:commandLink action="#{food_OrderListBean.refreshListByDates()}" styleClass="fancy-submit"> <i class="icon icon--circle fa fa-check "></i>
-                        </h:commandLink>
-                    </h:form>
-                    </div>
-                <div class="col-md-6">
-                    <h1 class="section__title">Info</h1>
-                    <table class="fancy-table">
-                        <tr>
-                            <th>Category</th>
-                            <th width="50">Income</th>
-                        </tr>
-                        <ui:repeat var="item" value="#{food_OrderListBean.summary}">
-                        <tr>
-                        	<td>#{item.key.name}</td>
-                            <td>#{item.value}</td>
-                        </tr> 
-                        </ui:repeat>
-                    </table>
-                    
-                       
-                </div>
-            </div>
-        </div>
-
+                <f:passThroughAttribute name="data-toggle" value="modal"/>
+                <f:passThroughAttribute name="data-target" value="#logIn"/>                 
+            </h:link>
+        </span>
     </div>
-    
-    <div class="modal fade" id="logIn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        		<div class="modal-dialog modal-sm">
-            		<div class="modal-content">
-            		<div class="modal-header clearfix">
-                    	<button type="button" class="close fancy-close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
-                    	</button>
-                	</div>
-                      <div class="modal-body">
-						<h4 class="section__title">Log in</h4>
-							<h:form class="fancy-form">
-							
-							
-								<h:outputLabel for="email" value="Email" styleClass="fancy-label" />
-								<h:inputText value="#{employeeAtWorkBean.email}" styleClass="fancy-input"></h:inputText>
+    <div class="nav">
+        <h:link outcome="business" class="nav__item" value="Business Analytic page"/>
+        
+    </div>
 
-								<h:outputLabel for="password" value="Password" styleClass="fancy-label" />
-								<h:inputSecret id="password" value="#{employeeAtWorkBean.password}"
-									styleClass="fancy-input" placeholder="Your password" required="true" requiredMessage="#{msgs.dishNameRequired}"/>
+    <div class="aside__copyright">
+        © 2014 ERestaurant, All Rights Reserved
+    </div>
+</div>
 
-							
-							<div style="text-align: center">
-								<h:commandLink id="log" 
-									action="#{employeeAtWorkBean.login()}" styleClass="fancy-submit"> <i class="icon icon--circle fa fa-check"> </i> </h:commandLink>
-							</div>
-							
-							</h:form>
-						</div>
-					</div>
-				</div>
-			</div>
-    
+<div class="main">
+    <div id="section" class="clearfix">
+        <div class="col-md-6">
+            <h:form class="fancy-form">
+            <h:outputLabel for="startDate" styleClass="fancy-label">Start Date</h:outputLabel>
+            <h:inputText  id="startDate" value="#{food_OrderListBean.startDate}" styleClass="fancy-input">
+            <f:convertDateTime pattern="dd.MM.yyyy" />
+        </h:inputText>
+        <br/>
+        <h:outputLabel for="endDate" styleClass="fancy-label">End Date</h:outputLabel>
+        <h:inputText id="endDate" value="#{food_OrderListBean.endDate}" styleClass="fancy-input">
+        <f:convertDateTime pattern="dd.MM.yyyy" />
+    </h:inputText>
+
+    <h:outputLabel for="category" class="fancy-label">Category</h:outputLabel>
+    <h:selectOneMenu id="category" value="#{food_OrderListBean.selectedCategoryId}" styleClass="selection" rendered="false">
+    <f:selectItems value="#{food_OrderListBean.categories}" var="cat" itemLabel="#{cat.name}" itemValue="#{cat.id}"></f:selectItems>
+</h:selectOneMenu>
+
+<h:commandLink action="#{food_OrderListBean.refreshListByDates()}" styleClass="fancy-submit"> <i class="icon icon--circle fa fa-check "></i>
+</h:commandLink>
+</h:form>
+</div>
+<div class="col-md-6">
+    <h1 class="section__title">Info</h1>
+    <table class="fancy-table">
+        <tr>
+            <th>Category</th>
+            <th width="50">Income</th>
+        </tr>
+        <ui:repeat var="item" value="#{food_OrderListBean.summary}">
+        <tr>
+           <td>#{item.key.name}</td>
+           <td>#{item.value}</td>
+       </tr> 
+   </ui:repeat>
+</table>
+
+
+</div>
+</div>
+</div>
+
+</div>
+
+<div class="modal fade" id="logIn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+          <div class="modal-header clearfix">
+           <button type="button" class="close fancy-close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
+           </button>
+       </div>
+       <div class="modal-body">
+          <h4 class="section__title">Log in</h4>
+          <h:form class="fancy-form">
+          
+          
+          <h:outputLabel for="email" value="Email" styleClass="fancy-label" />
+          <h:inputText value="#{employeeAtWorkBean.email}" styleClass="fancy-input"></h:inputText>
+
+          <h:outputLabel for="password" value="Password" styleClass="fancy-label" />
+          <h:inputSecret id="password" value="#{employeeAtWorkBean.password}"
+          styleClass="fancy-input" placeholder="Your password" required="true" requiredMessage="#{msgs.dishNameRequired}"/>
+
+          
+          <div style="text-align: center">
+            <h:commandLink id="log" 
+            action="#{employeeAtWorkBean.login()}" styleClass="fancy-submit"> <i class="icon icon--circle fa fa-check"> </i> </h:commandLink>
+        </div>
+        
+    </h:form>
+</div>
+</div>
+</div>
+</div>
+
 </h:body>
 </html>

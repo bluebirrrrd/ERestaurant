@@ -1,143 +1,197 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>New Dish</title>
-	<link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>
-    <link rel="stylesheet" type="text/css" href="http://balticlab.ru/lib/css/style.css"/>
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
-    <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet' type='text/css'/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Edit Dish Info | ERestaurant</title>
+<link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+<link rel="stylesheet" type="text/css" href="http://balticlab.ru/lib/css/style.css"/>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+<link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet' type='text/css'/>
     <!--[if lt IE 9]>     
 		<script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<script type="text/javascript" src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
-	<![endif]-->
+		<![endif]-->
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="http://balticlab.ru/lib/js/control.js"></script>
-</h:head>
-<h:body class="page">
-#{foodListBean.getCategoriesList()}
-#{foodBean.refreshCategories()}
-<div class="wrap">
-<h:form>
- <div class="aside">
-            <div class="header">
-                <a href="#" class="logo"></a>
-                <span class="header_user">
-                <h:outputText value="Welcome back, #{employeeAtWorkBean.employee.name}" rendered="#{employeeAtWorkBean.loggedIn}"/>
-                <h:outputText value="Welcome! " rendered="#{!employeeAtWorkBean.loggedIn}"/>
-                <h:link rendered="#{!employeeAtWorkBean.loggedIn}" outcome="#" value="Log in">
-                 <f:passThroughAttribute name="data-toggle" value="modal"/>
-                 <f:passThroughAttribute name="data-target" value="#logIn"/>                 
-                </h:link>
-            </span>
-            </div>
-            <div class="nav">
-               <ui:repeat var="o" value="#{foodListBean.categories}">
-                <h:commandLink action="#{foodListBean.adminRefreshListByCategory(o.id)}" class="nav__item" value="#{o.name}"/>
-                </ui:repeat>
-                <h:link outcome="newDish" class="nav__item" value="New Dish"/>
-            </div>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script type="text/javascript" src="http://balticlab.ru/lib/js/control.js"></script>
+	</h:head>
+	<h:body class="page">
+	#{foodListBean.getCategoriesList()}
+	#{foodBean.refreshCategories()}
+	<div class="wrap">
+		<h:form>
+		<div class="aside">
+			<div class="header">
+				<a href="#" class="logo"></a>
+				<span class="header_user">
+					<h:outputText value="Welcome back, #{employeeAtWorkBean.employee.name}" rendered="#{employeeAtWorkBean.loggedIn}"/>
+					<h:outputText value="Welcome! " rendered="#{!employeeAtWorkBean.loggedIn}"/>
+					<h:link rendered="#{!employeeAtWorkBean.loggedIn}" outcome="#" value="Log in">
+					<f:passThroughAttribute name="data-toggle" value="modal"/>
+					<f:passThroughAttribute name="data-target" value="#logIn"/>                 
+				</h:link>
+			</span>
+		</div>
+		<div class="nav">
+			<ui:repeat var="o" value="#{foodListBean.categories}">
+			<h:commandLink action="#{foodListBean.adminRefreshListByCategory(o.id)}" class="nav__item" value="#{o.name}"/>
+		</ui:repeat>
+		<a href="#" data-toggle="modal" data-target="#newDish" class="nav__item">New Dish</a>
 	</div>
-	</h:form>
-	<div class="main">
-            <div id="section">
-                <a href="#" data-toggle="modal" data-target="#newDish">
-                    <h1 class="section__title">Add dish</h1>
-                </a>
+</div>
+</h:form>
+<div class="main">
+	<div id="section">
+		<a href="#" data-toggle="modal" data-target="#editDish">
+			<h1 class="section__title">Edit dish</h1>
+		</a>
 
 
-            </div>
-        </div>
-	 <div class="modal fade" id="newDish" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header clearfix">
-                    <button type="button" class="close fancy-close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
-                    </button>
+	</div>
+</div>
+<div class="modal fade" id="newDish" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header clearfix">
+				<button type="button" class="close fancy-close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
+				</button>
 
-                </div>
-                <div class="modal-body">
-					<h4 class="section__title">New dish</h4>
-					<h:form class="fancy-form">
-						
-						
-							
+			</div>
+			<div class="modal-body">
+				<h4 class="section__title">New dish</h4>
+				<h:form class="fancy-form">
+				
+				
+				
 
-			<h:outputLabel for="cat" value="Category:" styleClass="fancy-label" />
-			<h:selectOneMenu id="cat" value="#{foodBean.selectedFoodCategory.id}" styleClass="selection">
+				<h:outputLabel for="cat" value="Category:" styleClass="fancy-label" />
+				<h:selectOneMenu id="cat" value="#{foodBean.selectedFoodCategory.id}" styleClass="selection">
 				<f:selectItems value="#{foodBean.categories}" var="categ" itemLabel="#{categ.name}" itemValue="#{categ.id}" />
 			</h:selectOneMenu>
 
 			<h:outputLabel for="name" value="Name:" styleClass="fancy-label" />
 
 			<h:inputText id="name" value="#{foodBean.dish.name}"
-				styleClass="fancy-input" placeholder="Enter the name" required="true" requiredMessage="#{msgs.dishNameRequired}"/>
+			styleClass="fancy-input" placeholder="Enter the name" required="true" requiredMessage="#{msgs.dishNameRequired}"/>
 
 			<h:outputLabel for="description" value="Description" styleClass="fancy-label label-high" />
 
 			
-				<h:inputTextarea id="description" styleClass="fancy-input"
-					value="#{foodBean.dish.description}" counter="display" placeholder="Optional"
-					maxlength="500" counterTemplate="({0} characters remaining)" />
-				<br />
-				<h:outputText id="display" />
+			<h:inputTextarea id="description" styleClass="fancy-input"
+			value="#{foodBean.dish.description}" counter="display" placeholder="Optional"
+			maxlength="500" counterTemplate="({0} characters remaining)" />
+			<br />
+			<h:outputText id="display" />
 			
 			<h:outputLabel for="kitchenMade" value="Kitchen made?" styleClass="fancy-label"/>
 			<h:selectOneMenu  styleClass="selection" id="kitchenMade"	value="#{foodBean.dish.kitchenMade}">
-				<f:selectItem itemValue="1" itemLabel="Yes"/>
-                <f:selectItem itemValue="0" itemLabel="No"/> 
-			</h:selectOneMenu>
-			<br/>
-			<h:outputLabel for="price" value="Price" styleClass="fancy-label"/>
-			<h:inputText id="price" styleClass="fancy-input" value="#{foodBean.dish.price}" required="true" requiredMessage="#{msgs.priceRequired}" />
-	
+			<f:selectItem itemValue="1" itemLabel="Yes"/>
+			<f:selectItem itemValue="0" itemLabel="No"/> 
+		</h:selectOneMenu>
+		<br/>
+		<h:outputLabel for="price" value="Price" styleClass="fancy-label"/>
+		<h:inputText id="price" styleClass="fancy-input" value="#{foodBean.dish.price}" required="true" requiredMessage="#{msgs.priceRequired}" />
+		
 		<div style="text-align: center">
-			<h:commandButton id="submit" value="Save"
-				action="#{foodBean.saveFood()}" styleClass="fancy-submit"> <i class="icon icon--circle fa-check"> </i> </h:commandButton>
+			<h:commandLink id="submit"
+			action="#{foodBean.saveFood()}" styleClass="fancy-submit"> <i class="icon icon--circle fa-check"> </i> </h:commandLink>
 		</div>
-</h:form>
+	</h:form>
 </div>
 </div>
 </div>
 </div>
 </div>
 
-    <div class="modal fade" id="logIn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        		<div class="modal-dialog modal-sm">
-            		<div class="modal-content">
-            		<div class="modal-header clearfix">
-                    	<button type="button" class="close fancy-close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
-                    	</button>
+<div class="modal fade" id="logIn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header clearfix">
+				<button type="button" class="close fancy-close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
+				</button>
 
-                	</div>
-                      <div class="modal-body">
-						<h4 class="section__title">Log in</h4>
-							<h:form class="fancy-form">
-							
-							
-								<h:outputLabel for="email" value="Email" styleClass="fancy-label" />
-								<h:inputText value="#{employeeAtWorkBean.email}" styleClass="fancy-input"></h:inputText>
-
-								<h:outputLabel for="password" value="Password" styleClass="fancy-label" />
-								<h:inputSecret id="password" value="#{employeeAtWorkBean.password}"
-									styleClass="fancy-input" placeholder="Your password" required="true" requiredMessage="#{msgs.dishNameRequired}"/>
-
-							
-							<div style="text-align: center">
-								<h:commandLink id="log" 
-									action="#{employeeAtWorkBean.login()}" styleClass="fancy-submit"> <i class="icon icon--circle fa fa-check"> </i> </h:commandLink>
-							</div>
-							
-							</h:form>
-						</div>
-					</div>
-				</div>
 			</div>
-    
+			<div class="modal-body">
+				<h4 class="section__title">Log in</h4>
+				<h:form class="fancy-form">
+				
+				
+				<h:outputLabel for="email" value="Email" styleClass="fancy-label" />
+				<h:inputText value="#{employeeAtWorkBean.email}" styleClass="fancy-input"></h:inputText>
+
+				<h:outputLabel for="password" value="Password" styleClass="fancy-label" />
+				<h:inputSecret id="password" value="#{employeeAtWorkBean.password}"
+				styleClass="fancy-input" placeholder="Your password" required="true" requiredMessage="#{msgs.dishNameRequired}"/>
+
+				
+				<div style="text-align: center">
+					<h:commandLink id="log" 
+					action="#{employeeAtWorkBean.login()}" styleClass="fancy-submit"> <i class="icon icon--circle fa fa-check"> </i> </h:commandLink>
+				</div>
+				
+			</h:form>
+		</div>
+	</div>
+</div>
+</div>
+
+
+<div class="modal fade" id="editDish" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header clearfix">
+				<button type="button" class="close fancy-close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
+				</button>
+
+			</div>
+			<div class="modal-body">
+				<h4 class="section__title">Edit dish</h4>
+				<h:form class="fancy-form">
+				
+				
+				
+
+				<h:outputLabel for="cat" value="Category:" styleClass="fancy-label" />
+				<h:selectOneMenu id="cat" value="#{foodBean.selectedFoodCategory.id}" styleClass="selection">
+				<f:selectItems value="#{foodBean.categories}" var="categ" itemLabel="#{categ.name}" itemValue="#{categ.id}" />
+			</h:selectOneMenu>
+
+			<h:outputLabel for="name" value="Name:" styleClass="fancy-label" />
+
+			<h:inputText id="name" value="#{foodBean.dish.name}"
+			styleClass="fancy-input" placeholder="Enter the name" required="true" requiredMessage="#{msgs.dishNameRequired}"/>
+
+			<h:outputLabel for="description" value="Description" styleClass="fancy-label label-high" />
+
+			
+			<h:inputTextarea id="description" styleClass="fancy-input"
+			value="#{foodBean.dish.description}" placeholder="Optional"
+			maxlength="500"  />
+			<br />
+			<h:outputText id="display" />
+			
+			<h:outputLabel for="kitchenMade" value="Kitchen made?" styleClass="fancy-label"/>
+			<h:selectOneMenu  styleClass="selection" id="kitchenMade"	value="#{foodBean.dish.kitchenMade}">
+			<f:selectItem itemValue="1" itemLabel="Yes"/>
+			<f:selectItem itemValue="0" itemLabel="No"/> 
+		</h:selectOneMenu>
+		<br/>
+		<h:outputLabel for="price" value="Price" styleClass="fancy-label"/>
+		<h:inputText id="price" styleClass="fancy-input" value="#{foodBean.dish.price}" required="true" requiredMessage="#{msgs.priceRequired}" />
+		
+		<div style="text-align: center">
+			<h:commandLink id="submit" 
+			action="#{foodBean.saveFood()}" styleClass="fancy-submit"> <i class="icon icon--circle fa fa-check"> </i> </h:commandLink>
+		</div>
+	</h:form>
+</div>
+</div>
+</div>
+</div>
+
 </h:body>
 </html>

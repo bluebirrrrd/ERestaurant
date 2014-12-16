@@ -19,7 +19,6 @@ import Services.FoodService;
 import com.bionic.edu.ERestro.Food;
 import com.bionic.edu.ERestro.FoodCategory;
 
-
 @Named("foodBean")
 @Scope("view")
 public class FoodBean {
@@ -34,7 +33,7 @@ public class FoodBean {
 		dish = new Food();
 		selectedFoodCategory = new FoodCategory();
 	}
-	
+
 	public FoodCategory getSelectedFoodCategory() {
 		return selectedFoodCategory;
 	}
@@ -47,7 +46,6 @@ public class FoodBean {
 		return categories;
 	}
 
-	
 	public void setCategories(List<FoodCategory> categories) {
 		this.categories = categories;
 	}
@@ -73,39 +71,27 @@ public class FoodBean {
 		selectedFoodCategory = foodService.findCategoryById(catId);
 		dish.setCategory(selectedFoodCategory);
 		foodService.save(dish);
-		return "editMenu";
+		return "admin";
 	}
 
 	public String editFood(String id) {
 		Integer intId = Integer.valueOf(id);
 		dish = foodService.findById(intId);
-		return "admin";
+		return "newDish";
 	}
-	
+
 	public void refreshCategories() {
 		categories = foodService.getCategoriesList();
 	}
-	/*public String addPhoto(String photoId) {
-		String fileId = "../" + photoId + ".jpg";
-		File inpt = new File(fileId);
-		if (!inpt.exists()) {
-			String fileMsg = "Не найден файл " + fileId;
-			return "AddCover";
-		}
-		dish = foodService.findById();
-		dish.setId(photoId);
-		try {
-			FileInputStream in = new FileInputStream(fileId);
-			// Чтение изображения из файла
-			byte[] img = new byte[(int) inpt.length()];
-			in.read(img);
-			in.close();
-			dish.setPhoto(img);
-			foodService.save(dish);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		return "editMenu";
-	} */ //РАЗБЕРИСЬ!!!!!!!!!!!!!!!!!!!
+	/*
+	 * public String addPhoto(String photoId) { String fileId = "../" + photoId
+	 * + ".jpg"; File inpt = new File(fileId); if (!inpt.exists()) { String
+	 * fileMsg = "Не найден файл " + fileId; return "AddCover"; } dish =
+	 * foodService.findById(); dish.setId(photoId); try { FileInputStream in =
+	 * new FileInputStream(fileId); // Чтение изображения из файла byte[] img =
+	 * new byte[(int) inpt.length()]; in.read(img); in.close();
+	 * dish.setPhoto(img); foodService.save(dish); } catch (Exception e) {
+	 * System.out.println(e.getMessage()); } return "editMenu"; }
+	 */// РАЗБЕРИСЬ!!!!!!!!!!!!!!!!!!!
 
 }

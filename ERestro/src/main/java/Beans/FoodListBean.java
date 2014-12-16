@@ -49,6 +49,11 @@ public class FoodListBean {
 		return "index";
 	}
 	
+	public String refreshAdminList() {
+		dishes = foodService.getAllFoodList();
+		return "admin";
+	}
+	
 	public String refreshListByCategory(String categoryId) {
 		int catId = Integer.valueOf(categoryId);
 		dishes = foodService.getListByCategory(catId);

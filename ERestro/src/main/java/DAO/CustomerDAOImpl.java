@@ -98,7 +98,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 	public List<Orders> getMyOrders(int customerId) {
 		List<Orders> list = null;
 		TypedQuery<Orders> query = em1.createQuery(
-				"SELECT o FROM Orders o WHERE (o.userId = :id)", Orders.class);
+				"SELECT o FROM Orders o WHERE (o.customer.id = :id)", Orders.class);
 		query.setParameter("id", customerId);
 		list = query.getResultList();
 		return list;

@@ -1,111 +1,154 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>New Customer | ERestaurant</title>
-	<h:link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>
-	<link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>	
-	 <link rel="stylesheet" type="text/css" href="http://balticlab.ru/lib/css/style.css"/>
-	<link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400'
-			rel='stylesheet' type='text/css'/>
-			<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>New Customer | ERestaurant</title>
+<h:link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+<link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>	
+<link rel="stylesheet" type="text/css" href="http://balticlab.ru/lib/css/style.css"/>
+<link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400'
+rel='stylesheet' type='text/css'/>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
 			<!--[if lt IE 9]>     
 		<script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<script type="text/javascript" src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
-	<![endif]-->
-	 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="http://balticlab.ru/lib/control.js"></script>
-</h:head>
-<h:body class="page">
-	<div class="wrap">
+       <![endif]-->
+       <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+       <script type="text/javascript" src="http://balticlab.ru/lib/control.js"></script>
+   </h:head>
+   <h:body class="page">
+   <div class="wrap">
 
-        <div class="aside">
-            <div class="header">
-                <h:link href="#" class="logo"></h:link>
-                <span class="header_user">
+    <div class="aside">
+        <h:form>
+        <div class="header">
+            <h:link href="#" class="logo"></h:link>
+            <span class="header_user">
                 <h:outputText value="Welcome back, #{employeeAtWorkBean.employee.name}" rendered="#{employeeAtWorkBean.loggedIn}"/>
                 <h:outputText value="Welcome! " rendered="#{!employeeAtWorkBean.loggedIn}"/>
                 <h:link rendered="#{!employeeAtWorkBean.loggedIn}" outcome="#" value="Log in">
-                 <f:passThroughAttribute name="data-toggle" value="modal"/>
-                 <f:passThroughAttribute name="data-target" value="#logIn"/>                 
-                </h:link>
-            </span>
-            </div>
-            <div class="nav">
-                <h:link outcome="allCustomers" class="nav__item" value="All customers"/>
-                <h:link outcome="#" class="nav__item" value="New customer"/>
-                <h:link outcome="allEmployees" class="nav__item" value="All employees"/>
-                <h:link outcome="#" class="nav__item" value="New employee"/>
-            </div>
-
-            <div class="aside__copyright">
-                © 2014 ERestaurant, All Rights Reserved
-            </div>
-        </div>
-
-        <div class="main">
-            <div id="section">
-                <h1 class="section__title">Add info</h1>
-                <h:form action="" class="fancy-form">
-                    <h:outputLabel for="name" class="fancy-label">Name</h:outputLabel>
-                    <h:inputText value="#{customerBean.customer.name}" id="name" class="fancy-input"/>
-
-                    <h:outputLabel for="email" class="fancy-label">Email</h:outputLabel>
-                    <h:inputText value="#{customerBean.customer.email}" id="email" class="fancy-input"/>
-
-                    <h:outputLabel for="birthday" class="fancy-label">Birthday</h:outputLabel>
-                    <h:inputText value="#{customerBean.birthday}" id="birthday" class="fancy-input">
-                    	<!-- <f:passThroughAttribute name="type" value="date" />--> 
-                    	<f:convertDateTime pattern="dd.MM.yyyy" />
-                    </h:inputText>
-					
-                    <h:outputLabel for="address" class="fancy-label label-high">Billing address</h:outputLabel>
-                    <h:inputText value="#{customerBean.customer.billingAddress}" id="address" class="fancy-input input-high"/>
-                    
-                    <h:outputLabel for="password" class="fancy-label">Password</h:outputLabel>
-                    <h:inputSecret value="#{customerBean.customer.password}" id="password" class="fancy-input"/>
-                    
-                    <h:commandLink action="#{customerBean.save()}" class="fancy-submit"> <i class="icon icon--circle fa fa-check"></i>
-                    </h:commandLink>
-                </h:form>
-            </div>
-        </div>
-
+                <f:passThroughAttribute name="data-toggle" value="modal"/>
+                <f:passThroughAttribute name="data-target" value="#logIn"/>                 
+            </h:link>
+        </span>
     </div>
-    <div class="modal fade" id="logIn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        		<div class="modal-dialog modal-sm">
-            		<div class="modal-content">
-            		<div class="modal-header clearfix">
-                    	<button type="button" class="close fancy-close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
-                    	</button>
-                	</div>
-                      <div class="modal-body">
-						<h4 class="section__title">Log in</h4>
-							<h:form class="fancy-form">
-							
-							
-								<h:outputLabel for="email" value="Email" styleClass="fancy-label" />
-								<h:inputText value="#{employeeAtWorkBean.email}" styleClass="fancy-input"></h:inputText>
+    
+    <div class="nav">
+        <h:link outcome="allCustomers" class="nav__item" value="All customers"/>
+        <h:link outcome="#" class="nav__item" value="New customer">
+        <f:passThroughAttribute name="data-toggle" value="modal"/>
+        <f:passThroughAttribute name="data-target" value="#newCust"/>
+    </h:link>
+    <h:link outcome="allEmployees" class="nav__item" value="All employees"/>
+    <h:link outcome="newEmployee" class="nav__item" value="New employee"/>
+</div>
 
-								<h:outputLabel for="password" value="Password" styleClass="fancy-label" />
-								<h:inputSecret id="password" value="#{employeeAtWorkBean.password}"
-									styleClass="fancy-input" placeholder="Your password" required="true" requiredMessage="#{msgs.dishNameRequired}"/>
+<div class="aside__copyright">
+    © 2014 ERestaurant, All Rights Reserved
+</div>
+</h:form>
+</div>
 
-							
-							<div style="text-align: center">
-								<h:commandLink id="log" 
-									action="#{employeeAtWorkBean.login()}" styleClass="fancy-submit"> <i class="icon icon--circle fa fa-check"> </i> </h:commandLink>
-							</div>
-							
-							</h:form>
-						</div>
-					</div>
-				</div>
-			</div>
-      
+
+<div class="main">
+    <div id="section">
+        <h1 class="section__title">Add info</h1>
+        <h:form action="" class="fancy-form">
+        <h:outputLabel for="name" class="fancy-label">Name</h:outputLabel>
+        <h:inputText value="#{customerBean.customer.name}" id="name" class="fancy-input"/>
+
+        <h:outputLabel for="email" class="fancy-label">Email</h:outputLabel>
+        <h:inputText value="#{customerBean.customer.email}" id="email" class="fancy-input"/>
+
+        <h:outputLabel for="birthday" class="fancy-label">Birthday</h:outputLabel>
+        <h:inputText value="#{customerBean.birthday}" id="birthday" class="fancy-input">
+        <!-- <f:passThroughAttribute name="type" value="date" />--> 
+        <f:convertDateTime pattern="dd.MM.yyyy" />
+    </h:inputText>
+    
+    <h:outputLabel for="address" class="fancy-label label-high">Billing address</h:outputLabel>
+    <h:inputText value="#{customerBean.customer.billingAddress}" id="address" class="fancy-input input-high"/>
+    
+    <h:outputLabel for="password" class="fancy-label">Password</h:outputLabel>
+    <h:inputSecret value="#{customerBean.customer.password}" id="password" class="fancy-input"/>
+    
+    <h:commandLink action="#{customerBean.save()}" class="fancy-submit"> <i class="icon icon--circle fa fa-check"></i>
+</h:commandLink>
+</h:form>
+</div>
+</div>
+
+</div>
+<div class="modal fade" id="logIn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+          <div class="modal-header clearfix">
+           <button type="button" class="close fancy-close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
+           </button>
+       </div>
+       <div class="modal-body">
+          <h4 class="section__title">Log in</h4>
+          <h:form class="fancy-form">
+          
+          
+          <h:outputLabel for="email" value="Email" styleClass="fancy-label" />
+          <h:inputText value="#{employeeAtWorkBean.email}" styleClass="fancy-input"></h:inputText>
+
+          <h:outputLabel for="password" value="Password" styleClass="fancy-label" />
+          <h:inputSecret id="password" value="#{employeeAtWorkBean.password}"
+          styleClass="fancy-input" placeholder="Your password" required="true" requiredMessage="#{msgs.dishNameRequired}"/>
+
+          
+          <div style="text-align: center">
+            <h:commandLink id="log" 
+            action="#{employeeAtWorkBean.login()}" styleClass="fancy-submit"> <i class="icon icon--circle fa fa-check"> </i> </h:commandLink>
+        </div>
+        
+    </h:form>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="newCust" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+          <div class="modal-header clearfix">
+           <button type="button" class="close fancy-close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
+           </button>
+       </div>
+       <div class="modal-body">
+         <h1 class="section__title">Add info</h1>
+         <h:form action="" class="fancy-form">
+         <h:outputLabel for="name" class="fancy-label">Name</h:outputLabel>
+         <h:inputText value="#{customerBean.customer.name}" id="name" class="fancy-input"/>
+
+         <h:outputLabel for="email" class="fancy-label">Email</h:outputLabel>
+         <h:inputText value="#{customerBean.customer.email}" id="email" class="fancy-input"/>
+
+         <h:outputLabel for="birthday" class="fancy-label">Birthday</h:outputLabel>
+         <h:inputText value="#{customerBean.birthday}" id="birthday" class="fancy-input">
+         <!-- <f:passThroughAttribute name="type" value="date" />--> 
+         <f:convertDateTime pattern="dd.MM.yyyy" />
+     </h:inputText>
+     
+     <h:outputLabel for="address" class="fancy-label label-high">Billing address</h:outputLabel>
+     <h:inputText value="#{customerBean.customer.billingAddress}" id="address" class="fancy-input input-high"/>
+     
+     <h:outputLabel for="password" class="fancy-label">Password</h:outputLabel>
+     <h:inputSecret value="#{customerBean.customer.password}" id="password" class="fancy-input"/>
+     
+     <h:commandLink action="#{customerBean.save()}" class="fancy-submit"> <i class="icon icon--circle fa fa-check"></i>
+ </h:commandLink>
+</h:form>
+</div>
+</div>
+</div>
+</div>
+
 </h:body>
 </html>
