@@ -1,5 +1,7 @@
 package Beans;
 
+import java.io.Serializable;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -12,7 +14,7 @@ import com.bionic.edu.ERestro.Rights;
 
 @Named
 @Scope("session")
-public class EmployeeAtWorkBean {
+public class EmployeeAtWorkBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Employee employee;
