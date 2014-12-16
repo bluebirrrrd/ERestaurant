@@ -4,6 +4,7 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,7 @@ import Services.FoodService;
 import Services.Food_OrderService;
 
 @Named
-@Scope("request")
+@Scope("session")
 public class Food_OrderListBean {
 	
 	private List<Food_Order> foodOrderList;
@@ -108,8 +109,15 @@ public class Food_OrderListBean {
 	}
 	
 	public String refreshListByDates() {
-		this.refreshList();
 		List<Food_Order> tempList = new ArrayList<Food_Order>();
+		/*Iterator<Food_Order> it = foodOrderList.iterator();
+		while (it.hasNext()) {
+			Food_Order item = it.next();
+			Date tempDate = item.getOrder().getTime();
+			if (tempDate.after(startDate) && tempDate.before(endDate)) {
+				tempList.add(item);
+			}
+		}*/
 		for (Food_Order item: foodOrderList) {
 			Date tempDate = item.getOrder().getTime();
 			if (tempDate.after(startDate) && tempDate.before(endDate)) {

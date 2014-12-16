@@ -21,9 +21,24 @@
 </context-param>  
 
     <welcome-file-list>
-        <welcome-file>newCustomer.xhtml</welcome-file>
+        <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
-
+	<error-page>
+    	<error-code>500</error-code>
+   		 <location>/Error.xhtml</location>
+	</error-page>
+	<error-page>
+    	<error-code>404</error-code>
+   		 <location>/Error.xhtml</location>
+	</error-page>
+	<error-page>
+    	<exception-type>java.lang.Exception</exception-type>
+    	<location>/Error.xhtml</location>
+	</error-page>
+	<error-page>
+    	<exception-type>javax.faces.Exception</exception-type>
+    	<location>/Error.xhtml</location>
+	</error-page>
     <!-- Spring listeners -->
     <listener>
         <listener-class> org.springframework.web.context.ContextLoaderListener </listener-class>
