@@ -48,14 +48,12 @@ public class CookDAOImpl implements CookDAO {
 	}
 	
 	public void saveDish(Food_Order part) {
-		int partId = part.getId();
+		/*int partId = part.getId();
 		//try {
 			Food_Order partUpdate = em1.find(Food_Order.class, partId);
-		
+		*/
 		em1.merge(part);
-		/*} finally {
-			em1.close();
-		}*/
+		
 	}
 	
 	public Food_Order findPartById(int id) {

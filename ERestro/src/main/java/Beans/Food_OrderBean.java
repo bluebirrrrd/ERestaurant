@@ -34,10 +34,10 @@ public class Food_OrderBean {
 		foodOrderService.save(part);
 	}
 	
-	public String setDone(String id) {
+	public String setItemDone(String id) {
 		part = foodOrderService.findById(Integer.valueOf(id));
-		part.setDone(true);
+		part.setDone(1);
 		foodOrderService.save(part);
-		return "delivery";
+		return "kitchen";
 	}
 }

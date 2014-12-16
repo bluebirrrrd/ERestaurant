@@ -20,6 +20,8 @@ xmlns:f="http://java.sun.com/jsf/core"
     <script type="text/javascript" src="http://balticlab.ru/lib/js/control.js"></script>
 </h:head>
 <h:body class="page">
+
+#{food_OrderListBean.refreshUndoneList()}
     <div class="wrap">
 
         <div class="b_info">
@@ -65,6 +67,7 @@ xmlns:f="http://java.sun.com/jsf/core"
         <div class="main">
             <div id="section" class="clearfix">
                 <div class="col-md-6">
+                <h:form>
                     <table class="fancy-table">
                         <tr>
                             <th>Time</th>
@@ -74,19 +77,20 @@ xmlns:f="http://java.sun.com/jsf/core"
                         </tr>
                         <ui:repeat var="item" value="#{food_OrderListBean.foodOrderList}">
                         <tr>
-                        	<td>#{item.orderId.time}</td>
+                        	<td>#{item.order.time}</td>
                             <td>#{item.food.name}</td>
                             <td>#{item.quantity}</td>
-                            <td><h:outputLink action="#{item.setDone(1)}"><i class="fa fa-check"></i> </h:outputLink>
+                            <td><h:outputLink action="#{food_OrderBean.setItemDone(item.id)}"><i class="fa fa-check"></i> </h:outputLink>
                             
                             </td>
                         </tr> 
                         </ui:repeat>
                     </table>
+                    </h:form>
                 </div>
             </div>
         </div>
-
+	
     </div>
     	<div class="modal fade" id="logIn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         		<div class="modal-dialog modal-sm">

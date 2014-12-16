@@ -119,10 +119,6 @@ public class Food_OrderListBean {
 		foodOrderList = tempList;
 		refreshSummary();
 		return "business";
-		/* 
-		 * пройти по списку и проверять дату методами isBefore(ts2), isAfter(ts1)
-		 * сохранять все в новый список, а потом заменить старый новым
-		 */
 		
 	}
 	
