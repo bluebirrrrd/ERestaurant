@@ -14,7 +14,7 @@ public class Orders {
 	@Column(name = "Time", insertable = false, updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date time;
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="userId")
 	private Customer customer;
 	private double total;
@@ -26,7 +26,7 @@ public class Orders {
 					@JoinColumn(name="foodId"))
 	private Collection<Food> content;
 	*/
-	@OneToMany(mappedBy="orderId", cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy="orderId", cascade = CascadeType.PERSIST, fetch=FetchType.EAGER)
 	private Collection<Food_Order> content;
 	
 	public Orders() { }

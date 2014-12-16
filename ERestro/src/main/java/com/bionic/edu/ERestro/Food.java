@@ -9,7 +9,7 @@ public class Food {
 	private int id;
 	private String name;
 	private String description;
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "categoryId")
 	private FoodCategory category;
 	private short kitchenMade;

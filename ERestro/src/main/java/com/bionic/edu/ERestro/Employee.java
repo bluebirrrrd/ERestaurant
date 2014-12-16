@@ -16,7 +16,7 @@ public class Employee {
 	private String email;
 	private java.sql.Date birthDate;
 	private short valid;
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="accessId")
 	private Rights access;
 	private String password;

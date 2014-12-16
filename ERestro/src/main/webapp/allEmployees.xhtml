@@ -80,8 +80,8 @@ xmlns:f="http://java.sun.com/jsf/core"
                         <tr>
                             <td><h:commandLink action="#{employeeBean.editEmployee(empl.id)}" >#{empl.name}</h:commandLink></td>
                             <td><h:outputText value="#{epml.access.role}"/></td>
-                            <td><h:outputText rendered="#{empl.isValid()}"><i class="fa fa-check"></i> </h:outputText>
-                            <h:outputText rendered="#{!empl.isValid()}"><i class="fa fa-times"></i> </h:outputText>
+                            <td><h:link outcome="#" rendered="#{empl.isValid()}"><i class="fa fa-check fa-lg"></i> </h:link>
+                            <h:link outcome="#" rendered="#{!empl.isValid()}"><i class="fa fa-times fa-lg"></i> </h:link>
                             </td>
                         </tr>
                         
