@@ -45,7 +45,7 @@ public class FoodListBean {
 	}
 	
 	public String refreshList() {
-		dishes = foodService.getAllFoodList();
+		dishes = foodService.getAvailableFoodList();
 		return "index";
 	}
 	
@@ -56,7 +56,7 @@ public class FoodListBean {
 	
 	public String refreshListByCategory(String categoryId) {
 		int catId = Integer.valueOf(categoryId);
-		dishes = foodService.getListByCategory(catId);
+		dishes = foodService.custGetListByCategory(catId);
 		return "index";
 	}
 	
@@ -65,4 +65,6 @@ public class FoodListBean {
 		dishes = foodService.getListByCategory(catId);
 		return "admin";
 	}
+	
+	
 }

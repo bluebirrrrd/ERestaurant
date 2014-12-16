@@ -37,6 +37,7 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 			</span>
 		</div>
 		<div class="nav">
+			<h:commandLink action="#{foodListBean.refreshAdminList()}" class="nav__item" value="All dishes"/>
 			<ui:repeat var="o" value="#{foodListBean.categories}">
 			<h:commandLink action="#{foodListBean.adminRefreshListByCategory(o.id)}" class="nav__item" value="#{o.name}"/>
 		</ui:repeat>
@@ -88,7 +89,7 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 			<h:outputText id="display" />
 			
 			<h:outputLabel for="kitchenMade" value="Kitchen made?" styleClass="fancy-label"/>
-			<h:selectOneMenu  styleClass="selection" id="kitchenMade"	value="#{foodBean.dish.kitchenMade}">
+			<h:selectOneMenu  styleClass="selection" id="kitchenMade"	value="#{foodBean.kitchenMade}">
 			<f:selectItem itemValue="1" itemLabel="Yes"/>
 			<f:selectItem itemValue="0" itemLabel="No"/> 
 		</h:selectOneMenu>
@@ -151,10 +152,7 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 			<div class="modal-body">
 				<h4 class="section__title">Edit dish</h4>
 				<h:form class="fancy-form">
-				
-				
-				
-
+							
 				<h:outputLabel for="cat" value="Category:" styleClass="fancy-label" />
 				<h:selectOneMenu id="cat" value="#{foodBean.selectedFoodCategory.id}" styleClass="selection">
 				<f:selectItems value="#{foodBean.categories}" var="categ" itemLabel="#{categ.name}" itemValue="#{categ.id}" />
@@ -175,7 +173,7 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 			<h:outputText id="display" />
 			
 			<h:outputLabel for="kitchenMade" value="Kitchen made?" styleClass="fancy-label"/>
-			<h:selectOneMenu  styleClass="selection" id="kitchenMade"	value="#{foodBean.dish.kitchenMade}">
+			<h:selectOneMenu  styleClass="selection" id="kitchenMade"	value="#{foodBean.kitchenMade}">
 			<f:selectItem itemValue="1" itemLabel="Yes"/>
 			<f:selectItem itemValue="0" itemLabel="No"/> 
 		</h:selectOneMenu>
@@ -183,6 +181,11 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 		<h:outputLabel for="price" value="Price" styleClass="fancy-label"/>
 		<h:inputText id="price" styleClass="fancy-input" value="#{foodBean.dish.price}" required="true" requiredMessage="#{msgs.priceRequired}" />
 		
+		<h:outputLabel for="available" class="fancy-label" style="padding-top:15px;">Available</h:outputLabel>
+		<h:selectOneMenu id="available" value="#{foodBean.available}" class="selection"> 
+		<f:selectItem itemValue="1" itemLabel="Yes"/>
+		<f:selectItem itemValue="0" itemLabel="No"/>
+</h:selectOneMenu>
 		<div style="text-align: center">
 			<h:commandLink id="submit" 
 			action="#{foodBean.saveFood()}" styleClass="fancy-submit"> <i class="icon icon--circle fa fa-check"> </i> </h:commandLink>

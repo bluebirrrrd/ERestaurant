@@ -9,6 +9,7 @@ import javax.inject.Named;
 import org.springframework.transaction.annotation.Transactional;
 
 import DAO.AdminDAO;
+import DAO.CustomerDAO;
 
 import com.bionic.edu.ERestro.Food;
 import com.bionic.edu.ERestro.FoodCategory;
@@ -20,7 +21,9 @@ public class FoodServiceImpl implements FoodService, Serializable {
 
 	@Inject
 	AdminDAO adminDAO;
-
+	@Inject
+	CustomerDAO customerDAO;
+	
 	public Food findById(int id) {
 		Food dish = adminDAO.findById(id);
 		return dish;
@@ -33,6 +36,11 @@ public class FoodServiceImpl implements FoodService, Serializable {
 
 	public List<Food> getAllFoodList() {
 		List<Food> list = adminDAO.getAllDishes();
+		return list;
+	}
+	
+	public List<Food> getAvailableFoodList() {
+		List<Food> list = customerDAO.getAllFoodList();
 		return list;
 	}
 
@@ -50,6 +58,12 @@ public class FoodServiceImpl implements FoodService, Serializable {
 	public FoodCategory findCategoryById(int id) {
 		FoodCategory result = adminDAO.findCategoryById(id);
 		return result;
+	}
+
+	@Override
+	public List<Food> custGetListByCategory(int catId) {
+		List<Food> list = customerDAO.getFoodByCategory(catId);
+		return list;
 	}
 
 }

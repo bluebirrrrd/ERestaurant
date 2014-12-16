@@ -26,25 +26,28 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
    #{foodListBean.getCategoriesList()}
 
    <div class="aside">
+   <h:form>
     <div class="header">
         <a href="#" class="logo"></a>
         <span class="header_user">
             <h:outputText value="Welcome back, #{customerBean.customer.name}" rendered="#{customerBean.loggedIn}"/>
+            <h:commandLink value="Not you?" action="#{customerBean.logOff()}" rendered="#{customerBean.loggedIn}"/>
             <h:outputText value="Welcome! " rendered="#{!customerBean.loggedIn}"/>
             <h:link rendered="#{!customerBean.loggedIn}" outcome="#" value="Log in">
             <f:passThroughAttribute name="data-toggle" value="modal"/>
-            <f:passThroughAttribute name="data-target" value="#logIn"/>                 
-        </h:link>
+            <f:passThroughAttribute name="data-target" value="#logIn"/>                
+        </h:link><br/> 
+        <h:outputText value="Happy Birthday!" rendered="#{customerBean.birthdayToday}"/>
     </span>
 </div>
-<h:form>
+
 <div class="nav">
    <h:commandLink action="#{foodListBean.refreshList()}" class="nav__item" value="All dishes"/>
    <ui:repeat var="o" value="#{foodListBean.categories}">
    <h:commandLink action="#{foodListBean.refreshListByCategory(o.id)}" class="nav__item" value="#{o.name}"/>
 </ui:repeat>
 </div>
-</h:form>
+
 
 <div class="aside__order">
     Your order: <span><h:outputText value="#{orderBean.quantity}"/></span> items
@@ -55,9 +58,10 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 </span>
 <p>
     go to cart
-    <h:link outcome="#{orderBeanNew.proceedOrder()}"><i class="fa fa-arrow-right"></i></h:link>
+    <h:commandLink action="#{orderBean.proceedOrder()}"><i class="fa fa-arrow-right"></i></h:commandLink>
 </p>
 </div>
+</h:form>
 
 <div class="aside__copyright">
    

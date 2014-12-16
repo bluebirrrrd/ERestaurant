@@ -74,6 +74,28 @@ public class Food {
 		}
 
 	}
+	
+	
+
+	public short getKitchenMade() {
+		return kitchenMade;
+	}
+
+	public void setKitchenMade(short kitchenMade) {
+		this.kitchenMade = kitchenMade;
+	}
+
+	public short getAvailable() {
+		return available;
+	}
+
+	public void setAvailable(short available) {
+		this.available = available;
+	}
+	
+	public void setAvailable(int available) {
+		this.available = (short)available;
+	}
 
 	public double getPrice() {
 		return price;

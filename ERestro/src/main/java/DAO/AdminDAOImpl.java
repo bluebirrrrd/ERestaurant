@@ -86,15 +86,7 @@ public class AdminDAOImpl implements AdminDAO {
 		if (dish.getId() == 0) {
 			em1.persist(dish);
 		} else {
-			Food dishUpdate = em1.find(Food.class, dish.getId());
-				em1.getTransaction().begin();
-				dishUpdate.setName(dish.getName());
-				dishUpdate.setCategory(dish.getCategory());
-				dishUpdate.setDescription(dish.getDescription());
-				dishUpdate.setKitchenMade(dish.isKitchenMade());
-				dishUpdate.setPrice(dish.getPrice());
-				dishUpdate.setAvailable(dish.isAvailable());
-				em1.getTransaction().commit();
+			em1.merge(dish);
 		}
 	}
 	

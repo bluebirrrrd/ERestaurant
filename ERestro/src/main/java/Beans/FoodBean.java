@@ -2,6 +2,7 @@ package Beans;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -20,12 +21,13 @@ import com.bionic.edu.ERestro.Food;
 import com.bionic.edu.ERestro.FoodCategory;
 
 @Named("foodBean")
-@Scope("view")
-public class FoodBean {
+@Scope("session")
+public class FoodBean implements Serializable {
 	private Food dish;
 	private FoodCategory selectedFoodCategory;
 	private List<FoodCategory> categories = null;
-
+	private int available;
+	private int kitchenMade;
 	@Inject
 	FoodService foodService;
 
@@ -33,7 +35,7 @@ public class FoodBean {
 		dish = new Food();
 		selectedFoodCategory = new FoodCategory();
 	}
-
+	
 	public FoodCategory getSelectedFoodCategory() {
 		return selectedFoodCategory;
 	}
@@ -66,17 +68,41 @@ public class FoodBean {
 		this.dish = dish;
 	}
 
+	public int getAvailable() {
+		return available;
+	}
+
+	public void setAvailable(int available) {
+		this.available = available;
+	}
+
+	public int getKitchenMade() {
+		return kitchenMade;
+	}
+
+	public void setKitchenMade(int kitchenMade) {
+		this.kitchenMade = kitchenMade;
+	}
+
 	public String saveFood() {
 		int catId = selectedFoodCategory.getId();
 		selectedFoodCategory = foodService.findCategoryById(catId);
 		dish.setCategory(selectedFoodCategory);
+		dish.setKitchenMade((short) kitchenMade);
+		dish.setAvailable(available);
 		foodService.save(dish);
+		dish = new Food();
+		dish.setAvailable(1);
+		kitchenMade = 0;
+		available = 1;
 		return "admin";
 	}
 
 	public String editFood(String id) {
 		Integer intId = Integer.valueOf(id);
 		dish = foodService.findById(intId);
+		kitchenMade = dish.getKitchenMade();
+		available = dish.getAvailable();
 		return "newDish";
 	}
 

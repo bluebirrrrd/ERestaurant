@@ -24,7 +24,7 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
    
    #{foodBean.refreshCategories()}
    #{foodListBean.getCategoriesList()}
-   #{foodListBean.refreshList()}
+   
    <div class="aside">
     <div class="header">
         <a href="#" class="logo"></a>
@@ -60,11 +60,13 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
  <h:graphicImage styleClass="main__item__img" value="resources/img/#{dish.id}.jpg" />
  <div class="main__item__content">
     <div class="main__item__content__box">
-        <h4 class="main__item__content__price"><h:outputText value="$#{dish.price}"/></h4>
+        <h4 class="main__item__content__price"><h:outputText value="$#{dish.price}">
+        <f:convertNumber minFractionDigits="2" />
+        </h:outputText></h4>
         <h4 class="main__item__content__title"><h:outputText value="#{dish.name}"/></h4>
         <h4 class="main__item__content__text"><h:outputText value="#{dish.description}"/></h4>
         <div class="main__item__content__footer">
-         
+         <h:outputText styleclass="main__item__content__title" value="Not available" rendered="#{!dish.available}"></h:outputText>
         </div>
         
         <h:commandLink id="edit" action="#{foodBean.editFood(dish.id)}">
@@ -114,7 +116,7 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
            <h:outputText id="display" />
            
            <h:outputLabel for="kitchenMade" value="Kitchen made?" styleClass="fancy-label"/>
-           <h:selectOneMenu  styleClass="selection" id="kitchenMade"	value="#{foodBean.dish.kitchenMade}">
+           <h:selectOneMenu  styleClass="selection" id="kitchenMade"	value="#{foodBean.kitchenMade}">
            <f:selectItem itemValue="1" itemLabel="Yes"/>
            <f:selectItem itemValue="0" itemLabel="No"/> 
        </h:selectOneMenu>
@@ -124,7 +126,7 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
        
        <div style="text-align: center">
          <h:commandLink id="submit" 
-         action="#{foodBean.saveFood()}" styleClass="fancy-submit"> <i class="icon icon--circle fa-check"> </i> </h:commandLink>
+         action="#{foodBean.saveFood()}" styleClass="fancy-submit"> <i class="icon icon--circle fa fa-check"> </i> </h:commandLink>
      </div>
  </h:form>
 </div>

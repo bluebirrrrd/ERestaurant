@@ -55,7 +55,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 		List<Food> listFood = null;
 		TypedQuery<Food> query = em1
 				.createQuery(
-						"SELECT f FROM Food f, FoodCategory fc WHERE (fc.id=:categoryId)",
+						"SELECT f FROM Food f WHERE f.category.id = :categoryId AND f.available = 1",
 						Food.class);
 		query.setParameter("categoryId", categoryId);
 		listFood = query.getResultList();
@@ -64,12 +64,13 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 	public List<Food> getAllFoodList() {
 		List<Food> listFood = null;
-		TypedQuery<Food> query = em1.createQuery("SELECT f FROM Food f",
+		TypedQuery<Food> query = em1.createQuery("SELECT f FROM Food f WHERE f.available = 1",
 				Food.class);
 			listFood = query.getResultList();
 		return listFood;
 	}
 
+	
 	public List<FoodCategory> getFoodCategories() {
 		List<FoodCategory> listCategories = null;
 		TypedQuery<FoodCategory> query = em1.createQuery(

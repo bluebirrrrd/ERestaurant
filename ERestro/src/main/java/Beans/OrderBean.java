@@ -182,7 +182,20 @@ public class OrderBean implements Serializable {
 		java.util.Date now = calendar.getTime();
 		java.sql.Timestamp currentTimestamp = new java.sql.Timestamp(now.getTime());
 		order.setTime(currentTimestamp);
+		if (customer.isBirthdayToday()) {
+			addBirthdayItem();}
 		return "profile";
+	}
+	
+	public void addBirthdayItem() {
+		item.setOrder(order);
+		Food dish = foodService.findById(8);
+		item.setFood(dish);
+		content.add(item);
+		order.setContent(content);
+		countTotal();
+		this.quantity = content.size();
+		item = new Food_Order();
 	}
 
 	public String confirmOrder() {

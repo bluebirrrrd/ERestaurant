@@ -1,6 +1,11 @@
 package Beans;
 
 import java.io.Serializable;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 
 import javax.faces.bean.*;
 
@@ -27,6 +32,7 @@ public class CustomerBean implements Serializable{
 	private String email;
 	private String password;
 	private int valid;
+	private boolean birthdayToday;
 	
 	
 	public CustomerBean() {
@@ -88,6 +94,14 @@ public class CustomerBean implements Serializable{
 		this.password = password;
 	}
 
+	public boolean isBirthdayToday() {
+		return birthdayToday;
+	}
+
+	public void setBirthdayToday(boolean birthdayToday) {
+		this.birthdayToday = birthdayToday;
+	}
+
 	public String editCustomer(String id) {
 		customer = custService.findById(Integer.valueOf(id));
 		birthday = customer.getBirthDate();
@@ -99,6 +113,8 @@ public class CustomerBean implements Serializable{
 		customer = custService.logIn(email, password); //String pass = DigestUtils.md5Hex(password); - //this one should go into custService implementation
 		if (customer.getId() != 0) {
 			loggedIn = true;
+			birthday = customer.getBirthDate();
+			checkBirthday();
 		} 
 		return "index";
 	}
@@ -116,6 +132,21 @@ public class CustomerBean implements Serializable{
 		loggedIn = false;
 		customer = new Customer();
 		return "index";
+	}
+	
+	public void checkBirthday() {
+		LocalDate today = LocalDate.now();
+		
+		Instant instant = Instant.ofEpochMilli(birthday.getTime());
+		LocalDate birth = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
+
+		if((today.getMonthValue()==birth.getMonthValue())&&(today.getDayOfMonth()==birth.getDayOfMonth())) {
+			birthdayToday = true;
+		} else {
+			birthdayToday = false;
+		}
+			
+		
 	}
 
 }

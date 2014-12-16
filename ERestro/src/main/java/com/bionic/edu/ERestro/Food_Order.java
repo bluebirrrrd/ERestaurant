@@ -16,10 +16,14 @@ public class Food_Order {
 	private int quantity;
 	private short done;
 	
+	public Food_Order() {	
+		quantity = 1;
+	}
+	
 	public boolean isDone() {
 		return (done>0?true:false);
 	}
-
+	
 	public void setDone(boolean done) {
 		if (done==true) {
 			this.done = 1;
@@ -29,10 +33,6 @@ public class Food_Order {
 	}
 	public void setDone(int done) {
 		this.done = (short)done;
-	}
-
-	public Food_Order() {	
-		quantity = 1;
 	}
 
 	public int getId() {
