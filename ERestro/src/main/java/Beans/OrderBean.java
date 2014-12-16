@@ -206,6 +206,7 @@ public class OrderBean implements Serializable {
 		order = orderService.findById(Integer.valueOf(orderId));
 		order.setDelivered(1);
 		orderService.save(order);
+		
 		return "delivery";
 	}
 

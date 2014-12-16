@@ -53,13 +53,13 @@
                 <h1 class="section__title">Add info</h1>
                 <h:form action="" class="fancy-form">
                     <h:outputLabel for="name" class="fancy-label">Name</h:outputLabel>
-                    <h:inputText value="#{employeeBean.employee.name}" id="name" class="fancy-input"/>
+                    <h:inputText value="#{employeeBean.employee.name}" id="name" class="fancy-input" required="true"  requiredMessage="#{msgs.dishNameRequired}"/>
 
                     <h:outputLabel for="email" class="fancy-label">Email</h:outputLabel>
-                    <h:inputText value="#{employeeBean.employee.email}" id="email" class="fancy-input"/>
+                    <h:inputText value="#{employeeBean.employee.email}" id="email" class="fancy-input" required="true" requiredMessage="#{msgs.emailRequired}"/>
 
                     <h:outputLabel for="birthday" class="fancy-label">Birthday</h:outputLabel>
-                    <h:inputText value="#{employeeBean.birthday}" id="birthday" class="fancy-input">
+                    <h:inputText value="#{employeeBean.birthday}" id="birthday" class="fancy-input" required="true" converterMessage="#{msgs.birthdayFormat}">
                     	<!-- <f:passThroughAttribute name="type" value="date" />--> 
                     	<f:convertDateTime pattern="dd.MM.yyyy" />
                     </h:inputText>
@@ -71,7 +71,7 @@
                     </h:selectOneMenu>
                     
                     <h:outputLabel for="password" class="fancy-label">Password</h:outputLabel>
-                    <h:inputSecret value="#{employeeBean.employee.password}" id="password" class="fancy-input"/>
+                    <h:inputSecret value="#{employeeBean.employee.password}" id="password" class="fancy-input" required="true" requiredMessage="#{msgs.passwordRequired}"/>
                     
                     <h:commandLink action="#{employeeBean.saveEmployee()}" class="fancy-submit"> <i class="icon icon--circle fa fa-check"></i>
                     </h:commandLink>

@@ -73,15 +73,17 @@ xmlns:f="http://java.sun.com/jsf/core"
                             <th>Address</th>
                             <th width="40">Done?</th>
                         </tr>
-                        <ui:repeat var="item" value="#{orderListBean.orderList}">
+                        <ui:repeat var="item" value="#{orderListBean.orderList}"  varStatus="status" offset="0" step="3">
+                        <h:panelGroup rendered="#{(status.index+4)%4==0}">
                         <tr>
-                        	<td>#{item.time}</td>
-                            <td>#{item.customer.name}</td>
-                            <td>#{item.customer.billingAddress}</td>
+                        	<td><h:outputText value="#{item.time}"/> </td>
+                            <td><h:outputText value="#{item.customer.name}"/></td>
+                            <td><h:outputText value="#{item.customer.billingAddress}" /></td>
                             <td><h:outputLink action="#{orderBean.setDone(item.id)}"><i class="fa fa-check"></i> </h:outputLink>
                             
                             </td>
-                        </tr> 
+                        </tr>
+                        </h:panelGroup> 
                         </ui:repeat>
                     </table>
                 </div>

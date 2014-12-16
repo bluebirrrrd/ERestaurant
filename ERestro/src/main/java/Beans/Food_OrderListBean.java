@@ -2,11 +2,11 @@ package Beans;
 
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
 import java.sql.Timestamp;
 
 import javax.inject.*;
@@ -94,6 +94,8 @@ public class Food_OrderListBean {
 	}
 	
 	public void refreshSummary() {
+		refreshCategories();
+		summary = new LinkedHashMap<FoodCategory, Double>();
 		for (Food_Order f: foodOrderList) {
 			for (FoodCategory c: categories) {
 				double tempTotal = 0.0;
@@ -105,12 +107,18 @@ public class Food_OrderListBean {
 		}
 	}
 	
-	public void refreshListByDates() {
-		/*Format formatter = new SimpleDateFormat("yyyy-MM-dd");
-		String sd = formatter.format(startDate);
-		String ed = formatter.format(endDate);*/
-		Timestamp ts1 = new Timestamp(startDate.getTime());
-		Timestamp ts2 = new Timestamp(endDate.getTime());
+	public String refreshListByDates() {
+		this.refreshList();
+		List<Food_Order> tempList = new ArrayList<Food_Order>();
+		for (Food_Order item: foodOrderList) {
+			Date tempDate = item.getOrder().getTime();
+			if (tempDate.after(startDate) && tempDate.before(endDate)) {
+				tempList.add(item);
+			}
+		}
+		foodOrderList = tempList;
+		refreshSummary();
+		return "business";
 		/* 
 		 * пройти по списку и проверять дату методами isBefore(ts2), isAfter(ts1)
 		 * сохранять все в новый список, а потом заменить старый новым
